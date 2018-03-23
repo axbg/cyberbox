@@ -1,0 +1,40 @@
+body{
+	margin: 0px 0;
+	padding: 0px;
+  	margin-top: 200px;
+	font-family: sans-serif;
+	color: white;
+	text-align: center;
+	align-items: center;
+	line-height: 10px;
+}
+
+.logo{
+	margin-top: 200px;
+}
+
+.title{
+	margin-top: -40px;
+	animation-delay:0.4s;
+	transition: .5s ease;
+}
+
+
+.login-button{
+	margin-top: -50px;
+	animation-delay: 0.7s;
+}
+
+.container{
+	background-color: #00b3b3;
+	transition: .5s ease;
+}
+
+.g-signin2{
+	width: 100%;
+
+}
+
+.g-signin2 > div{
+	margin: 0 auto;
+}
