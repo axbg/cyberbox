@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" href="img/icon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="google-signin-client_id" content="399387437152-b36uum2fnsmk7uj32dsvqqr0dvrojohe.apps.googleusercontent.com">
+		<title>cyberbox - Login</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/animate.css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"/>
+
+	</head>
+
+	<body>
+		<div class="container fadeIn animated">
+			<div class="container-wrapper">
+				<div class="logo fadeInDown animated">
+					<img src="img\logo transparent.png" height="200px" width="200" />
+				</div>
+				<div class="title fadeIn animated"><h2>your daily drive</h2></div>
+				<div id="loginG" class="g-signin2 fadeInDown animated" data-onsuccess="onSignIn"></div>
+			</div>
+		</div>
+
+
+			<script src="https://apis.google.com/js/platform.js" async defer></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+			<script type="text/javascript">
+
+                function onSignIn(googleUser){
+
+                    let details = googleUser.getBasicProfile();
+                    let token = googleUser.getAuthResponse().id_token;
+
+                    googleUser.disconnect();
+
+                    axios.post("http://localhost:8080/auth/glogin", {name: details.ig, token: token})
+						.then((response) => {
+
+                            if(response.status === 200){
+                                window.location.replace('new_index.html');
+
+                            } else {
+                                toastr.warning("Your email is not allowed");
+                            }
+
+						}).catch(() => {toastr.info("Your email is not allowed")});
+                }
+			</script>
+	</body>
+</html>

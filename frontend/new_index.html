@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>cyberbox</title>
+        <link rel="icon" href="img/icon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/structure.css">
+        <link rel="stylesheet" href="css/sidenav.css">
+        <link rel="stylesheet" href="css/modal.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+
+
+    <div id="mySidenav" class="sidenav" style="z-index: 1100;">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div id="menu">
+            <img id="logo" src= "img/img.png">
+            <a href="#dashboard" onClick="changeMenu('welcome');welcome();">Dashboard</a>
+            <a onClick="changeMenu('files');loadFiles();">Files</a>
+            <a href="#notes" onClick="changeMenu('notes');loadNotes()">Notes</a>
+            <a href="#reminders" onclick="changeMenu('reminders');loadUndoneReminders();">Reminders</a>
+            <a href="#permissions" onclick="changeMenu('permissions');showGranted();getGranted();">Permissions</a>
+            <a href="#settings" onClick="changeMenu('settings');loadSettings();getParentFolders();getParentNotes();">Settings</a>
+            <a onClick="logout()">Logout</a>
+        </div>
+    </div>
+
+    <div class="menu-button" style="background-color: #29a3a3">
+        <span style="font-size:30px;cursor:pointer;align-content: left; color:white;" onclick="openNav()" >&#9776;</span>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div id="modal-content" class="modal-content">
+            <span class="close">&times;</span>
+        </div>s
+    </div>
+
+    <div id="main" style="padding-top:10px;">
+        <div id="welcome">
+            <div class="container">
+                <div class="col">
+                    <h1 id="welcome-name"></h1>
+                    <h1 id="welcome-day"></h1>
+                    <h1 id="welcome-day-numbers"></h1>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col">
+                    <h1 id="welcome-files"></h1>
+                </div>
+                <div class="col">
+                    <h1 id="welcome-notes"></h1>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col">
+                    <h1 id="welcome-reminders"></h1>
+                </div>
+            </div>
+        </div>
+        <div id="files">
+            <div class="container">
+                <div class="col">
+                    <h1>Files</h1>
+                    <div class="content-wrapper controller">
+                        <i class="fa fa-backward" onclick="backFolder()"></i>
+                        <i class="fa fa-plus" onclick="addModalFolder();"></i>
+                        <i class="fa fa-upload" onclick="uploadModalFiles()"></i>
+                    </div>
+                    <div id="files-wrapper" class="content-wrapper">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="notes">
+            <div class="container">
+                <div class="col">
+                    <h1>Notes</h1>
+                    <div id="notes-controller" class="content-wrapper controller">
+                        <i class="fa fa-plus" onclick="addModalNotesFolder();"></i>
+                        <i class="fa fa-upload" onclick="addModalNotes()"></i>
+                    </div>
+                    <div id="notes-wrapper" class="content-wrapper">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="reminders">
+            <div class="container">
+                <div class="col">
+                    <h1>Reminders</h1>
+                    <div id="reminders-controller" class="content-wrapper controller smaller">
+                        <i class="fa fa-plus" onclick="addModalReminder()"></i>
+                        <i class="fa fa-check" onclick="loadDoneReminders()"></i>
+                        <i class="fa fa-times" onclick="loadUndoneReminders();"></i>
+                    </div>
+                    <div id="reminders-wrapper" class="content-wrapper smaller">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="permissions">
+            <div class="container">
+                <div class="col">
+                    <h1>Permissions</h1>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col">
+                    <h3 onclick="showGranted();getGranted();">Granted</h3>
+                </div>
+                <div class="col">
+                    <h3 onclick="showReceived();getReceived();">Received</h3>
+                </div>
+            </div>
+            <div class="container">
+                <div id="granted" class="content-wrapper">
+                    <div id="permissions-controler" class="content-wrapper controller">
+                        <a><i class="fa fa-plus" onclick="openGrantModal()"> Grant Permission</i></a>
+                    </div>
+                    <div id="permissions-wrapper" class="content-wrapper">
+                    </div>
+                </div>
+                <div id="received" class="content-wrapper">
+                </div>
+            </div>
+        </div>
+        <div id="settings">
+            <div class="container">
+                <div class="col">
+                    <h1>Settings</h1>
+                    <div id="settings-wrapper" class="content-wrapper smaller">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col">
+                    <h1>Files Permission</h1>
+                    <div id="files-perm-wrapper" class="content-wrapper smaller">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col">
+                    <h1>Notes Permission</h1>
+                    <div id="notes-perm-wrapper" class="content-wrapper smaller">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/structure.js"></script>
+    <script type="text/javascript" src="js/content.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
+    <script type="text/javascript" src="js/notes.js"></script>
+    <script type="text/javascript" src="js/permissions.js"></script>
+    <script type="text/javascript" src="js/reminders.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    </body>
+</html>
