@@ -11,10 +11,10 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
+    <body style="background-color: rgba(0, 23, 49, 0.5);">
 
 
-    <div id="mySidenav" class="sidenav" style="z-index: 1100;">
+    <div id="mySidenav" class="sidenav" style="z-index: 1100; background-color: rgba(0, 23, 49, 1);">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div id="menu">
             <img id="logo" src= "img/img.png">
@@ -28,125 +28,125 @@
         </div>
     </div>
 
-    <div class="menu-button" style="background-color: #29a3a3">
+    <div class="menu-button" >
         <span style="font-size:30px;cursor:pointer;align-content: left; color:white;" onclick="openNav()" >&#9776;</span>
     </div>
 
     <div id="myModal" class="modal">
         <div id="modal-content" class="modal-content">
             <span class="close">&times;</span>
-        </div>s
+        </div>
     </div>
 
     <div id="main" style="padding-top:10px;">
         <div id="welcome">
-            <div class="container">
-                <div class="col">
+            <div class="container" style="background-color: rgba(0, 23, 49, 0.5);">
+                <div class="col" style="color:white">
                     <h1 id="welcome-name"></h1>
                     <h1 id="welcome-day"></h1>
                     <h1 id="welcome-day-numbers"></h1>
                 </div>
             </div>
-            <div class="container">
-                <div class="col">
+            <div class="container"  style="background-color: rgba(0, 23, 49, 0.5);">
+                <div class="col" style="color:white">
                     <h1 id="welcome-files"></h1>
                 </div>
-                <div class="col">
+                <div class="col" style="color:white">
                     <h1 id="welcome-notes"></h1>
                 </div>
             </div>
-            <div class="container">
-                <div class="col">
+            <div class="container"  style="background-color: rgba(0, 23, 49, 0.5);">
+                <div class="col" style="color:white">
                     <h1 id="welcome-reminders"></h1>
                 </div>
             </div>
         </div>
-        <div id="files">
-            <div class="container">
-                <div class="col">
+        <div id="files" >
+            <div class="container"  style="background-color: rgba(0, 23, 49, 0.5);" >
+                <div class="col" style="color:white">
                     <h1>Files</h1>
-                    <div class="content-wrapper controller">
+                    <div class="content-wrapper controller" style="background-color: rgba(0, 23, 49, 0);">
                         <i class="fa fa-backward" onclick="backFolder()"></i>
                         <i class="fa fa-plus" onclick="addModalFolder();"></i>
                         <i class="fa fa-upload" onclick="uploadModalFiles()"></i>
                     </div>
-                    <div id="files-wrapper" class="content-wrapper">
+                    <div id="files-wrapper" class="content-wrapper" style="background-color: rgba(0, 23, 49, 0);">
                     </div>
                 </div>
             </div>
         </div>
         <div id="notes">
-            <div class="container">
-                <div class="col">
+            <div class="container" style="background-color: rgba(0, 23, 49, 0.5);" >
+                <div class="col" style="color:white">
                     <h1>Notes</h1>
-                    <div id="notes-controller" class="content-wrapper controller">
+                    <div id="notes-controller" class="content-wrapper controller" style="background-color: rgba(0, 23, 49, 0);" >
                         <i class="fa fa-plus" onclick="addModalNotesFolder();"></i>
                         <i class="fa fa-upload" onclick="addModalNotes()"></i>
                     </div>
-                    <div id="notes-wrapper" class="content-wrapper">
+                    <div id="notes-wrapper" class="content-wrapper" style="background-color: rgba(0, 23, 49, 0);">
                     </div>
                 </div>
             </div>
         </div>
         <div id="reminders">
-            <div class="container">
-                <div class="col">
+            <div class="container" style="background-color: rgba(0, 23, 49, 0.5);" >
+                <div class="col" style="color:white" >
                     <h1>Reminders</h1>
-                    <div id="reminders-controller" class="content-wrapper controller smaller">
+                    <div id="reminders-controller" class="content-wrapper controller smaller" style="background-color: rgba(0, 23, 49, 0);" >
                         <i class="fa fa-plus" onclick="addModalReminder()"></i>
                         <i class="fa fa-check" onclick="loadDoneReminders()"></i>
                         <i class="fa fa-times" onclick="loadUndoneReminders();"></i>
                     </div>
-                    <div id="reminders-wrapper" class="content-wrapper smaller">
+                    <div id="reminders-wrapper" class="content-wrapper smaller" style="background-color: rgba(0, 23, 49, 0);" >
                     </div>
                 </div>
             </div>
         </div>
         <div id="permissions">
-            <div class="container">
-                <div class="col">
+            <div class="container" style="background-color: rgba(0, 23, 49, 0.5);">
+                <div class="col" style="color: white">
                     <h1>Permissions</h1>
                 </div>
             </div>
-            <div class="container">
-                <div class="col">
+            <div class="container" style="background-color: rgba(0, 23, 49, 0.5);">
+                <div class="col" style="color: white">
                     <h3 onclick="showGranted();getGranted();">Granted</h3>
                 </div>
-                <div class="col">
+                <div class="col" style="color: white">
                     <h3 onclick="showReceived();getReceived();">Received</h3>
                 </div>
             </div>
-            <div class="container">
-                <div id="granted" class="content-wrapper">
+            <div class="container" style="background-color: rgba(0, 23, 49, 0.5);">
+                <div id="granted" class="content-wrapper" >
                     <div id="permissions-controler" class="content-wrapper controller">
                         <a><i class="fa fa-plus" onclick="openGrantModal()"> Grant Permission</i></a>
                     </div>
-                    <div id="permissions-wrapper" class="content-wrapper">
+                    <div id="permissions-wrapper" class="content-wrapper" >
                     </div>
                 </div>
-                <div id="received" class="content-wrapper">
+                <div id="received" class="content-wrapper" style="background-color: rgba(0, 23, 49, 0);">
                 </div>
             </div>
         </div>
         <div id="settings">
-            <div class="container">
-                <div class="col">
+            <div class="container" style="background-color: rgba(0, 23, 49, 0.5);">
+                <div class="col" style="color: white">
                     <h1>Settings</h1>
-                    <div id="settings-wrapper" class="content-wrapper smaller">
+                    <div id="settings-wrapper" class="content-wrapper smaller" style="background-color: rgba(0, 23, 49, 0);">
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="col">
+            <div class="container" style="background-color: rgba(0, 23, 49, 0.5);">
+                <div class="col" style="color: white">
                     <h1>Files Permission</h1>
-                    <div id="files-perm-wrapper" class="content-wrapper smaller">
+                    <div id="files-perm-wrapper" class="content-wrapper smaller" style="background-color: rgba(0, 23, 49, 0);">
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="col">
+            <div class="container" style="background-color: rgba(0, 23, 49, 0.5);">
+                <div class="col" style="color: white">
                     <h1>Notes Permission</h1>
-                    <div id="notes-perm-wrapper" class="content-wrapper smaller">
+                    <div id="notes-perm-wrapper" class="content-wrapper smaller" style="background-color: rgba(0, 23, 49, 0);">
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 
 body {
-    background-color: #00b3b3;
+    background-image:url(blocuri.png);
     margin: 0;
     text-align: center
 }
@@ -17,7 +17,7 @@ i{
 .container {
     display: flex;
     justify-content: space-between;
-    background-color:white;
+    background-color:grey;
     flex-wrap: wrap;
     width:80%;
     margin: 0 auto;
@@ -27,16 +27,35 @@ i{
     flex: 1
 }
 
+#menu{
+    background-color: rgba(0, 23, 49, 1);
+}
+
+
 .content-wrapper{
     width:100%;
     font-size:50px;
     margin: 0 auto;
     max-height:300px;
     min-height:30px;
-    background-color:#669999;
+    background-color: rgba(0, 23, 49, 0);
     text-align:left;
     overflow-y: scroll;
 
+}
+
+#mySidenav{
+    opacity: 20;
+}
+
+.side-menu{
+
+    display:block;
+    background-color: #001731;
+}
+
+.menu-button{
+    background-color:#001731;
 }
 
 .content-wrapper i{
@@ -114,6 +133,7 @@ i{
 
 @media only screen and (min-width: 200px) and (max-width: 700px) {
     .container{
+        margin-top:40px;
         width:90%;
         font-size:30px;
     }

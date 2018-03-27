@@ -7,8 +7,8 @@
 
 
 .sidenav {
-    height: 100%;
-    width: 0%;
+    height: 0%;
+    width: 100%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -16,7 +16,6 @@
     background-color: #00b3b3;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
 
 
 }
@@ -52,7 +51,6 @@
 }
 
 .menu-button {
-    background-color: #c0c0c0;
     position:fixed;
     top:0;
     width:100%;
