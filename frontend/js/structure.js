@@ -1,18 +1,18 @@
 
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "100%";
+    document.getElementById("mySidenav").style.height = "100%";
 
 }
 
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.height = "0%";
 
 }
 
 function changeMenu(element){
 
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.height = "0";
 
     var nodes = document.getElementById('main').childNodes;
     for(var i=0; i<nodes.length; i++) {

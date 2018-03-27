@@ -26,8 +26,8 @@ body{
 }
 
 .container{
-	background-color: #00b3b3;
 	transition: .5s ease;
+	background-color: white;
 }
 
 .g-signin2{
