@@ -1,8 +1,16 @@
 
 #logo {
+    margin-top:40px;
     width: 150px;
     height: 150px;
     margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#icon{
+    width:10px;
+    height: 10px;
+    size:5px;
 }
 
 
@@ -16,8 +24,10 @@
     background-color: #00b3b3;
     overflow-x: hidden;
     transition: 0.5s;
+}
 
-
+#mySidenav{
+    z-index: 1100;
 }
 
 .sidenav a {
@@ -27,7 +37,7 @@
     color: white;
     display: block;
     transition: 0.3s;
-
+    font-size: 50px;
 }
 
 .sidenav a:focus {
@@ -39,7 +49,7 @@
 }
 
 .sidenav a:hover {
-    color: #145252;
+    color: #2490e3;
 }
 
 .sidenav .closebtn {
@@ -56,4 +66,14 @@
     width:100%;
     z-index:100;
 
+}
+
+@media only screen and (max-width: 700px){
+    .sidenav a{
+        font-size: 35px;
+    }
+    #logo{
+        width:100px;
+        height:100px
+    }
 }

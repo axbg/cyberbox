@@ -21,6 +21,8 @@ i{
     flex-wrap: wrap;
     width:80%;
     margin: 0 auto;
+    background-color: rgba(0, 23, 49, 0.5);
+
 }
 
 .col {
@@ -46,6 +48,7 @@ i{
 
 #mySidenav{
     opacity: 20;
+    background-color: rgba(0, 23, 49, 1);
 }
 
 .side-menu{
@@ -128,6 +131,15 @@ i{
 
 #files, #settings, #notes, #permissions, #reminders {
     display: none;
+    background-color: rgba(0, 23, 49, 0);
+    color: white;
+}
+
+span{
+    font-size:30px;
+    cursor:pointer;
+    align-content: left; 
+    color:white;
 }
 
 
