@@ -6,11 +6,12 @@ body{
 	color: white;
 	text-align: center;
 	align-items: center;
-	line-height: 10px;
+	line-height: 30px;
 }
 
 .logo{
 	margin-top: 200px;
+	margin-bottom: 70px;
 }
 
 .title{
