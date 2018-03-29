@@ -256,34 +256,48 @@ function uploadModalFiles(){
 function uploadFiles(){
 
     let files = document.getElementById("files-input");
-    let modalcontent = document.getElementById('modal-content');
-    modalcontent.innerHTML = '<div class="container col loader"></div>';
 
-    let form = new FormData();
-
+    let size = 0;
 
     for(let i = 0; i < files.files.length; i++){
-        form.append("fisiere", files.files[i]);
+        size = size + files.files[i].size;
     }
 
+    if(size !== 0) {
 
-    axios.post("http://cyberboxx.me/api/files/upload", form)
-        .then((response) => {
+        let modalcontent = document.getElementById('modal-content');
+        modalcontent.innerHTML = '<div class="container col loader"></div>';
 
-            if(response.status === 201){
-                toastr.success("Files Uploaded");
-                loadFiles();
-                closeModal();
-            } else if(response.status === 200){
-                for(let i=0; i < response.data.message.length; i++){
-                    toastr.warning(response.data.message[i]);
-                    uploadModalFiles();
+        let form = new FormData();
+
+
+        for (let i = 0; i < files.files.length; i++) {
+            form.append("fisiere", files.files[i]);
+        }
+
+
+        axios.post("http://cyberboxx.me/api/files/upload", form)
+            .then((response) => {
+
+                if (response.status === 201) {
+                    toastr.success("Files Uploaded");
+                    loadFiles();
+                    closeModal();
+                } else if (response.status === 200) {
+                    for (let i = 0; i < response.data.message.length; i++) {
+                        toastr.warning(response.data.message[i]);
+                        uploadModalFiles();
+                    }
+                } else if (response.status === 204) {
+                    toastr.error("File bigger than 5MB");
+                    closeModal();
                 }
-            } else if(response.status === 204){
-                toastr.error("File bigger than 5MB");
-                closeModal();
-            }
-        }).catch(() => toastr.error("Error occured"));
+            }).catch(() => toastr.error("Error occured"));
+    } else {
+
+        toastr.error("You cannot upload empty files");
+
+    }
 
 }
 
