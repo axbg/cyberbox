@@ -40,7 +40,7 @@ function loadNotes() {
 
             } else if(response.status === 204) {
 
-                let files = document.getElementById("files-wrapper");
+                let files = document.getElementById("notes-wrapper");
                 files.innerHTML = "";
                 files.innerHTML = "<h1>No files here</h1>";
 
