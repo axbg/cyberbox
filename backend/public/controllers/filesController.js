@@ -612,14 +612,13 @@ module.exports.getFriendFiles = (req, res) => {
                     where:{
                         user_id: req.params.owner_id,
                         idParent: currentId,
-                        isFolder: 1,
                         isPublic: 1
                     }
                 }).then((public) => {
 
                     if(public.length){
 
-                        req.session.friend_folder = currentId;
+                        //req.session.friend_folder = currentId;
                         res.status(200).send(public);
 
                     } else {
