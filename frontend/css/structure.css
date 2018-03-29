@@ -39,6 +39,7 @@ i{
     color:white;
 }
 
+
 .modal{
     background-color: rba(0, 23, 49, 1);
 }
@@ -68,6 +69,10 @@ i{
 
 .menu-button{
     background-color:#001731;
+}
+
+.menu-button span{
+    font-size: 30px !important;
 }
 
 .content-wrapper i{
@@ -206,7 +211,7 @@ span{
     }
 
     span{
-        font-size:15px;
+        font-size:15px !important;
     }
 
     .controller i{
@@ -216,6 +221,11 @@ span{
     #modal-content{
         width:100%;
     }
+
+    .menu-button span{
+        font-size: 30px !important;
+    }
+
     input{
         margin-right:35px !important;
         width:70% !important;
@@ -225,9 +235,7 @@ span{
         width:70% !important;
         margin-right:35px !important;
     }
-    h3{
-         margin-right:35px !important;
-    }
+
     button{
         width:70% !important;
         margin-right:35px !important;
@@ -243,9 +251,7 @@ span{
     .upload{
         align-items: left !important;
     }
-    span{
-        font-size:30px !important;
-    }
+
     #main{
          margin-top:80px !important;
     }
