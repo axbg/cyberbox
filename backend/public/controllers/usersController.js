@@ -138,14 +138,14 @@ module.exports.deleteUser = (req,res) => {
 
 				Settings.destroy({
 					where:{
-						user_id: req.session.id
+						user_id: result.id
 					}
 				});
 
 				
 				Files.destroy({
 					where:{
-						user_id: req.session.id
+						user_id: result.id
 					}
 				});
 
@@ -153,20 +153,20 @@ module.exports.deleteUser = (req,res) => {
 				
 				Notes.destroy({
 					where:{
-						user_id: req.session.id
+						user_id: result.id
 					}
 				});
 				rmdir(locationNotes, () =>{ req.status(200).send("Notes Folder has been removed")});
 
 				Reminders.destroy({
 					where:{
-						user_id: req.session.id
+						user_id: result.id
 					}
 				});
 
 				Permissions.destroy({
 					where:{
-						user_id: req.session.id
+						user_id: result.id
 					}
 				});
 

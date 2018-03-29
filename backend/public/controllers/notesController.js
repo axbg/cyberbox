@@ -187,6 +187,7 @@ module.exports.getRoot = (req, res) => {
 		attributes: ['id', 'title', 'isFolder', 'isPublic'],
 		where: {
 			user_id : req.session.id,
+			isFolder: 1,
 			idParent: result.id
 		},
 		raw:true,
