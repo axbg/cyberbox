@@ -133,6 +133,8 @@ function getParentNotes() {
 
                 for(let i = 0; i < response.data.length; i++) {
 
+                    if (response.data[i].isFolder) {
+
                         if (response.data[i].isPublic) {
                             content += "<li><a class='fa fa-folder-open'></a>" +
                                 "<span>" + response.data[i].title + "</span>" +
@@ -145,6 +147,7 @@ function getParentNotes() {
                                 "<i class='fa fa-eye-slash'  id=" + response.data[i].id + " onclick='changeAccessNotes(this)'></i>" +
                                 "</li>";
                         }
+                    }
                 }
 
                 content += '</ul>';

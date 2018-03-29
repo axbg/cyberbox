@@ -14,6 +14,7 @@ function changeMenu(element){
 
     document.getElementById("mySidenav").style.height = "0";
 
+
     var nodes = document.getElementById('main').childNodes;
     for(var i=0; i<nodes.length; i++) {
        if(nodes[i].nodeName === 'DIV') {
@@ -21,11 +22,13 @@ function changeMenu(element){
         }
     }
 
+
     document.getElementById(element).style.display = "block";
 }
 
 window.onload = function(){
 
+    /*
     let nodes = document.getElementById('main').childNodes;
     for(let i=0; i<nodes.length; i++) {
 
@@ -34,10 +37,13 @@ window.onload = function(){
         }
     }
 
-    welcome();
-
+*/
     document.getElementById('welcome').style.display = "block";
     document.getElementById('received').style.display = "none";
+
+    welcome();
+
+
 
 };
 
