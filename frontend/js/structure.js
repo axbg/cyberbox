@@ -28,7 +28,7 @@ function changeMenu(element){
 
 window.onload = function(){
 
-    /*
+
     let nodes = document.getElementById('main').childNodes;
     for(let i=0; i<nodes.length; i++) {
 
@@ -37,7 +37,7 @@ window.onload = function(){
         }
     }
 
-*/
+
     document.getElementById('welcome').style.display = "block";
     document.getElementById('received').style.display = "none";
 
