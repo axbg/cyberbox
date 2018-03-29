@@ -254,13 +254,13 @@ cron.schedule('0 0 9 * * *', function(){
                             let transporter = nodemailer.createTransport({
                                 service: 'gmail',
                                 auth: {
-                                    user: 'bisagalexstefan@gmail.com',
-                                    pass: '28grand07master197'
+                                    user: 'cyberbox.app@gmail.com',
+                                    pass: 'neamfacutgmail'
                                 }
                             });
 
                             let mailOptions = {
-                                from: 'bisagalexstefan@gmail.com',
+                                from: 'cyberbox.app@gmail.com',
                                 to: sender.email,
                                 subject: 'You have a reminder set for today',
                                 text: result[i].title

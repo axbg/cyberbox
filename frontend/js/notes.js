@@ -149,15 +149,19 @@ function createFolderNotes(){
 
 function deleteNote(element){
 
-    axios.post("http://localhost:8080/api/notes/delete", {note_id: element.id})
-        .then((result)=>{
+    if(confirm("Do you really want to delete this note?")) {
+        axios.post("http://localhost:8080/api/notes/delete", {note_id: element.id})
+            .then((result) => {
 
-            if(result.status===200){
-                toastr.success(result.data.message);
-                loadNotes();
-            }
+                if (result.status === 200) {
+                    toastr.success(result.data.message);
+                    loadNotes();
+                }
 
-        }).catch(() => {toastr.error("Error occurred");})
+            }).catch(() => {
+            toastr.error("Error occurred");
+        })
+    }
 }
 
 function addModalNotes() {

@@ -215,12 +215,17 @@ function addFolder() {
 
 function deleteFile(element){
 
+    if(confirm("Do you really want to delete this file?")) {
 
-    axios.post("http://localhost:8080/api/files/delete", {file_id:element.id})
-        .then((response) => {
-            toastr.success("File was deleted");
-            loadFiles();
-        }).catch((error) => {toastr.error("An error occured"); console.log(error)});
+        axios.post("http://localhost:8080/api/files/delete", {file_id: element.id})
+            .then((response) => {
+                toastr.success("File was deleted");
+                loadFiles();
+            }).catch((error) => {
+            toastr.error("An error occured");
+            console.log(error)
+        });
+    }
 }
 
 function downloadFile(element){
@@ -244,13 +249,15 @@ function uploadModalFiles(){
     modalcontent.innerHTML += '<button style="margin-top:5px;height:30px;width:40%;" onclick="uploadFiles()">Upload</button>';
     modalcontent.innerHTML += '</form>';
 
+
     openModal();
 }
 
 function uploadFiles(){
 
     let files = document.getElementById("files-input");
-
+    let modalcontent = document.getElementById('modal-content');
+    modalcontent.innerHTML = '<div class="container col loader"></div>';
 
     let form = new FormData();
 
@@ -270,9 +277,11 @@ function uploadFiles(){
             } else if(response.status === 200){
                 for(let i=0; i < response.data.message.length; i++){
                     toastr.warning(response.data.message[i]);
+                    uploadModalFiles();
                 }
             } else if(response.status === 204){
-                toastr.error("File bigget than 5MB");
+                toastr.error("File bigger than 5MB");
+                closeModal();
             }
         }).catch(() => toastr.error("Error occured"));
 
