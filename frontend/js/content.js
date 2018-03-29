@@ -3,7 +3,7 @@ function login(){
 
     let email = 'bisagalexstefan@gmail.com';
 
-    axios.post("http://localhost:8080/auth/login", {email:email})
+    axios.post("http://cyberboxx.me/auth/login", {email:email})
         .then((result)=>{
             if(result.status === 200){
                 window.location.replace('new_index.html');
@@ -16,7 +16,7 @@ function login(){
 
 function logout(){
 
-    axios.post("http://localhost:8080/auth/logout")
+    axios.post("http://cyberboxx.me/auth/logout")
         .then((result) => {
             window.location.replace('index.html');
             toastr.success("You've been logged out");
@@ -26,7 +26,7 @@ function logout(){
 
 function loadFiles() {
 
-    axios.get("http://localhost:8080/api/files/get")
+    axios.get("http://cyberboxx.me/api/files/get")
         .then((response)=>{
 
             if(response.status === 200) {
@@ -75,7 +75,7 @@ function loadFiles() {
 
 function loadFolder(folder) {
 
-    axios.get("http://localhost:8080/api/files/get/" + folder.id)
+    axios.get("http://cyberboxx.me/api/files/get/" + folder.id)
         .then((response) => {
 
             if(response.status === 200) {
@@ -123,7 +123,7 @@ function loadFolder(folder) {
 
 function backFolder() {
 
-    axios.get("http://localhost:8080/api/files/back")
+    axios.get("http://cyberboxx.me/api/files/back")
         .then((response) => {
             if(response.status === 200) {
 
@@ -189,7 +189,7 @@ function addFolder() {
 
     if(folder_name.length !=0 ){
 
-    axios.post("http://localhost:8080/api/files/create", {name:folder_name})
+    axios.post("http://cyberboxx.me/api/files/create", {name:folder_name})
         .then((result) => {
 
             if(result.status === 201){
@@ -217,7 +217,7 @@ function deleteFile(element){
 
     if(confirm("Do you really want to delete this file?")) {
 
-        axios.post("http://localhost:8080/api/files/delete", {file_id: element.id})
+        axios.post("http://cyberboxx.me/api/files/delete", {file_id: element.id})
             .then((response) => {
                 toastr.success("File was deleted");
                 loadFiles();
@@ -230,9 +230,9 @@ function deleteFile(element){
 
 function downloadFile(element){
 
-    axios.get("http://localhost:8080/api/files/download/" + element.id)
+    axios.get("http://cyberboxx.me/api/files/download/" + element.id)
         .then((result)=>{
-            window.location = "http://localhost:8080/api/files/download/" + element.id;
+            window.location = "http://cyberboxx.me/api/files/download/" + element.id;
         })
 }
 
@@ -267,7 +267,7 @@ function uploadFiles(){
     }
 
 
-    axios.post("http://localhost:8080/api/files/upload", form)
+    axios.post("http://cyberboxx.me/api/files/upload", form)
         .then((response) => {
 
             if(response.status === 201){
