@@ -33,6 +33,14 @@ i{
     background-color: rgba(0, 23, 49, 1);
 }
 
+#modal-content{
+    background-color: rgba(0, 23, 49, 0.7);
+    color:white;
+}
+
+.modal{
+    background-color: rba(0, 23, 49, 1);
+}
 
 .content-wrapper{
     width:100%;
@@ -70,7 +78,7 @@ i{
 }
 
 .content-wrapper i:hover{
-    color: black;
+    color: #2490e3;
 }
 
 .content-wrapper ul{
@@ -171,6 +179,11 @@ span{
 
 
 @media only screen and (min-width: 200px) and (max-width: 700px) {
+    
+    h1{
+        font-size:50px !important;
+    }
+
     .container{
         margin-top:40px;
         width:90%;
@@ -201,7 +214,50 @@ span{
         font-size: 20px !important;
     }
 
+    #modal-content{
+        width:100%;
+    }
+    input{
+        margin-right:35px !important;
+        width:70% !important;
+    }
+    #content{
+        position: relative;
+        width:70% !important;
+        margin-right:35px !important;
+    }
+    h3{
+         margin-right:35px !important;
+    }
+    button{
+        width:70% !important;
+        margin-right:35px !important;
+    }
+    #input-files{
+        display:flex !important;
+        flex-direction: column !important;
+    }
+    /*.fa.fa{
+        font-size: 50px !important;
+        text-align: center !important;
+    }*/
+    .upload{
+        align-items: left !important;
+    }
+    span{
+        font-size:30px !important;
+    }
+    #main{
+         margin-top:80px !important;
+    }
 }
+
+/*@media only screen and (max-width: 1024px) and (min-width: 700px) {
+
+    .fa.fa{
+        font-size:60px !important;
+    }
+}*/
 
 ::-webkit-scrollbar {
     display: none;
