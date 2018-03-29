@@ -19,12 +19,12 @@
         <div id="menu">
             <img id="logo" src= "img/logo.png">
             <a href="#dashboard" onClick="changeMenu('welcome');welcome();">Dashboard</a>
-            <a onClick="changeMenu('files');loadFiles();">Files</a>
+            <a href="#files" onClick="changeMenu('files');loadFiles();">Files</a>
             <a href="#notes" onClick="changeMenu('notes');loadNotes()">Notes</a>
             <a href="#reminders" onclick="changeMenu('reminders');loadUndoneReminders();">Reminders</a>
             <a href="#permissions" onclick="changeMenu('permissions');showGranted();getGranted();">Permissions</a>
             <a href="#settings" onClick="changeMenu('settings');loadSettings();getParentFolders();getParentNotes();">Settings</a>
-            <a onClick="logout()">Logout</a>
+            <a href="#logout" onClick="logout()">Logout</a>
         </div>
     </div>
 
