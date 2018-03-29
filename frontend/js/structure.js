@@ -44,7 +44,7 @@ window.onload = function(){
 
 function welcome() {
 
-    axios.post("http://cyberboxx.me/api/users/welcome", {email: "bisagalexstefan@gmail.com"})
+    axios.get("http://cyberboxx.me/api/users/welcome")
         .then((response) => {
 
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

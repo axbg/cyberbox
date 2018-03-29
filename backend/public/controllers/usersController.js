@@ -74,7 +74,7 @@ module.exports.Welcome = (req, res) => {
 
 	Users.findOne({
 		where:{
-			email: req.body.email
+			email: req.session.email
 		}
 	}).then((response) => {
 		let info = [];
