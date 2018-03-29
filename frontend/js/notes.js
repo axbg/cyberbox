@@ -1,6 +1,6 @@
 function loadNotes() {
 
-    axios.get("http://localhost:8080/api/notes/get/folder/root")
+    axios.get("http://cyberboxx.me/api/notes/get/folder/root")
         .then((response)=>{
 
             if(response.status === 200) {
@@ -52,7 +52,7 @@ function loadNotes() {
 
 function loadFolderNotes(folder){
 
-    axios.get("http://localhost:8080/api/notes/get/folder/" + folder.id)
+    axios.get("http://cyberboxx.me/api/notes/get/folder/" + folder.id)
         .then((response) => {
 
             if(response.status === 200) {
@@ -124,7 +124,7 @@ function createFolderNotes(){
     let folder_name = document.getElementById("title").value;
 
     if(folder_name.length !=0 ) {
-        axios.post("http://localhost:8080/api/notes/create/folder", {title:folder_name})
+        axios.post("http://cyberboxx.me/api/notes/create/folder", {title:folder_name})
             .then((result) => {
                 console.log(result.status);
 
@@ -150,7 +150,7 @@ function createFolderNotes(){
 function deleteNote(element){
 
     if(confirm("Do you really want to delete this note?")) {
-        axios.post("http://localhost:8080/api/notes/delete", {note_id: element.id})
+        axios.post("http://cyberboxx.me/api/notes/delete", {note_id: element.id})
             .then((result) => {
 
                 if (result.status === 200) {
@@ -184,7 +184,7 @@ function createNote(){
     let noteContent = document.getElementById("content").value;
 
 
-    axios.post("http://localhost:8080/api/notes/create/note", {title: noteTitle, content: noteContent})
+    axios.post("http://cyberboxx.me/api/notes/create/note", {title: noteTitle, content: noteContent})
         .then((response) => {
 
             if(response.status === 204){
@@ -206,7 +206,7 @@ function editModalNote(note){
     modalcontent.innerHTML = "";
 
 
-    axios.get("http://localhost:8080/api/notes/get/note/" + note.id)
+    axios.get("http://cyberboxx.me/api/notes/get/note/" + note.id)
         .then((result) => {
 
             openModal();
@@ -230,7 +230,7 @@ function editNote(element){
     let noteTitle = document.getElementById("title").value;
     let noteContent = document.getElementById("content").value;
 
-    axios.post("http://localhost:8080/api/notes/edit/note", {note_id: element, title: noteTitle, content: noteContent})
+    axios.post("http://cyberboxx.me/api/notes/edit/note", {note_id: element, title: noteTitle, content: noteContent})
         .then((response) => {
 
             if(response.status === 204){

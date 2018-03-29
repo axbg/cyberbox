@@ -13,7 +13,7 @@ function showReceived(){
 
 function getReceived(){
 
-    axios.get("http://localhost:8080/api/permissions/get/received")
+    axios.get("http://cyberboxx.me/api/permissions/get/received")
         .then((response) => {
 
             let received = document.getElementById("received");
@@ -43,7 +43,7 @@ function getReceived(){
 
 function getGranted(){
 
-    axios.get("http://localhost:8080/api/permissions/get/granted")
+    axios.get("http://cyberboxx.me/api/permissions/get/granted")
         .then((response) => {
 
             let received = document.getElementById("permissions-wrapper");
@@ -90,7 +90,7 @@ function grantAccess(){
 
     let email = document.getElementById("email").value;
 
-    axios.post("http://localhost:8080/api/permissions/create", {email:email})
+    axios.post("http://cyberboxx.me/api/permissions/create", {email:email})
         .then((response) => {
 
             if(response.status === 200){
@@ -111,7 +111,7 @@ function revokeAccess(element){
 
     let email = element.id;
 
-    axios.post("http://localhost:8080/api/permissions/create", {email:email})
+    axios.post("http://cyberboxx.me/api/permissions/create", {email:email})
         .then((response) => {
 
             if(response.status === 200){
@@ -146,7 +146,7 @@ function othersFiles(element){
 
     let playground = document.getElementById("playground");
 
-    axios.get("http://localhost:8080/api/files/get/friend/" + element.getAttribute('owner_id'))
+    axios.get("http://cyberboxx.me/api/files/get/friend/" + element.getAttribute('owner_id'))
         .then((response) => {
 
             if(response.status === 200){
@@ -195,9 +195,9 @@ function downloadFileFriend(element){
     let owner_id = element.getAttribute("owner_id");
     let file_id = element.id;
 
-    axios.get("http://localhost:8080/api/files/get/friend/download/" + owner_id + "/" + file_id)
+    axios.get("http://cyberboxx.me/api/files/get/friend/download/" + owner_id + "/" + file_id)
         .then((response) =>{
-            window.location = "http://localhost:8080/api/files/get/friend/download/" + owner_id + "/" + file_id;
+            window.location = "http://cyberboxx.me/api/files/get/friend/download/" + owner_id + "/" + file_id;
         }).catch(() => toastr.error("Error occured"));
 }
 
@@ -205,7 +205,7 @@ function loadFolderFriend(element){
 
     let playground = document.getElementById("playground");
 
-    axios.get("http://localhost:8080/api/files/get/friend/" + element.getAttribute('owner_id') + "/" + element.id)
+    axios.get("http://cyberboxx.me/api/files/get/friend/" + element.getAttribute('owner_id') + "/" + element.id)
         .then((response) => {
 
             if(response.status === 200){
@@ -253,7 +253,7 @@ function othersNotes(element){
 
     let playground = document.getElementById("playground");
 
-    axios.get("http://localhost:8080/api/notes/get/friend/root/" + element.getAttribute('owner_id'))
+    axios.get("http://cyberboxx.me/api/notes/get/friend/root/" + element.getAttribute('owner_id'))
         .then((response) => {
 
             if(response.status === 200){
@@ -298,7 +298,7 @@ function loadFolderNotesFriend(element){
 
     let playground = document.getElementById("playground");
 
-    axios.get("http://localhost:8080/api/notes/get/friend/folder/" + element.getAttribute('owner_id') + "/" + element.id)
+    axios.get("http://cyberboxx.me/api/notes/get/friend/folder/" + element.getAttribute('owner_id') + "/" + element.id)
         .then((response) => {
 
             if(response.status === 200){
@@ -336,7 +336,7 @@ function openNoteFriend(element){
 
     modalcontent.innerHTML = "";
 
-    axios.get("http://localhost:8080/api/notes/get/friend/note/" + element.getAttribute("owner_id") + "/" + element.id)
+    axios.get("http://cyberboxx.me/api/notes/get/friend/note/" + element.getAttribute("owner_id") + "/" + element.id)
         .then((result) => {
 
             if(result.status===200) {
