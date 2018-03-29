@@ -5,6 +5,10 @@ body {
     text-align: center
 }
 
+#main div{
+    display: none;
+}
+
 h1 {
     font-size: 70px;
     font-family: 'Source Sans Pro', sans-serif
@@ -149,8 +153,6 @@ span{
     align-content: left; 
     color:white;
 }
-
-
 
 .welcome-text h1{
    color:white;

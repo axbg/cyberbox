@@ -37,7 +37,7 @@ module.exports.createFolder = (req,res) => {
                             user_id: req.session.id,
                             idParent: req.session.folder,
                             name: req.body.name,
-                            isPublic: 0,
+                            isPublic: folder.isPublic,
                             isFolder: 1,
                             path: location
                         }).then(() => res.status(201).send({message: "Folder created"}));
@@ -512,7 +512,6 @@ module.exports.deleteFiles = (req, res) => {
 
 module.exports.downloadFiles = (req, res) => {
 
-    //implement for friend
     Files.findOne({
         where: {
             user_id: req.session.id,
