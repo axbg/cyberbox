@@ -173,7 +173,7 @@ function addModalNotes() {
     modalcontent.innerHTML += '<h3>Note Title</h3>';
     modalcontent.innerHTML += '<input id="title" type="text" style="font-size:40px;height:50px;width:50%">';
     modalcontent.innerHTML += '<h3>Content</h3>';
-    modalcontent.innerHTML += '<textarea id="content" style="font-size:20px;height:200px;width:50%;resize:none;"></textarea>';
+    modalcontent.innerHTML += '<textarea id="content" style="font-size:20px;height:200px;width:50%;resize:none;"maxlenght=900000000000></textarea>';
     modalcontent.innerHTML += '<button style="margin-top:5px;height:50px;width:50%;" ' +
         'onclick="createNote()">Create</button>';
 }
