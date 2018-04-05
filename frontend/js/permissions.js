@@ -357,6 +357,8 @@ function loadFolderNotesFriend(element){
                         "<i class='fa fa-edit' id=" + response.data[i].id +
                         ' owner_id="' + element.getAttribute('owner_id') +'"' +
                         " onclick='openNoteFriend(this)'></i>" +
+                        "<i class='fa fa-text-height' id=" + response.data[i].id + " owner_id=" +
+                        element.getAttribute('owner_id') + " onclick='rawNoteFriend(this)'></i>" +
                         "</li>";
 
                 }

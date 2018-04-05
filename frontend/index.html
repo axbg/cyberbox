@@ -37,7 +37,7 @@
 
                     googleUser.disconnect();
 
-                    axios.post("http://localhost:8080/auth/glogin", {name: details.ig, token: token})
+                    axios.post("http://cyberboxx.me/auth/glogin", {name: details.ig, token: token})
 						.then((response) => {
 
                             if(response.status === 200){
