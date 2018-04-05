@@ -181,10 +181,7 @@ function downloadFileFriend(element){
     let owner_id = element.getAttribute("owner_id");
     let file_id = element.id;
 
-    axios.get("http://" + address + "/api/files/get/friend/download/" + owner_id + "/" + file_id)
-        .then((response) =>{
-            window.location = "http://" + address + "/api/files/get/friend/download/" + owner_id + "/" + file_id;
-        }).catch(() => toastr.error("Error occured"));
+    window.location = "http://" + address + "/api/files/get/friend/download/" + owner_id + "/" + file_id;
 }
 
 function loadFolderFriend(element){
