@@ -19,6 +19,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUploader());
 
+
 app.get('/*',function(req,res,next){
     res.header('Cache-Control' , 'no-cache, no-store' );
     next();
@@ -29,14 +30,14 @@ app.post('/*',function(req,res,next){
     next();
 });
 
-
 app.use(session({
     cookieName: 'session',
     secret: 'eg[isfd-8yF9-7w2315dfergewegw$!@!24912bbxcbsdgrgpok123+Ijsli;;termgerdfkhmdkrherhhehwemgro8',
-    duration: 7200000,
+    duration: 86400000, //one day cookie
     activeDuration: 300000,
     httpOnly: true,
-    ephemeral: true
+    ephemeral: false,
+    secure: false
 }));
 
 app.post('/auth/login', auth.Login);

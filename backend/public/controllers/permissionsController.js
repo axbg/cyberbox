@@ -40,7 +40,7 @@ module.exports.createPermissions = (req, res)=> {
                 }
             })
         } else {
-            res.status(403).send({message: "You cannot grant permissions to yourself!"});
+            res.status(204).send({message: "You cannot grant permissions to yourself!"});
         }
     }).catch(() => res.status(203).send({message: "No user has this email"}));
 };

@@ -1,4 +1,4 @@
-
+const address = "cyberboxx.me";
 
 function openNav() {
     document.getElementById("mySidenav").style.height = "100%";
@@ -15,8 +15,8 @@ function changeMenu(element){
     document.getElementById("mySidenav").style.height = "0";
 
 
-    var nodes = document.getElementById('main').childNodes;
-    for(var i=0; i<nodes.length; i++) {
+    let nodes = document.getElementById('main').childNodes;
+    for(let i=0; i<nodes.length; i++) {
        if(nodes[i].nodeName === 'DIV') {
             document.getElementById(nodes[i].id).style.display = "none";
         }
@@ -43,14 +43,12 @@ window.onload = function(){
 
     welcome();
 
-
-
 };
 
 
 function welcome() {
 
-    axios.get("http://cyberboxx.me/api/users/welcome")
+    axios.get("http://" + address + "/api/users/welcome")
         .then((response) => {
 
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -60,11 +58,16 @@ function welcome() {
             let dayName = days[d.getDay()];
             let monthName = months[d.getMonth()];
 
-            document.getElementById('welcome-name').innerHTML = "Welcome, " + response.data.name;
+            document.getElementById('welcome-name').innerHTML = "Welcome " + response.data.name;
             document.getElementById('welcome-day').innerHTML = "It's " + dayName;
             document.getElementById('welcome-day-numbers').innerHTML = d.getDate() + " " + monthName + " " + d.getFullYear();
             document.getElementById('welcome-files').innerHTML = "You have " + response.data.files + " files";
             document.getElementById('welcome-notes').innerHTML = "You have " + response.data.notes + " notes";
             document.getElementById('welcome-reminders').innerHTML = "You have " + response.data.reminders + " reminders";
         })
+        .catch(() => {
+            localStorage.setItem("logged", 0);
+            alert("Your cookie expired. Please log in");
+            window.location.replace("index.html");
+        });
 }

@@ -1,12 +1,14 @@
 
+
 function login(){
 
     let email = 'bisagalexstefan@gmail.com';
 
-    axios.post("http://cyberboxx.me/auth/login", {email:email})
+    axios.post("http://" + address + "/auth/login", {email:email})
         .then((result)=>{
             if(result.status === 200){
-                window.location.replace('new_index.html');
+                window.location.replace('dashboard.html');
+
 
             } else {
                 toastr.info("Your email is not allowed");
@@ -16,17 +18,16 @@ function login(){
 
 function logout(){
 
-    axios.post("http://cyberboxx.me/auth/logout")
+    axios.post("http://" + address + "/auth/logout")
         .then((result) => {
+            localStorage.setItem("logged", 0);
             window.location.replace('index.html');
-            toastr.success("You've been logged out");
-
         })
 }
 
 function loadFiles() {
 
-    axios.get("http://cyberboxx.me/api/files/get")
+    axios.get("http://" + address + "/api/files/get")
         .then((response)=>{
 
             if(response.status === 200) {
@@ -40,20 +41,20 @@ function loadFiles() {
 
                     if(response.data[i].isFolder){
                         content +=
-                            "<li><a class='fa fa-folder-open'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-folder-open'></a>" +
                             "<span id=" + response.data[i].id +
                             " onclick='loadFolder(this)'>" + response.data[i].name + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
-                            "</li>";
+                            "</i></li>";
                     }
                     else {
                         content +=
-                            "<li><a class='fa fa-file'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-file'></a>" +
                             "<span>" + response.data[i].name + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
-                            "</li>";
+                            "</i></li>";
                     }
                 }
 
@@ -75,7 +76,7 @@ function loadFiles() {
 
 function loadFolder(folder) {
 
-    axios.get("http://cyberboxx.me/api/files/get/" + folder.id)
+    axios.get("http://" + address + "/api/files/get/" + folder.id)
         .then((response) => {
 
             if(response.status === 200) {
@@ -89,20 +90,20 @@ function loadFolder(folder) {
 
                     if(response.data[i].isFolder){
                         content +=
-                            "<li><a class='fa fa-folder-open'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-folder-open'></a>" +
                             "<span id=" + response.data[i].id +
                             " onclick='loadFolder(this)'>" + response.data[i].name + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
-                            "</li>";
+                            "</i></li>";
                     }
                     else {
                         content +=
-                            "<li><a class='fa fa-file'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-file'></a>" +
                             "<span>" + response.data[i].name + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
-                            "</li>";
+                            "</i></li>";
                     }
                 }
 
@@ -123,7 +124,7 @@ function loadFolder(folder) {
 
 function backFolder() {
 
-    axios.get("http://cyberboxx.me/api/files/back")
+    axios.get("http://" + address + "/api/files/back")
         .then((response) => {
             if(response.status === 200) {
 
@@ -136,20 +137,20 @@ function backFolder() {
 
                     if(response.data[i].isFolder){
                         content +=
-                            "<li><a class='fa fa-folder-open'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-folder-open'></a>" +
                             "<span id=" + response.data[i].id +
                             " onclick='loadFolder(this)'>" + response.data[i].name + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
-                            "</li>";
+                            "</i></li>";
                     }
                     else {
                         content +=
-                            "<li><a class='fa fa-file'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-file'></a>" +
                             "<span>" + response.data[i].name + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
-                            "<i class='fa fa-download'  id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
-                            "</li>";
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
+                            "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
+                            "</i></li>";
                     }
                 }
 
@@ -178,8 +179,8 @@ function addModalFolder(){
 
     openModal();
     modalcontent.innerHTML += '<h1>Folder Name</h1>';
-    modalcontent.innerHTML += '<input id="folder_name" type="text" style="font-size:40px;height:50px;width:50%">';
-    modalcontent.innerHTML += '<button style="margin-top:5px;height:50px;width:50%;" onclick="addFolder()">Create</button>';
+    modalcontent.innerHTML += '<input id="folder_name" class="input-fls small-text" type="text" style="font-size:30px;height:30px;width:50%">';
+    modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:50px;width:50%;" onclick="addFolder()">Create</button>';
 
 }
 
@@ -189,7 +190,7 @@ function addFolder() {
 
     if(folder_name.length !=0 ){
 
-    axios.post("http://cyberboxx.me/api/files/create", {name:folder_name})
+    axios.post("http://" + address + "/api/files/create", {name:folder_name})
         .then((result) => {
 
             if(result.status === 201){
@@ -217,7 +218,7 @@ function deleteFile(element){
 
     if(confirm("Do you really want to delete this file?")) {
 
-        axios.post("http://cyberboxx.me/api/files/delete", {file_id: element.id})
+        axios.post("http://" + address + "/api/files/delete", {file_id: element.id})
             .then((response) => {
                 toastr.success("File was deleted");
                 loadFiles();
@@ -230,10 +231,7 @@ function deleteFile(element){
 
 function downloadFile(element){
 
-    axios.get("http://cyberboxx.me/api/files/download/" + element.id)
-        .then((result)=>{
-            window.location = "http://cyberboxx.me/api/files/download/" + element.id;
-        })
+    window.location = "http://" + address + "/api/files/download/" + element.id;
 }
 
 function uploadModalFiles(){
@@ -241,12 +239,11 @@ function uploadModalFiles(){
     let modalcontent = document.getElementById('modal-content');
     modalcontent.innerHTML = "";
 
-
     modalcontent.innerHTML += '<h1>Upload Files</h1>';
     modalcontent.innerHTML += '<form method="post" enctype="multipart/form-data">';
-    modalcontent.innerHTML += '<p><input id="files-input" name="fisier[]" type="file" value="Browse" multiple ' +
-        'style="font-size:30px;height:40px;width:40%"></p>';
-    modalcontent.innerHTML += '<button style="margin-top:5px;height:30px;width:40%;" onclick="uploadFiles()">Upload</button>';
+    modalcontent.innerHTML += '<p><input class="input-fls" id="files-input" name="fisier[]" type="file" value="Browse" multiple ' +
+        'style="font-size:25px;height:40px;width:50%"></p>';
+    modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:30px;width:50%;" onclick="uploadFiles()">Upload</button>';
     modalcontent.innerHTML += '</form>';
 
 
@@ -263,21 +260,30 @@ function uploadFiles(){
         size = size + files.files[i].size;
     }
 
-    if(size !== 0) {
+
+    if(size !== 0 && size < 150000000) {
 
         let modalcontent = document.getElementById('modal-content');
         modalcontent.innerHTML = '<div class="container col loader"></div>';
+        modalcontent.innerHTML += '<div id="percentage-loader"></div>';
 
         let form = new FormData();
-
+        let percentageLoader = document.getElementById("percentage-loader");
 
         for (let i = 0; i < files.files.length; i++) {
             form.append("fisiere", files.files[i]);
         }
 
+        axios.post("http://" + address + "/api/files/upload", form, {
+            onUploadProgress: (progressEvent) => {
+                const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
 
-        axios.post("http://cyberboxx.me/api/files/upload", form)
-            .then((response) => {
+                if (totalLength !== progressEvent.loaded) {
+                    percentageLoader.innerHTML = '<h3>' + (Math.round( (progressEvent.loaded * 100) / totalLength ))
+                                                        + '%</h3>';
+                }
+            }
+        }).then((response) => {
 
                 if (response.status === 201) {
                     toastr.success("Files Uploaded");
@@ -286,22 +292,26 @@ function uploadFiles(){
                 } else if (response.status === 200) {
                     for (let i = 0; i < response.data.message.length; i++) {
                         toastr.warning(response.data.message[i]);
-                        uploadModalFiles();
+                        loadFiles();
+                        closeModal();
                     }
                 } else if (response.status === 204) {
-                    toastr.error("File bigger than 5MB");
+                    toastr.error("File bigger than 150MB");
                     closeModal();
                 }
             }).catch(() => toastr.error("Error occured"));
-    } else {
+    } else if(size >= 150000000) {
+
+        toastr.error("Upload limit is 150MB");
+    }
+    else{
 
         toastr.error("You cannot upload empty files");
-
     }
 
 }
 
-//modal controllers
+
 function openModal() {
     document.getElementById('myModal').style.display = "block";
 }
@@ -316,7 +326,14 @@ function closeModal(){
 
     window.onclick = function(event) {
         if (event.target === modal) {
-            modal.style.display = "none";
+            if(document.getElementById("content") && document.getElementById("content").value !== "" &&
+                !document.getElementById("content").readOnly) {
+                if (confirm("Do you really want to close?")) {
+                    modal.style.display = "none";
+                }
+            } else {
+                modal.style.display = "none";
+            }
         }
     };
 

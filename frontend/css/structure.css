@@ -1,14 +1,19 @@
 
 body {
-    background-image:url(blocuri.png);
+    background-image:url("../img/blocuri.jpg");
+    background-size:cover;
     margin: 0;
-    text-align: center
+    text-align: center;
 }
 
 
 h1 {
     font-size: 70px;
     font-family: 'Source Sans Pro', sans-serif
+}
+
+h3 {
+    font-size:40px;
 }
 
 i{
@@ -26,8 +31,17 @@ i{
 
 }
 
+#files-wrapper{
+    overflow-x:hidden !important;
+}
+
+#ul{
+    width:inherit;
+}
+
 .col {
-    flex: 1
+    flex: 1;
+    width:inherit !important;
 }
 
 #menu{
@@ -41,19 +55,30 @@ i{
 
 
 .modal{
-    background-color: rba(0, 23, 49, 1);
+    background-color: rgb(0, 23, 49, 1);
 }
 
 .content-wrapper{
     width:100%;
     font-size:50px;
     margin: 0 auto;
-    max-height:300px;
+    max-height:60vh;
     min-height:30px;
     background-color: rgba(0, 23, 49, 0);
     text-align:left;
     overflow-y: scroll;
 
+}
+
+.permissions-wrapper-style{
+    width:100%;
+    font-size:50px;
+    margin: 0 auto;
+    max-height:50vh;
+    min-height:30px;
+    background-color: rgba(0, 23, 49, 0);
+    text-align:left;
+    overflow-y: scroll;
 }
 
 #mySidenav{
@@ -74,6 +99,7 @@ i{
 .menu-button span{
     font-size: 30px !important;
 }
+
 
 .content-wrapper i{
     color:white;
@@ -132,8 +158,10 @@ i{
 
 .controller {
     overflow-y:hidden;
+}
 
-
+.granted {
+    overflow:hidden;
 }
 
 .controller i{
@@ -154,6 +182,14 @@ span{
     cursor:pointer;
     align-content: left; 
     color:white;
+    word-wrap:break-word;
+}
+
+.li-wrapper{
+    overflow:hidden;
+    padding-top:10px;
+    padding-bottom:10px;
+    width:100% !important;
 }
 
 .welcome-text h1{
@@ -164,7 +200,7 @@ span{
     border: 16px solid #f3f3f3;
     border-radius: 50%;
     border-top: 16px solid black;
-    width: 120px;
+    width: 120px !important;
     height: 120px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
@@ -181,11 +217,20 @@ span{
     100% { transform: rotate(360deg); }
 }
 
+@media only screen and (max-width: 1510px){
+    body{
 
-@media only screen and (min-width: 200px) and (max-width: 700px) {
-    
-    h1{
-        font-size:50px !important;
+        background-size:auto;
+        min-height:100%;
+
+    }
+}
+
+@media only screen and (min-width: 50px) and (max-width: 700px) {
+
+    body{
+        background-size:auto;
+        min-height:100%;
     }
 
     .container{
@@ -219,27 +264,18 @@ span{
     }
 
     #modal-content{
-        width:100%;
+        width:80%;
     }
 
     .menu-button span{
         font-size: 30px !important;
     }
 
-    input{
-        margin-right:35px !important;
+    .input-fls{
         width:70% !important;
-    }
-    #content{
-        position: relative;
-        width:70% !important;
-        margin-right:35px !important;
+        font-size:25px !important;
     }
 
-    button{
-        width:70% !important;
-        margin-right:35px !important;
-    }
     #input-files{
         display:flex !important;
         flex-direction: column !important;
@@ -254,6 +290,19 @@ span{
 
     #main{
          margin-top:80px !important;
+    }
+
+    .icons{
+        font-size:25px !important;
+        margin-top: 10px;
+    }
+
+    .small-text{
+        font-size:15px !important;
+    }
+
+    h3{
+        font-size:20px;
     }
 }
 

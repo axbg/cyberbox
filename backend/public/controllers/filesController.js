@@ -298,7 +298,7 @@ module.exports.uploadFiles = (req, res) => {
 
             }
 
-            if (size < 50000000) {
+            if (size < 150000000) {
 
                 Files.findOne({
                     where: {
@@ -355,7 +355,7 @@ module.exports.uploadFiles = (req, res) => {
                 });
             }
             else {
-                res.status(204).send({message: "Files are too big. Current upload limit is 50MB"});
+                res.status(204).send({message: "Files are too big. Current upload limit is 150MB"});
             }
         });
     } else {
@@ -531,23 +531,27 @@ module.exports.downloadFiles = (req, res) => {
                 archive.store = true;
                 archive.pipe(res);
                 res.attachment(result.name + ".zip");
+                res.header("Cache-Control", "public, max-age=31557600");
 
                 archive.directory(location,result.name);
 
+                archive.finalize();
 
-                archive.on('error', function (err) {
-
+                archive.on('error', function() {
+                   res.status(200).send({message: "An error occured"});
                 });
 
                 archive.on('finish', function (err) {
-                    return res.end();
+                    res.end();
                 });
 
-                archive.finalize();
-
-
             } else {
-                res.download(result.path, result.name);
+                if(fs.existsSync(result.path)) {
+                    res.download(result.path, result.name);
+                }
+                else{
+                    res.status(404).send({message: "File was not found"});
+                }
             }
         } else {
             res.status(404).send({message: "No file found"});
@@ -568,63 +572,25 @@ module.exports.getFriendFiles = (req, res) => {
 
         if(permission) {
 
-            if (!req.session.friend_folder && !req.params.folder_id) {
-
-                Files.findOne({
-                    where: {
-                        user_id: req.params.owner_id,
-                        idParent: 0,
-                    },
-                    raw: true,
-                }).then((result) => {
-
-                    Files.findAll({
-                        attributes: ['id', 'name', 'isFolder'],
-                        where: {
-                            user_id: req.params.owner_id,
-                            isPublic: 1,
-                            idParent: result.id,
-                        },
-                        raw: true,
-                    }).then((publicFolders) => {
-
-                        if (publicFolders.length) {
-                            req.session.friend_folder = result.folder_id;
-                            console.log(publicFolders);
-                            res.status(200).send(publicFolders);
-
-                        } else {
-                            res.status(201).send({message: "This user has no public files"});
-                        }
-                    }).catch(() => res.status(400).send({message: "Error on getting folders"}));
-                });
-            } else {
-
-                if(req.params.folder_id){
-                var currentId = req.params.folder_id;
-                } else {
-                var currentId = req.session.friend_folder;
-                }
-
                 Files.findAll({
                     attributes: ['id', 'name', 'isFolder'],
                     where:{
                         user_id: req.params.owner_id,
-                        idParent: currentId,
+                        idParent: req.params.folder_id,
                         isPublic: 1
                     }
                 }).then((public) => {
 
                     if(public.length){
 
-                        //req.session.friend_folder = currentId;
+                        req.session.friend_folder = req.params.folder_id;
                         res.status(200).send(public);
 
                     } else {
+                        req.session.friend_folder = req.params.folder_id;
                         res.status(201).send({message: "No file here"});
                     }
                 })
-            }
         } else {
             res.status(403).send({message: "This user didn't gave you permission"});
         }
@@ -632,12 +598,57 @@ module.exports.getFriendFiles = (req, res) => {
         });
 };
 
+module.exports.getFriendFilesRoot = (req, res) => {
+    console.log("asd");
+    Permissions.findOne({
+        where:{
+            owner_id: req.params.owner_id,
+            friend_id: req.session.id,
+        },
+    }).then((permission) => {
+
+        if(permission) {
+
+            Files.findOne({
+                where:{
+                    user_id: req.params.owner_id,
+                    isFolder: 1,
+                    idParent: 0
+                }
+            }).then((result) => {
+
+                Files.findAll({
+                    attributes: ['id', 'name', 'isFolder'],
+                    where: {
+                        user_id: req.params.owner_id,
+                        idParent: result.id,
+                        isPublic: 1
+                    }
+                }).then((public) => {
+
+                    if (public.length) {
+
+                        req.session.friend_folder = result.id;
+                        res.status(200).send(public);
+
+                    } else {
+                        req.session.friend_folder = result.id;
+                        res.status(201).send({message: "No file here"});
+                    }
+                });
+            });
+        } else {
+            res.status(403).send({message: "This user didn't gave you permission"});
+        }
+    })
+
+};
 
 module.exports.navigateBackFriend = (req, res) => {
 
     Permissions.findOne({
         where:{
-            owner_id: req.params.friend_id,
+            owner_id: req.params.owner_id,
             friend_id: req.session.id
         }
     }).then((permission) => {
@@ -646,31 +657,32 @@ module.exports.navigateBackFriend = (req, res) => {
             Files.findOne({
                 where: {
                     id: req.session.friend_folder,
-                    user_id: req.params.friend_id
+                    user_id: req.params.owner_id
                 },
                 raw: true
             }).then((output) => {
-                if (output.idParent != 0) {
+                if (output.idParent) {
+
                     Files.findAll({
                         attributes: ['id', 'name', 'isFolder'],
                         where: {
-                            user_id: req.params.friend_id,
+                            user_id: req.params.owner_id,
                             idParent: output.idParent,
+                            isPublic: 1
                         },
-                        raw: true
-                    }).then((result) => {
+                        raw:true
+                    }).then((public) => {
 
-                        if (result.length) {
                             req.session.friend_folder = output.idParent;
-                            res.status(200).send(result);
-                        }
-                    }).catch(() => res.status(500).send({message: "Error"}));
+                            res.status(200).send(public);
+
+                    });
                 } else {
-                    res.status(400).send({message: "This is the root folder"});
+                    res.status(203).send({message: "This is the root folder"});
                 }
-            }).catch(() => res.status(400).send({message: "Bad request"}));
-        }else {
-            res.status(403).send({message:"You don't have access here"});
+            });
+        } else {
+        res.status(403).send({message: "You don't have permission"});
         }
     });
 };
@@ -714,10 +726,9 @@ module.exports.downloadFilesFriend = (req, res) => {
                         });
 
                         archive.on('finish', function (err) {
+                            archive.finalize();
                             return res.end();
                         });
-
-                        archive.finalize();
 
                     } else {
                         res.download(result.path, result.name);
