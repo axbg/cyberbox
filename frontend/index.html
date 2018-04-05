@@ -37,11 +37,13 @@
 
                     googleUser.disconnect();
 
-                    axios.post("http://cyberboxx.me/auth/glogin", {name: details.ig, token: token})
+                    axios.post("http://localhost:8080/auth/glogin", {name: details.ig, token: token})
 						.then((response) => {
 
                             if(response.status === 200){
-                                window.location.replace('new_index.html');
+
+                                localStorage.setItem("logged", 1);
+                                window.location.replace('dashboard.html');
 
                             } else {
                                 toastr.warning("Your email is not allowed");
@@ -49,6 +51,11 @@
 
 						}).catch(() => {toastr.info("Your email is not allowed")});
                 }
+			</script>
+			<script type="text/javascript">
+				   	if(localStorage.getItem("logged") === "1"){
+                        window.location.replace('dashboard.html');
+					}
 			</script>
 	</body>
 </html>

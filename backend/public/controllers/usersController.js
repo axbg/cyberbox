@@ -107,7 +107,6 @@ module.exports.Welcome = (req, res) => {
 			}).then((reminders) => {
 				info['reminders'] = reminders;
 
-				console.log(info);
 				res.status(200).send({name: info['name'], files: info['files'], notes: info['notes'], reminders:info['reminders']});
 			})
 
@@ -213,7 +212,7 @@ module.exports.getOneUser = (req, res) => {
 };
 
 
-cron.schedule('0 0 9 * * *', function(){
+cron.schedule('0 0 6 * * *', function(){
 
 	Reminders.findAll({
 		where:{
@@ -260,7 +259,7 @@ cron.schedule('0 0 9 * * *', function(){
                             });
 
                             let mailOptions = {
-                                from: 'cyberbox.app@gmail.com',
+                                from: 'Cyberbox',
                                 to: sender.email,
                                 subject: 'You have a reminder set for today',
                                 text: result[i].title

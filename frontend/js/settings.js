@@ -1,7 +1,8 @@
 
+
 function loadSettings() {
 
-    axios.get("http://cyberboxx.me/api/settings/get")
+    axios.get("http://" + address + "/api/settings/get")
         .then((response) => {
 
             let settings = document.getElementById("settings-wrapper");
@@ -41,7 +42,7 @@ function loadSettings() {
 
 function changePush(){
 
-    axios.post("http://cyberboxx.me/api/settings/push")
+    axios.post("http://" + address + "/api/settings/push")
         .then((result)=> {
             if(result.status===200){
                 toastr.success(result.data.message);
@@ -52,7 +53,7 @@ function changePush(){
 
 function changeMail(){
 
-    axios.post("http://cyberboxx.me/api/settings/mail")
+    axios.post("http://" + address + "/api/settings/mail")
         .then((result)=> {
             if(result.status===200){
                 toastr.success(result.data.message);
@@ -67,7 +68,7 @@ function getParentFolders() {
 
     let content = "";
 
-    axios.get("http://cyberboxx.me/api/files/get/parents")
+    axios.get("http://" + address + "/api/files/get/parents")
         .then((response) => {
 
             if(response.status === 200){
@@ -104,7 +105,7 @@ function getParentFolders() {
 
 function changeAccess(element){
 
-    axios.post("http://cyberboxx.me/api/files/access", {file_id: element.id})
+    axios.post("http://" + address + "/api/files/access", {file_id: element.id})
         .then((response) => {
 
             if(response.status === 201){
@@ -124,7 +125,7 @@ function getParentNotes() {
 
     let content = "";
 
-    axios.get("http://cyberboxx.me/api/notes/get/folder/root")
+    axios.get("http://" + address + "/api/notes/get/folder/root")
         .then((response) => {
 
             if(response.status === 200){
@@ -165,7 +166,7 @@ function getParentNotes() {
 
 function changeAccessNotes(element){
 
-    axios.get("http://cyberboxx.me/api/notes/access/" + element.id)
+    axios.get("http://" + address + "/api/notes/access/" + element.id)
         .then((response) => {
             if(response.status === 201){
                 toastr.success(response.data.message);

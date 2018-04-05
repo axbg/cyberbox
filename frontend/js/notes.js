@@ -1,6 +1,8 @@
+
+
 function loadNotes() {
 
-    axios.get("http://cyberboxx.me/api/notes/get/folder/root")
+    axios.get("http://" + address + "/api/notes/get/folder/root")
         .then((response)=>{
 
             if(response.status === 200) {
@@ -14,19 +16,20 @@ function loadNotes() {
 
                     if(response.data[i].isFolder){
                         content +=
-                            "<li><a class='fa fa-folder-open'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-folder-open icons'></a>" +
                             "<span id=" + response.data[i].id +
                             " onclick='loadFolderNotes(this)'>" + response.data[i].title + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteNote(this)'></i>" +
-                            "</li>";
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteNote(this)'></i>" +
+                            "</i></li>";
                     }
                     else {
                         content +=
-                            "<li><a class='fa fa-file'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-file icons'></a>" +
                             "<span>" + response.data[i].title + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteNote(this)'></i>" +
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteNote(this)'></i>" +
                             "<i class='fa fa-edit' id=" + response.data[i].id + " onclick='editModalNote(this)'></i>" +
-                            "</li>";
+                            "<i class='fa fa-text-height' id=" + response.data[i].id + " onclick='rawNote(this)'></i>" +
+                            "</i></li>";
                     }
                 }
 
@@ -52,7 +55,7 @@ function loadNotes() {
 
 function loadFolderNotes(folder){
 
-    axios.get("http://cyberboxx.me/api/notes/get/folder/" + folder.id)
+    axios.get("http://" + address + "/api/notes/get/folder/" + folder.id)
         .then((response) => {
 
             if(response.status === 200) {
@@ -66,19 +69,20 @@ function loadFolderNotes(folder){
 
                     if(response.data[i].isFolder){
                         content +=
-                            "<li><a class='fa fa-folder-open'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-folder-open icons'></a>" +
                             "<span id=" + response.data[i].id +
                             " onclick='loadFolderNotes(this)'>" + response.data[i].title + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteNote(this)'></i>" +
-                            "</li>";
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteNote(this)'></i>" +
+                            "</i></li>";
                     }
                     else {
                         content +=
-                            "<li><a class='fa fa-file'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-file icons'></a>" +
                             "<span>" + response.data[i].title + "</span>"+
-                            "<i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteNote(this)'></i>" +
+                            "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteNote(this)'></i>" +
                             "<i class='fa fa-edit' id=" + response.data[i].id + " onclick='editModalNote(this)'></i>" +
-                            "</li>";
+                            "<i class='fa fa-text-height' id=" + response.data[i].id + " onclick='rawNote(this)'></i>" +
+                            "</i></li>";
                     }
                 }
 
@@ -114,8 +118,8 @@ function addModalNotesFolder(){
 
         openModal();
         modalcontent.innerHTML += '<h1>Folder Name</h1>';
-        modalcontent.innerHTML += '<input id="title" type="text" style="font-size:40px;height:50px;width:50%">';
-        modalcontent.innerHTML += '<button style="margin-top:5px;height:50px;width:50%;" onclick="createFolderNotes()">Create</button>';
+        modalcontent.innerHTML += '<input id="title" class="input-fls" type="text" style="font-size:40px;height:50px;width:50%">';
+        modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:50px;width:50%;" onclick="createFolderNotes()">Create</button>';
 
 }
 
@@ -124,7 +128,7 @@ function createFolderNotes(){
     let folder_name = document.getElementById("title").value;
 
     if(folder_name.length !=0 ) {
-        axios.post("http://cyberboxx.me/api/notes/create/folder", {title:folder_name})
+        axios.post("http://" + address + "/api/notes/create/folder", {title:folder_name})
             .then((result) => {
                 console.log(result.status);
 
@@ -150,7 +154,7 @@ function createFolderNotes(){
 function deleteNote(element){
 
     if(confirm("Do you really want to delete this note?")) {
-        axios.post("http://cyberboxx.me/api/notes/delete", {note_id: element.id})
+        axios.post("http://" + address + "/api/notes/delete", {note_id: element.id})
             .then((result) => {
 
                 if (result.status === 200) {
@@ -171,10 +175,10 @@ function addModalNotes() {
 
     openModal();
     modalcontent.innerHTML += '<h3>Note Title</h3>';
-    modalcontent.innerHTML += '<input id="title" type="text" style="font-size:40px;height:50px;width:50%">';
+    modalcontent.innerHTML += '<input id="title" class="input-fls" type="text" style="font-size:40px;height:50px;width:50%">';
     modalcontent.innerHTML += '<h3>Content</h3>';
-    modalcontent.innerHTML += '<textarea id="content" style="font-size:20px;height:200px;width:50%;resize:none;"maxlenght=900000000000></textarea>';
-    modalcontent.innerHTML += '<button style="margin-top:5px;height:50px;width:50%;" ' +
+    modalcontent.innerHTML += '<textarea id="content" class="small-text" style="font-size:20px;height:150px;width:90%;resize:none; max-length=900000000000"></textarea>';
+    modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:50px;width:50%;" ' +
         'onclick="createNote()">Create</button>';
 }
 
@@ -184,7 +188,7 @@ function createNote(){
     let noteContent = document.getElementById("content").value;
 
 
-    axios.post("http://cyberboxx.me/api/notes/create/note", {title: noteTitle, content: noteContent})
+    axios.post("http://" + address + "/api/notes/create/note", {title: noteTitle, content: noteContent})
         .then((response) => {
 
             if(response.status === 204){
@@ -206,7 +210,7 @@ function editModalNote(note){
     modalcontent.innerHTML = "";
 
 
-    axios.get("http://cyberboxx.me/api/notes/get/note/" + note.id)
+    axios.get("http://" + address + "/api/notes/get/note/" + note.id)
         .then((result) => {
 
             openModal();
@@ -230,7 +234,7 @@ function editNote(element){
     let noteTitle = document.getElementById("title").value;
     let noteContent = document.getElementById("content").value;
 
-    axios.post("http://cyberboxx.me/api/notes/edit/note", {note_id: element, title: noteTitle, content: noteContent})
+    axios.post("http://" + address + "/api/notes/edit/note", {note_id: element, title: noteTitle, content: noteContent})
         .then((response) => {
 
             if(response.status === 204){
@@ -242,5 +246,10 @@ function editNote(element){
             }
 
         }).catch(() => {toastr.warning("Error occured")});
+}
+
+function rawNote(element){
+
+    window.open("http://" + address + "/api/notes/get/raw/" + element.id);
 
 }

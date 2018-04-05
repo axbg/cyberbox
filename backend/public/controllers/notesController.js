@@ -487,3 +487,54 @@ module.exports.getActualNotes = (req, res) => {
 		}
 		}).catch(() => res.status(500).send({message: "Error at searching permissions"}));
 };
+
+module.exports.rawNote = (req, res) => {
+
+	Notes.findOne({
+		where:{
+			user_id: req.session.id,
+			id: req.params.note_id
+		},
+		raw:true
+	}).then((result) => {
+
+		if(result){
+			res.status(200).send(result.content);
+		} else{
+			res.status(404).send("Note was not found");
+		}
+	}).catch(() => res.status(500).send("Error occurred"));
+};
+
+
+module.exports.rawNoteFriend = (req, res) => {
+
+	Permissions.findOne({
+		where:{
+            owner_id: req.params.owner_id,
+            friend_id: req.session.id
+		}
+	}).then((find)=> {
+
+		if(find) {
+            Notes.findOne({
+                where: {
+                    user_id: req.params.owner_id,
+                    id: req.params.note_id
+                },
+                raw: true
+            }).then((result) => {
+
+                if (result) {
+                    res.status(200).send(result.content);
+                } else {
+                    res.status(404).send("Note was not found");
+                }
+            }).catch(() => res.status(500).send("Error occurred"));
+        }
+        else{
+			res.status(500).send("You don't have permission to view this file");
+		}
+    });
+
+};

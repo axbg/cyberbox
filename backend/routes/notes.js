@@ -27,7 +27,7 @@ router.get('/get/friend/root/:owner_id', notesController.getFriendRoot);
 router.get('/get/friend/note/:owner_id/:note_id', notesController.getActualNotes);
 router.get('/get/friend/folder/:owner_id/:folder_id', notesController.getNotesFolder);
 
-
-
+router.get('/get/raw/:note_id', notesController.rawNote);
+router.get('/get/raw/:note_id/:owner_id', notesController.rawNoteFriend);
 
 module.exports = router;	

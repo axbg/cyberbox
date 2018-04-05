@@ -1,11 +1,12 @@
 
+
 function loadUndoneReminders(){
 
 
     let container = document.getElementById('reminders-wrapper');
     let content  = "";
 
-    axios.get("http://cyberboxx.me/api/reminders/getUndone")
+    axios.get("http://" + address + "/api/reminders/getUndone")
         .then((response) => {
 
             if(response.status === 200){
@@ -38,7 +39,7 @@ function loadDoneReminders(){
     let container = document.getElementById('reminders-wrapper');
     let content  = "";
 
-    axios.get("http://cyberboxx.me/api/reminders/getDone")
+    axios.get("http://" + address + "/api/reminders/getDone")
         .then((response) => {
 
             if(response.status === 200){
@@ -85,7 +86,7 @@ function createReminder(){
     let reminder = document.getElementById('reminder').value;
     let date = document.getElementById('date').value;
 
-    axios.post("http://cyberboxx.me/api/reminders/create", {title: reminder, expiration: date})
+    axios.post("http://" + address + "/api/reminders/create", {title: reminder, expiration: date})
         .then((response) => {
             if(response.status === 201){
                 toastr.success("Reminder created");
@@ -97,7 +98,7 @@ function createReminder(){
 
 function makeDone(element) {
 
-    axios.post("http://cyberboxx.me/api/reminders/makeDone", {reminder_id: element.id})
+    axios.post("http://" + address + "/api/reminders/makeDone", {reminder_id: element.id})
         .then((response) => {
             if(response.status === 200){
                 toastr.success("Reminder set as done");
@@ -108,7 +109,7 @@ function makeDone(element) {
 
 function makeUndone(element) {
 
-    axios.post("http://cyberboxx.me/api/reminders/makeUndone", {reminder_id: element.id})
+    axios.post("http://" + address + "/api/reminders/makeUndone", {reminder_id: element.id})
         .then((response) => {
             if(response.status === 200){
                 toastr.success("Reminder set as undone");

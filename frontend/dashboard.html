@@ -22,7 +22,7 @@
             <a href="#files" onClick="changeMenu('files');loadFiles();">Files</a>
             <a href="#notes" onClick="changeMenu('notes');loadNotes()">Notes</a>
             <a href="#reminders" onclick="changeMenu('reminders');loadUndoneReminders();">Reminders</a>
-            <a href="#permissions" onclick="changeMenu('permissions');showGranted();getGranted();">Permissions</a>
+            <a href="#permissions" onclick="changeMenu('permissions');showGranted();getGranted();">Friends</a>
             <a href="#settings" onClick="changeMenu('settings');loadSettings();getParentFolders();getParentNotes();">Settings</a>
             <a href="#logout" onClick="logout()">Logout</a>
         </div>
@@ -108,7 +108,7 @@
                     <h1>Permissions</h1>
                 </div>
             </div>
-            <div class="container">
+            <div class="container" style="margin-top: 0 !important;">
                 <div class="col">
                     <h3 onclick="showGranted();getGranted();">Granted</h3>
                 </div>
@@ -116,12 +116,12 @@
                     <h3 onclick="showReceived();getReceived();">Received</h3>
                 </div>
             </div>
-            <div class="container">
+            <div class="container" style="margin-top: 0 !important">
                 <div id="granted" class="content-wrapper" >
                     <div id="permissions-controler" class="content-wrapper controller">
                         <a><i class="fa fa-plus" onclick="openGrantModal()"> Grant Permission</i></a>
                     </div>
-                    <div id="permissions-wrapper" class="content-wrapper" >
+                    <div id="permissions-wrapper" class=" permissions-wrapper-style content-wrapper" >
                     </div>
                 </div>
                 <div id="received" class="content-wrapper">
