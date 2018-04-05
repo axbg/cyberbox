@@ -727,7 +727,12 @@ module.exports.downloadFilesFriend = (req, res) => {
                         archive.finalize();
 
                     } else {
-                        res.download(result.path, result.name);
+                        if(fs.existsSync(result.path)) {
+                            res.download(result.path, result.name);
+                        }
+                        else{
+                            res.status(404).send({message: "File was not found"});
+                        }
                     }
                 } else {
                     res.status(404).send({message: "No file found"});
