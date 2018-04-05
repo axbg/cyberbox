@@ -524,26 +524,24 @@ module.exports.downloadFiles = (req, res) => {
             if (result.isFolder) {
 
                 let location = result.path + "/";
-                console.log(location);
 
                 let archive = archiver('zip');
-
-                archive.store = true;
-                archive.pipe(res);
-                res.attachment(result.name + ".zip");
-                res.header("Cache-Control", "public, max-age=31557600");
-
-                archive.directory(location,result.name);
-
-                archive.finalize();
 
                 archive.on('error', function() {
                    res.status(200).send({message: "An error occured"});
                 });
 
                 archive.on('finish', function (err) {
-                    res.end();
+
                 });
+
+                archive.pipe(res);
+
+                res.attachment(result.name + ".zip");
+
+                archive.directory(location,result.name);
+
+                archive.finalize();
 
             } else {
                 if(fs.existsSync(result.path)) {
@@ -709,26 +707,24 @@ module.exports.downloadFilesFriend = (req, res) => {
                     if (result.isFolder) {
 
                         let location = result.path + "/";
-                        console.log(location);
 
                         let archive = archiver('zip');
 
-
-                        archive.store = true;
-                        archive.pipe(res);
-                        res.attachment(result.name + ".zip");
-
-                        archive.directory(location, result.name);
-
-
-                        archive.on('error', function (err) {
-                            throw err;
+                        archive.on('error', function() {
+                            res.status(200).send({message: "An error occured"});
                         });
 
                         archive.on('finish', function (err) {
-                            archive.finalize();
-                            return res.end();
+
                         });
+
+                        archive.pipe(res);
+
+                        res.attachment(result.name + ".zip");
+
+                        archive.directory(location,result.name);
+
+                        archive.finalize();
 
                     } else {
                         res.download(result.path, result.name);
