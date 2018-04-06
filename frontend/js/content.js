@@ -46,6 +46,8 @@ function loadFiles() {
                             " onclick='loadFolder(this)'>" + response.data[i].name + "</span>"+
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
+                            "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
+                            response.data[i].name + "'></i>" +
                             "</i></li>";
                     }
                     else {
@@ -54,6 +56,8 @@ function loadFiles() {
                             "<span>" + response.data[i].name + "</span>"+
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
+                            "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
+                            response.data[i].name + "'></i>" +
                             "</i></li>";
                     }
                 }
@@ -95,6 +99,8 @@ function loadFolder(folder) {
                             " onclick='loadFolder(this)'>" + response.data[i].name + "</span>"+
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
+                            "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
+                            response.data[i].name + "'></i>" +
                             "</i></li>";
                     }
                     else {
@@ -103,6 +109,8 @@ function loadFolder(folder) {
                             "<span>" + response.data[i].name + "</span>"+
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
+                            "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
+                            response.data[i].name + "'></i>" +
                             "</i></li>";
                     }
                 }
@@ -142,6 +150,8 @@ function backFolder() {
                             " onclick='loadFolder(this)'>" + response.data[i].name + "</span>"+
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
+                            "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
+                            response.data[i].name + "'></i>" +
                             "</i></li>";
                     }
                     else {
@@ -150,6 +160,8 @@ function backFolder() {
                             "<span>" + response.data[i].name + "</span>"+
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
+                            "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
+                            response.data[i].name + "'></i>" +
                             "</i></li>";
                     }
                 }
@@ -312,24 +324,73 @@ function uploadFiles(){
 }
 
 
+function renameModal(file){
+
+    let modalcontent = document.getElementById('modal-content');
+    let currentTitle = file.getAttribute("current");
+    let currentId = file.getAttribute("fileId");
+    modalcontent.innerHTML = "";
+
+    openModal();
+    modalcontent.innerHTML += '<h1>Rename File</h1>';
+    modalcontent.innerHTML += '<h3>Be aware that you can modify the file\'s extension too!</h3>';
+    modalcontent.innerHTML += '<input id="file_name" class="input-fls small-text" type="text"' +
+        ' value="' + currentTitle + '"style="font-size:30px;height:30px;width:50%">';
+    modalcontent.innerHTML += '<button id="' + currentId + '"class="input-fls" style="margin-top:5px;height:50px;width:50%;" onclick="renameFolder(this)">Rename</button>';
+
+}
+
+function renameFolder(element) {
+
+    let file_name = document.getElementById("file_name").value;
+
+    if(file_name.length !==0){
+
+        axios.post("http://" + address + "/api/files/rename", {file_id: element.id, name:file_name})
+            .then((result) => {
+
+                if(result.status === 200){
+
+                    toastr.success("File was renamed!");
+                    loadFiles();
+                    closeModal();
+
+                } else if(result.status === 203){
+
+                    toastr.warning("File already exists!");
+
+                } else {
+                    toastr.error(result.status);
+                }
+            }).catch(() => {toastr.error("error")});
+
+    } else {
+        toastr.error("Empty names are not allowed");
+    }
+}
+
+
+
 function openModal() {
     document.getElementById('myModal').style.display = "block";
 }
 
 function closeModal(){
     document.getElementById('myModal').style.display = "none";
+    modified = 0;
 }
 
 
     let modal = document.getElementById('myModal');
-
+    let modified = 0;
 
     window.onclick = function(event) {
         if (event.target === modal) {
             if(document.getElementById("content") && document.getElementById("content").value !== "" &&
-                !document.getElementById("content").readOnly) {
+                !document.getElementById("content").readOnly && modified === 1) {
                 if (confirm("Do you really want to close?")) {
                     modal.style.display = "none";
+                    modified = 0;
                 }
             } else {
                 modal.style.display = "none";

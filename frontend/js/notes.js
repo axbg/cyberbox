@@ -177,7 +177,7 @@ function addModalNotes() {
     modalcontent.innerHTML += '<h3>Note Title</h3>';
     modalcontent.innerHTML += '<input id="title" class="input-fls" type="text" style="font-size:40px;height:50px;width:50%">';
     modalcontent.innerHTML += '<h3>Content</h3>';
-    modalcontent.innerHTML += '<textarea id="content" class="small-text" style="font-size:20px;height:150px;width:90%;resize:none; max-length=900000000000"></textarea>';
+    modalcontent.innerHTML += '<textarea id="content" class="small-text" onkeydown="modifiedTrue()" style="font-size:20px;height:150px;width:90%;resize:none; max-length=900000000000"></textarea>';
     modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:50px;width:50%;" ' +
         'onclick="createNote()">Create</button>';
 }
@@ -215,18 +215,22 @@ function editModalNote(note){
 
             openModal();
             modalcontent.innerHTML += '<h3>Note Title</h3>';
-            modalcontent.innerHTML += '<input id="title" type="text" style="font-size:20px;height:50px;width:50%"' +
+            modalcontent.innerHTML += '<input id="title" class="input-fls" type="text" style="font-size:20px;height:50px;width:50%"' +
                 'value="' + result.data.title + '">';
             modalcontent.innerHTML += '<h3>Content</h3>';
-            modalcontent.innerHTML += '<textarea id="content" style="font-size:20px;height:200px;width:50%;resize:none;"' +
-                '>' + result.data.content + '</textarea>';
-            modalcontent.innerHTML += '<button style="margin-top:5px;height:50px;width:50%;" ' +
+            modalcontent.innerHTML += '<textarea id="content" class="small-text" style="font-size:20px;height:200px;width:90%;"' +
+                ' onkeydown="modifiedTrue()">' + result.data.content + '</textarea>';
+            modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:50px;width:50%;" ' +
                 'onclick="editNote('+ note.id +')">Edit</button>';
 
 
         }).catch(() => toastr.error("Error occured"));
 
 
+}
+
+function modifiedTrue(){
+    modified = 1;
 }
 
 function editNote(element){

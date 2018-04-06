@@ -15,20 +15,26 @@ module.exports.createNote = (req, res) =>{
 		if(result){
 			res.status(204).send({message: "Note already exist"});
 		}
-		else
-		{
-				Notes.create({
-				title: req.body.title,
-				content: req.body.content,
-				isPublic: 0,
-				isFolder: 0,
-				user_id: req.session.id,
-				idParent: req.session.note
-			}).then(() => {
+		else {
+            Notes.findOne({
+                attributes: ['isPublic'],
+                where: {
+                    id: req.session.note
+                }
+            }).then((parent) => {
+                Notes.create({
+                    title: req.body.title,
+                    content: req.body.content,
+                    isPublic: parent.isPublic,
+                    isFolder: 0,
+                    user_id: req.session.id,
+                    idParent: req.session.note
+                }).then(() => {
                     res.status(201).send({message: "Note created"});
-				}).catch(() => res.status(500).send({message: "Server Error!"}));
-		}
-	});
+                }).catch(() => res.status(500).send({message: "Server Error!"}));
+            })
+        }
+	})
 };
 
 module.exports.createNoteFolder = (req, res) => {
@@ -499,6 +505,7 @@ module.exports.rawNote = (req, res) => {
 	}).then((result) => {
 
 		if(result){
+			res.header("Content-Type", "text/plain");
 			res.status(200).send(result.content);
 		} else{
 			res.status(404).send("Note was not found");
@@ -526,6 +533,7 @@ module.exports.rawNoteFriend = (req, res) => {
             }).then((result) => {
 
                 if (result) {
+                    res.header("Content-Type", "text/plain");
                     res.status(200).send(result.content);
                 } else {
                     res.status(404).send("Note was not found");

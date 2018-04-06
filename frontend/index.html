@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script type="text/javascript">if(localStorage.getItem("logged") === "1"){window.stop();window.location.replace('dashboard.html');}</script>
 		<meta charset="utf-8">
 		<link rel="icon" href="img/icon.ico" size="5px">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,11 +52,6 @@
 
 						}).catch(() => {toastr.info("Your email is not allowed")});
                 }
-			</script>
-			<script type="text/javascript">
-				   	if(localStorage.getItem("logged") === "1"){
-                        window.location.replace('dashboard.html');
-					}
 			</script>
 	</body>
 </html>

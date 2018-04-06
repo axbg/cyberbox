@@ -138,7 +138,7 @@ i{
 }
 
 .content-wrapper span:hover{
-    color:black;
+    color:#2490e3;;
 }
 
 .content-wrapper h1{
@@ -148,7 +148,7 @@ i{
 }
 
 .content-wrapper h1:hover{
-    color:black;
+    color:#2490e3;
 }
 
 .content-wrapper a{
@@ -199,7 +199,7 @@ span{
 .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 16px solid black;
+    border-top: 16px solid #2490e3;
     width: 120px !important;
     height: 120px;
     -webkit-animation: spin 2s linear infinite; /* Safari */

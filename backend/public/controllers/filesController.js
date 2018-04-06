@@ -7,6 +7,7 @@ let rmdir = require('rmdir');
 let archiver = require('archiver');
 
 
+
 module.exports.createFolder = (req,res) => {
 
     Files.findOne({
@@ -33,11 +34,19 @@ module.exports.createFolder = (req,res) => {
 
                         makedir(location);
 
+                        let privacy;
+
+                        if(folder.idParent === 0){
+                            privacy = 0;
+                        } else {
+                            privacy = folder.isPublic;
+                        }
+
                         Files.create({
                             user_id: req.session.id,
                             idParent: req.session.folder,
                             name: req.body.name,
-                            isPublic: folder.isPublic,
+                            isPublic: privacy,
                             isFolder: 1,
                             path: location
                         }).then(() => res.status(201).send({message: "Folder created"}));
@@ -597,7 +606,7 @@ module.exports.getFriendFiles = (req, res) => {
 };
 
 module.exports.getFriendFilesRoot = (req, res) => {
-    console.log("asd");
+
     Permissions.findOne({
         where:{
             owner_id: req.params.owner_id,
@@ -743,4 +752,83 @@ module.exports.downloadFilesFriend = (req, res) => {
             res.status(403).send({message: "You don't have permission to download this file"});
         }
     }).catch(() => res.status(400).send({message: "Error at permissions"}));
+};
+
+
+module.exports.renameFile = (req, res) => {
+
+    Files.findOne({
+        where:{
+            user_id: req.session.id,
+            id: req.body.file_id,
+            idParent: {
+                $not: 0
+                    }
+        }
+    }).then((result) => {
+
+        if(result){
+
+            let oldPath = result.path;
+            let newPath = result.path.substring(0, result.path.lastIndexOf("/") + 1) + req.body.name;
+
+            Files.findAll({
+                where:{
+                    user_id: req.session.id,
+                    idParent: result.idParent,
+                    name: req.body.name
+                }
+            }).then((found) => {
+
+                if(found.length){
+                    res.status(203).send({message:"A file with this name already exists!"});
+                } else {
+
+                    fs.rename(oldPath,newPath, (err) => {console.log(err)});
+
+                    Files.update({
+                            name: req.body.name,
+                            path: newPath
+                        },
+                        {
+                            where: {
+                                id: req.body.file_id,
+                                user_id: req.session.id
+                            }
+
+                        }).then((resp) => {
+                            Files.findAll({
+                                where:{
+                                    user_id: req.session.id,
+                                    path: {
+                                        $like: oldPath + '/%'
+                                    }
+                                },
+                                raw:true
+                            }).then((children) => {
+
+                                for(let i = 0; i < children.length; i++){
+
+                                    let newChildPath = children[i].path.replace(oldPath,newPath);
+
+                                    Files.update({
+                                            path: newChildPath
+                                        },
+                                        {
+                                            where: {
+                                                id: children[i].id,
+                                                user_id: req.session.id
+                                            }
+
+                                        });
+                                }
+                            });
+                            res.status(200).send({message:"Name change was successful"});
+                    })
+                }
+            })
+        } else {
+            res.status(404).send({message:"File was not found"});
+        }
+    }).catch(() => res.status(500).send({message: "Server error occurred"}));
 };
