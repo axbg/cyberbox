@@ -126,7 +126,7 @@ module.exports.searchEmail = (req,res) => {
         attributes: ['email'],
         where:{
             email:{
-                $like: req.params.content + "%"
+                $like: "%" + req.params.content + "%"
             }
         },
         limit: 4,
