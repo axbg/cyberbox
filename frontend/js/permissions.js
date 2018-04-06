@@ -77,6 +77,11 @@ function showResult(element){
     let liveSearch = document.getElementById("liveSearch");
 
     liveSearch.innerHTML = "";
+    liveSearch.innerHTML += '<p id="op0" onclick="liveSelected(this)"></p>';
+    liveSearch.innerHTML += '<p id="op1" onclick="liveSelected(this)"></p>';
+    liveSearch.innerHTML += '<p id="op2" onclick="liveSelected(this)"></p>';
+    liveSearch.innerHTML += '<p id="op3" onclick="liveSelected(this)"></p>';
+
 
     if (element.length === 0) {
         liveSearch.style.display = "none";
@@ -87,9 +92,7 @@ function showResult(element){
 
                 if(result.status === 200){
                     for(let i = 0; i < result.data.length; i++){
-                        liveSearch.innerHTML += '<p>';
-                        liveSearch.innerHTML += result.data[i]['email'];
-                        liveSearch.innerHTML += '</p>';
+                        document.getElementById("op" + i).innerText = result.data[i]['email'];
                     }
 
                 } else if(result.status === 203){
