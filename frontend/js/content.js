@@ -333,9 +333,9 @@ function renameModal(file){
 
     openModal();
     modalcontent.innerHTML += '<h1>Rename File</h1>';
-    modalcontent.innerHTML += '<h3>Be aware that you can modify the file\'s extension too!</h3>';
     modalcontent.innerHTML += '<input id="file_name" class="input-fls small-text" type="text"' +
         ' value="' + currentTitle + '"style="font-size:30px;height:30px;width:50%">';
+    modalcontent.innerHTML += '<h3>Be aware that you can modify the file\'s extension too!</h3>';
     modalcontent.innerHTML += '<button id="' + currentId + '"class="input-fls" style="margin-top:5px;height:50px;width:50%;" onclick="renameFolder(this)">Rename</button>';
 
 }

@@ -1,4 +1,8 @@
 
+html{
+    display:none;
+}
+
 body {
     background-image:url("../img/blocuri.jpg");
     background-size:cover;
@@ -30,6 +34,21 @@ i{
     background-color: rgba(0, 23, 49, 0.5);
 
 }
+
+#liveSearch {
+    border: 1px solid rgb(165, 172, 178);
+    background-color: white;
+    color: black;
+    text-align: left;
+    z-index: 1;
+    position: absolute;
+    display:none;
+    width:40%;
+    font-size:20px;
+    margin-left:20%;
+    cursor: pointer;
+}
+
 
 #files-wrapper{
     overflow-x:hidden !important;
@@ -274,6 +293,23 @@ span{
     .input-fls{
         width:70% !important;
         font-size:25px !important;
+    }
+
+    #liveSearch {
+        border: 1px solid rgb(165, 172, 178);
+        background-color: white;
+        color: black;
+        text-align: left;
+        z-index: 1;
+        position: absolute;
+        display:none;
+        width:56%;
+        font-size:15px;
+        margin-left:12%;
+    }
+
+    .modal{
+        padding-top: 40px !important; /* Location of the box */
     }
 
     #input-files{

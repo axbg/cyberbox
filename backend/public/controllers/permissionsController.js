@@ -119,3 +119,25 @@ module.exports.getPermissionsReceived = (req, res) => {
 
     }).catch(()=> res.status(500).send({message: "Server Error"}));
 };
+
+module.exports.searchEmail = (req,res) => {
+
+    Users.findAll({
+        attributes: ['email'],
+        where:{
+            email:{
+                $like: req.params.content + "%"
+            }
+        },
+        limit: 4,
+        raw:true
+    }).then((result) => {
+
+        if(result.length){
+            res.status(200).send(result);
+        } else {
+            res.status(203).send({message:"nothing found"});
+        }
+
+    })
+};

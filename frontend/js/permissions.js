@@ -72,6 +72,44 @@ function getGranted(){
 
 }
 
+function showResult(element){
+
+    let liveSearch = document.getElementById("liveSearch");
+
+    liveSearch.innerHTML = "";
+
+    if (element.length === 0) {
+        liveSearch.style.display = "none";
+    } else {
+
+        axios.get("http://" + address + "/api/permissions/searchEmail/" + document.getElementById("email").value)
+            .then((result) => {
+
+                if(result.status === 200){
+                    for(let i = 0; i < result.data.length; i++){
+                        liveSearch.innerHTML += '<p>';
+                        liveSearch.innerHTML += result.data[i]['email'];
+                        liveSearch.innerHTML += '</p>';
+                    }
+
+                } else if(result.status === 203){
+                    liveSearch.innerHTML = "nothing found";
+                }
+            });
+
+        liveSearch.style.border = "1px solid #A5ACB2";
+        liveSearch.style.display = "block";
+    }
+
+}
+
+function liveSelected(element){
+
+  document.getElementById("email").value = element.innerText;
+  document.getElementById("liveSearch").style.display = "none";
+
+}
+
 function openGrantModal(){
 
     let modalcontent = document.getElementById('modal-content');
@@ -80,7 +118,9 @@ function openGrantModal(){
 
     openModal();
     modalcontent.innerHTML += '<h3>Email</h3>';
-    modalcontent.innerHTML += '<input id="email" class="input-fls" type="text" style="font-size:40px;height:50px;width:50%">';
+    modalcontent.innerHTML += '<input id="email" class="input-fls" type="text" onkeyup="showResult(this.value)" ' +
+        ' autocomplete="off" style="font-size:40px;height:50px;width:50%">';
+    modalcontent.innerHTML += '<div id="liveSearch"</div>';
     modalcontent.innerHTML += '<button style="margin-top:5px;height:50px;width:50%;" ' +
         'onclick="grantAccess()">Grant Access</button>';
 
