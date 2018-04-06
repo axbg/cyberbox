@@ -115,7 +115,7 @@ function othersMenu(element) {
 
     let content = "";
 
-    content += '<div class="col"><i>';
+    content += '<div class="col"><i style="padding:0 !important;">';
     content += element.getAttribute('email');
     content += ' Box</i></div>';
     content += '<div class="content-wrapper"><div class="col">' +
