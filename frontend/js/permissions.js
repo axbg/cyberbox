@@ -427,10 +427,10 @@ function openNoteFriend(element){
 
                 openModal();
                 modalcontent.innerHTML += '<h3>Note Title</h3>';
-                modalcontent.innerHTML += '<input id="title" type="text" style="font-size:20px;height:50px;width:50%"' +
+                modalcontent.innerHTML += '<input id="title" type="text" class="input-fls" style="font-size:20px;height:50px;width:50%"' +
                     'value="' + result.data.title + '" readonly>';
                 modalcontent.innerHTML += '<h3>Content</h3>';
-                modalcontent.innerHTML += '<textarea id="content" style="font-size:20px;height:200px;width:50%;resize:none;"' +
+                modalcontent.innerHTML += '<textarea id="content" class="small-text" style="font-size:20px;height:200px;width:90%;resize:none;"' +
                     ' readonly>' + result.data.content + '</textarea>';
             }
 

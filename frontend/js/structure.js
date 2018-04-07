@@ -1,4 +1,31 @@
 const address = "https://cyberboxx.me";
+const publicKey = 'BLRPNGqbj2rv4_nq73DyEtxf4TEObI514MTLCpUt1qtB7hiQC-Ip52Kj1KHXq6QKbIJ_hjw2o6FzIimPUzmndBA';
+
+navigator.serviceWorker && navigator.serviceWorker.register('./js/sw.js').then(function(registration) {
+    console.log('Excellent, registered with scope: ', registration.scope);
+});
+
+navigator.serviceWorker && navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+    serviceWorkerRegistration.pushManager.getSubscription()
+        .then(function(subscription) {
+            if (subscription) {
+                console.info('Got existing', subscription);
+                window.subscription = subscription;
+                return;  // got one, yay
+            }
+
+            const applicationServerKey = urlB64ToUint8Array(publicKey);
+            serviceWorkerRegistration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey,
+            })
+                .then(function(subscription) {
+                    console.info('Newly subscribed to push!', subscription);
+                    window.subscription = subscription;
+                });
+        });
+});
+
 
 function openNav() {
     document.getElementById("mySidenav").style.height = "100%";
