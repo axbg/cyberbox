@@ -89,6 +89,12 @@
 }
 
 @media only screen and (max-width: 350px){
+
+    #main{
+        margin-top: -10px !important;
+        padding-bottom:50px !important;
+    }
+
     .menu-button{
         display:none;
     }
@@ -100,10 +106,10 @@
         justify-content: center;
     }
 
-    .fa{
+    .faphone{
         font-size: 30px !important;
-        padding: 5px 5px 5px 10px;
-        color:white;
+        padding: 5px 5px 5px 10px !important;
+        color:white !important;
     }
 
     #logo{
@@ -120,6 +126,12 @@
 }
 
     @media only screen and (min-width: 350px) and (max-width: 445px){
+
+        #main{
+            margin-top: -10px !important;
+            padding-bottom:50px !important;
+        }
+
     .menu-button{
         display:none;
     }
@@ -131,12 +143,12 @@
         justify-content: center;
     }
 
-    .fa{
-        font-size: 40px !important;
-        padding-right:7px;
-        padding-left:7px;
-        color:white;
-        opacity:1;
+    .faphone{
+        font-size: 35px !important;
+        padding-right:8px !important;
+        padding-left:8px !important;
+        color:white !important;
+        opacity:1 !important;
     }
 
     #logo{
@@ -152,6 +164,13 @@
     }
 }
     @media only screen and (min-width: 401px) and (max-width: 500px){
+
+        #main{
+            margin-top: -10px !important;
+            padding-bottom:50px !important;
+
+        }
+
     .menu-button{
         display:none;
     }

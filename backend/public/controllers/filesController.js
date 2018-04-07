@@ -1,5 +1,7 @@
+
 const Files = require("../models").Files;
 const Permissions = require("../models").Permissions;
+
 let path = require('path');
 let fs = require('fs');
 let makedir = require('make-dir');
@@ -264,9 +266,10 @@ module.exports.navigateBack = (req,res) => {
     }).catch(() => res.status(400).send({message: "Bad request"}));
 };
 
+
 module.exports.uploadFiles = (req, res) => {
 
-    if(req.files.fisiere) {
+    if(req.files) {
 
         Files.findOne({
             where: {
@@ -280,28 +283,30 @@ module.exports.uploadFiles = (req, res) => {
             var err_text = [];
             var size = 0;
 
-            let files = [].concat(req.files.fisiere);
 
-            for (let i = 0; i < files.length; i++) {
+            for (let i = 0; i < req.files.length; i++) {
 
-                let current_file = files[i];
+                let current_file = req.files[i];
+                //console.log(req.files[i]);
+                //console.log(current_file);
+                console.log(parent.path);
 
-                let location = path.join(parent.path, current_file.name.toString());
+                let location = path.join(parent.path, current_file.originalname);
 
-                console.log(current_file.name.toString());
+                console.log(current_file.name);
 
-                size += files[i]['data'].length;
+                size += req.files[i].size;
 
                 Files.findOne({
                     where: {
-                        name: current_file.name.toString(),
+                        name: current_file.originalname,
                         idParent: req.session.folder,
                         user_id: req.session.id,
                         isFolder: 0
                     }
                 }).then((result) => {
                     if (result) {
-                        err_text.push("File " + current_file.name.toString() + " already exists");
+                        err_text.push("File " + current_file.originalname + " already exists");
                     }
                 })
 
@@ -316,18 +321,16 @@ module.exports.uploadFiles = (req, res) => {
                     }
                 }).then((result) => {
 
-                    let files = [].concat(req.files.fisiere);
+                    for (let i = 0; i < req.files.length; i++) {
 
-                    for (let i = 0; i < files.length; i++) {
-
-                        let current_file = files[i];
-                        let location = path.join(parent.path, current_file.name.toString());
+                        let current_file = req.files[i];
+                        let location = path.join(parent.path, current_file.originalname);
 
                         try {
 
                             Files.findOne({
                                 where: {
-                                    name: current_file.name.toString(),
+                                    name: current_file.originalname,
                                     idParent: req.session.folder,
                                     user_id: req.session.id,
                                     isFolder: 0
@@ -336,16 +339,20 @@ module.exports.uploadFiles = (req, res) => {
 
                                 if (!number) {
 
-                                    current_file.mv(location);
+                                    let file = fs.createWriteStream(location);
+                                    file.write(current_file.buffer);
+                                    file.end();
 
                                     Files.create({
                                         user_id: req.session.id,
                                         isPublic: result.isPublic,
                                         idParent: req.session.folder,
-                                        name: current_file.name.toString(),
+                                        name: current_file.originalname,
                                         isFolder: 0,
                                         path: location
                                     });
+                                } else {
+                                    current_file = null;
                                 }
                             });
                         }
@@ -356,6 +363,7 @@ module.exports.uploadFiles = (req, res) => {
                     }
                     if (err_text.length) {
                         res.status(200).send({message: err_text});
+
                     }
                     else {
                         res.status(201).send({message: "good"});
@@ -370,6 +378,7 @@ module.exports.uploadFiles = (req, res) => {
     } else {
         res.status(400).send({message: "Upload buffer is empty"});
     }
+
 };
 
 module.exports.parentFolders = (req, res) => {
@@ -586,12 +595,12 @@ module.exports.getFriendFiles = (req, res) => {
                         idParent: req.params.folder_id,
                         isPublic: 1
                     }
-                }).then((public) => {
+                }).then((pub) => {
 
-                    if(public.length){
+                    if(pub.length){
 
                         req.session.friend_folder = req.params.folder_id;
-                        res.status(200).send(public);
+                        res.status(200).send(pub);
 
                     } else {
                         req.session.friend_folder = req.params.folder_id;
@@ -631,12 +640,12 @@ module.exports.getFriendFilesRoot = (req, res) => {
                         idParent: result.id,
                         isPublic: 1
                     }
-                }).then((public) => {
+                }).then((pub) => {
 
-                    if (public.length) {
+                    if (pub.length) {
 
                         req.session.friend_folder = result.id;
-                        res.status(200).send(public);
+                        res.status(200).send(pub);
 
                     } else {
                         req.session.friend_folder = result.id;
@@ -678,10 +687,10 @@ module.exports.navigateBackFriend = (req, res) => {
                             isPublic: 1
                         },
                         raw:true
-                    }).then((public) => {
+                    }).then((pub) => {
 
                             req.session.friend_folder = output.idParent;
-                            res.status(200).send(public);
+                            res.status(200).send(pub);
 
                     });
                 } else {

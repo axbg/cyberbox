@@ -316,10 +316,8 @@ span{
         display:flex !important;
         flex-direction: column !important;
     }
-    /*.fa.fa{
-        font-size: 50px !important;
-        text-align: center !important;
-    }*/
+
+
     .upload{
         align-items: left !important;
     }
@@ -342,12 +340,6 @@ span{
     }
 }
 
-/*@media only screen and (max-width: 1024px) and (min-width: 700px) {
-
-    .fa.fa{
-        font-size:60px !important;
-    }
-}*/
 
 ::-webkit-scrollbar {
     display: none;
