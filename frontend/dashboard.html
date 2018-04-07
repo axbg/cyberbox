@@ -14,166 +14,164 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body >
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" height="40px" widht="40px" onclick="closeNav()">&times;</a>
+            <div id="menu">
+                <img id="logo" src= "img/logo.png">
+                <a href="#dashboard" onClick="changeMenu('welcome');welcome();">Dashboard</a>
+                <a href="#files" onClick="changeMenu('files');loadFiles();">Files</a>
+                <a href="#notes" onClick="changeMenu('notes');loadNotes()">Notes</a>
+                <a href="#reminders" onclick="changeMenu('reminders');loadUndoneReminders();">Reminders</a>
+                <a href="#permissions" onclick="changeMenu('permissions');showGranted();getGranted();">Friends</a>
+                <a href="#settings" onClick="changeMenu('settings');loadSettings();getParentFolders();getParentNotes();">Settings</a>
+                <a href="#logout" onClick="logout()">Logout</a>
+            </div>
+        </div>
 
+        <div class="menu-button" >
+            <span onclick="openNav();closeModal()" >&#9776;</span>
+        </div>
 
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" height="40px" widht="40px" onclick="closeNav()">&times;</a>
-        <div id="menu">
-            <img id="logo" src= "img/logo.png">
-            <a href="#dashboard" onClick="changeMenu('welcome');welcome();">Dashboard</a>
-            <a href="#files" onClick="changeMenu('files');loadFiles();">Files</a>
-            <a href="#notes" onClick="changeMenu('notes');loadNotes()">Notes</a>
-            <a href="#reminders" onclick="changeMenu('reminders');loadUndoneReminders();">Reminders</a>
-            <a href="#permissions" onclick="changeMenu('permissions');showGranted();getGranted();">Friends</a>
-            <a href="#settings" onClick="changeMenu('settings');loadSettings();getParentFolders();getParentNotes();">Settings</a>
-            <a href="#logout" onClick="logout()">Logout</a>
+        <div id="myModal" class="modal">
+            <div id="modal-content" class="modal-content">
+                <span class="close">&times;</span>
+            </div>
         </div>
-    </div>
 
-    <div class="menu-button" >
-        <span onclick="openNav();closeModal()" >&#9776;</span>
-    </div>
+        <div id="main">
+            <div id="welcome">
+                <div class="container">
+                    <div class="col welcome-text" >
+                        <h1 id="welcome-name"></h1>
+                        <h1 id="welcome-day"></h1>
+                        <h1 id="welcome-day-numbers"></h1>
+                    </div>
+                </div>
+                <div class="container welcome-text">
+                    <div class="col">
+                        <h1 id="welcome-files"></h1>
+                    </div>
+                    <div class="col">
+                        <h1 id="welcome-notes"></h1>
+                    </div>
+                </div>
+                <div class="container welcome-text">
+                    <div class="col">
+                        <h1 id="welcome-reminders"></h1>
+                    </div>
+                </div>
+            </div>
+            <div id="files" >
+                <div class="container" >
+                    <div class="col">
+                        <h1>Files</h1>
+                        <div class="content-wrapper controller">
+                            <i class="fa fa-backward" onclick="backFolder()"></i>
+                            <i class="fa fa-plus" onclick="addModalFolder();"></i>
+                            <i class="fa fa-upload upload" onclick="uploadModalFiles()"></i>
+                        </div>
+                        <div id="files-wrapper" class="content-wrapper">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="notes">
+                <div class="container">
+                    <div class="col">
+                        <h1>Notes</h1>
+                        <div id="notes-controller" class="content-wrapper controller" >
+                            <i class="fa fa-plus" onclick="addModalNotesFolder();"></i>
+                            <i class="fa fa-upload" onclick="addModalNotes()"></i>
+                        </div>
+                        <div id="notes-wrapper" class="content-wrapper">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="reminders">
+                <div class="container">
+                    <div class="col" >
+                        <h1>Reminders</h1>
+                        <div id="reminders-controller" class="content-wrapper controller smaller" >
+                            <i class="fa fa-plus" onclick="addModalReminder()"></i>
+                            <i class="fa fa-check" onclick="loadDoneReminders()"></i>
+                            <i class="fa fa-times" onclick="loadUndoneReminders();"></i>
+                        </div>
+                        <div id="reminders-wrapper" class="content-wrapper smaller" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="permissions">
+                <div class="container">
+                    <div class="col">
+                        <h1>Permissions</h1>
+                    </div>
+                </div>
+                <div class="container" style="margin-top: 0 !important;">
+                    <div class="col">
+                        <h3 onclick="showGranted();getGranted();">Granted</h3>
+                    </div>
+                    <div class="col">
+                        <h3 onclick="showReceived();getReceived();">Received</h3>
+                    </div>
+                </div>
+                <div class="container" style="margin-top: 0 !important">
+                    <div id="granted" class="content-wrapper" >
+                        <div id="permissions-controler" class="content-wrapper controller">
+                            <a><i class="fa fa-plus" onclick="openGrantModal()"> Grant Permission</i></a>
+                        </div>
+                        <div id="permissions-wrapper" class=" permissions-wrapper-style content-wrapper" >
+                        </div>
+                    </div>
+                    <div id="received" class="content-wrapper">
+                    </div>
+                </div>
+            </div>
+            <div id="settings">
+                <div class="container">
+                    <div class="col">
+                        <h1>Settings</h1>
+                        <div id="settings-wrapper" class="content-wrapper smaller">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col">
+                        <h1>Files Permission</h1>
+                        <div id="files-perm-wrapper" class="content-wrapper smaller">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col">
+                        <h1>Notes Permission</h1>
+                        <div id="notes-perm-wrapper" class="content-wrapper smaller">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div id="myModal" class="modal">
-        <div id="modal-content" class="modal-content">
-            <span class="close">&times;</span>
+        <div class="phone-menu">
+            <a class="fa fa-file faphone" onClick="changeMenu('files');loadFiles();"></a>
+            <a class="fa fa-sticky-note faphone" onClick="changeMenu('notes');loadNotes()"></a>
+            <a class="fa fa-bell faphone" onclick="changeMenu('reminders');loadUndoneReminders();"></a>
+            <img id="logo" src= "img/logo.png" onClick="changeMenu('welcome');welcome();"></img>
+            <a class="fa fa-share-alt faphone" onclick="changeMenu('permissions');showGranted();getGranted();"></a>
+            <a class="fa fa-gear faphone" onClick="changeMenu('settings');loadSettings();getParentFolders();getParentNotes();"></a>
+            <a class="fa fa-sign-out faphone" onClick="logout()"></a>
         </div>
-    </div>
 
-    <div id="main">
-        <div id="welcome">
-            <div class="container">
-                <div class="col welcome-text" >
-                    <h1 id="welcome-name"></h1>
-                    <h1 id="welcome-day"></h1>
-                    <h1 id="welcome-day-numbers"></h1>
-                </div>
-            </div>
-            <div class="container welcome-text">
-                <div class="col">
-                    <h1 id="welcome-files"></h1>
-                </div>
-                <div class="col">
-                    <h1 id="welcome-notes"></h1>
-                </div>
-            </div>
-            <div class="container welcome-text">
-                <div class="col">
-                    <h1 id="welcome-reminders"></h1>
-                </div>
-            </div>
-        </div>
-        <div id="files" >
-            <div class="container" >
-                <div class="col">
-                    <h1>Files</h1>
-                    <div class="content-wrapper controller">
-                        <i class="fa fa-backward" onclick="backFolder()"></i>
-                        <i class="fa fa-plus" onclick="addModalFolder();"></i>
-                        <i class="fa fa-upload upload" onclick="uploadModalFiles()"></i>
-                    </div>
-                    <div id="files-wrapper" class="content-wrapper">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="notes">
-            <div class="container">
-                <div class="col">
-                    <h1>Notes</h1>
-                    <div id="notes-controller" class="content-wrapper controller" >
-                        <i class="fa fa-plus" onclick="addModalNotesFolder();"></i>
-                        <i class="fa fa-upload" onclick="addModalNotes()"></i>
-                    </div>
-                    <div id="notes-wrapper" class="content-wrapper">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="reminders">
-            <div class="container">
-                <div class="col" >
-                    <h1>Reminders</h1>
-                    <div id="reminders-controller" class="content-wrapper controller smaller" >
-                        <i class="fa fa-plus" onclick="addModalReminder()"></i>
-                        <i class="fa fa-check" onclick="loadDoneReminders()"></i>
-                        <i class="fa fa-times" onclick="loadUndoneReminders();"></i>
-                    </div>
-                    <div id="reminders-wrapper" class="content-wrapper smaller" >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="permissions">
-            <div class="container">
-                <div class="col">
-                    <h1>Permissions</h1>
-                </div>
-            </div>
-            <div class="container" style="margin-top: 0 !important;">
-                <div class="col">
-                    <h3 onclick="showGranted();getGranted();">Granted</h3>
-                </div>
-                <div class="col">
-                    <h3 onclick="showReceived();getReceived();">Received</h3>
-                </div>
-            </div>
-            <div class="container" style="margin-top: 0 !important">
-                <div id="granted" class="content-wrapper" >
-                    <div id="permissions-controler" class="content-wrapper controller">
-                        <a><i class="fa fa-plus" onclick="openGrantModal()"> Grant Permission</i></a>
-                    </div>
-                    <div id="permissions-wrapper" class=" permissions-wrapper-style content-wrapper" >
-                    </div>
-                </div>
-                <div id="received" class="content-wrapper">
-                </div>
-            </div>
-        </div>
-        <div id="settings">
-            <div class="container">
-                <div class="col">
-                    <h1>Settings</h1>
-                    <div id="settings-wrapper" class="content-wrapper smaller">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="col">
-                    <h1>Files Permission</h1>
-                    <div id="files-perm-wrapper" class="content-wrapper smaller">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="col">
-                    <h1>Notes Permission</h1>
-                    <div id="notes-perm-wrapper" class="content-wrapper smaller">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="phone-menu">
-        <a class="fa fa-file faphone" onClick="changeMenu('files');loadFiles();"></a>
-        <a class="fa fa-sticky-note faphone" onClick="changeMenu('notes');loadNotes()"></a>
-        <a class="fa fa-bell faphone" onclick="changeMenu('reminders');loadUndoneReminders();"></a>
-        <img id="logo" src= "img/logo.png" onClick="changeMenu('welcome');welcome();"></img>
-        <a class="fa fa-share-alt faphone" onclick="changeMenu('permissions');showGranted();getGranted();"></a>
-        <a class="fa fa-gear faphone" onClick="changeMenu('settings');loadSettings();getParentFolders();getParentNotes();"></a>
-        <a class="fa fa-sign-out faphone" onClick="logout()"></a>
-    </div>
-
-    <script type="text/javascript" src="js/structure.js"></script>
-    <script type="text/javascript" src="js/content.js"></script>
-    <script type="text/javascript" src="js/settings.js"></script>
-    <script type="text/javascript" src="js/notes.js"></script>
-    <script type="text/javascript" src="js/permissions.js"></script>
-    <script type="text/javascript" src="js/reminders.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script type="text/javascript" src="js/structure.js"></script>
+        <script type="text/javascript" src="js/content.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
+        <script type="text/javascript" src="js/notes.js"></script>
+        <script type="text/javascript" src="js/permissions.js"></script>
+        <script type="text/javascript" src="js/reminders.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
     </body>
 </html>
