@@ -2,7 +2,7 @@
   "name": "cyberbox",
   "short_name": "cyberbox",
   "display": "standalone",
-  "start_url": "/index.html",
+  "start_url": "https://cyberboxx.me/index.html",
   "theme_color": "#021130",
   "background_color": "#021130",
   "orientation": "portrait",
@@ -30,6 +30,11 @@
     {
       "src": "/img/icons/48.png",
       "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/icons/512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
