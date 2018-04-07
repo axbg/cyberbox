@@ -4,7 +4,7 @@ function login(){
 
     let email = 'bisagalexstefan@gmail.com';
 
-    axios.post("http://" + address + "/auth/login", {email:email})
+    axios.post(address + "/auth/login", {email:email})
         .then((result)=>{
             if(result.status === 200){
                 window.location.replace('dashboard.html');
@@ -18,7 +18,7 @@ function login(){
 
 function logout(){
 
-    axios.post("http://" + address + "/auth/logout")
+    axios.post(address + "/auth/logout")
         .then((result) => {
             localStorage.setItem("logged", 0);
             window.location.replace('index.html');
@@ -27,7 +27,7 @@ function logout(){
 
 function loadFiles() {
 
-    axios.get("http://" + address + "/api/files/get")
+    axios.get(address + "/api/files/get")
         .then((response)=>{
 
             if(response.status === 200) {
@@ -80,7 +80,7 @@ function loadFiles() {
 
 function loadFolder(folder) {
 
-    axios.get("http://" + address + "/api/files/get/" + folder.id)
+    axios.get(address + "/api/files/get/" + folder.id)
         .then((response) => {
 
             if(response.status === 200) {
@@ -132,7 +132,7 @@ function loadFolder(folder) {
 
 function backFolder() {
 
-    axios.get("http://" + address + "/api/files/back")
+    axios.get(address + "/api/files/back")
         .then((response) => {
             if(response.status === 200) {
 
@@ -202,7 +202,7 @@ function addFolder() {
 
     if(folder_name.length !=0 ){
 
-    axios.post("http://" + address + "/api/files/create", {name:folder_name})
+    axios.post(address + "/api/files/create", {name:folder_name})
         .then((result) => {
 
             if(result.status === 201){
@@ -230,7 +230,7 @@ function deleteFile(element){
 
     if(confirm("Do you really want to delete this file?")) {
 
-        axios.post("http://" + address + "/api/files/delete", {file_id: element.id})
+        axios.post(address + "/api/files/delete", {file_id: element.id})
             .then((response) => {
                 toastr.success("File was deleted");
                 loadFiles();
@@ -243,7 +243,7 @@ function deleteFile(element){
 
 function downloadFile(element){
 
-    window.location = "http://" + address + "/api/files/download/" + element.id;
+    window.location = address + "/api/files/download/" + element.id;
 }
 
 function uploadModalFiles(){
@@ -286,7 +286,7 @@ function uploadFiles(){
             form.append("fisiere", files.files[i]);
         }
 
-        axios.post("http://" + address + "/api/files/upload", form, {
+        axios.post(address + "/api/files/upload", form, {
             onUploadProgress: (progressEvent) => {
                 const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
 
@@ -346,7 +346,7 @@ function renameFolder(element) {
 
     if(file_name.length !==0){
 
-        axios.post("http://" + address + "/api/files/rename", {file_id: element.id, name:file_name})
+        axios.post(address + "/api/files/rename", {file_id: element.id, name:file_name})
             .then((result) => {
 
                 if(result.status === 200){

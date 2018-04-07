@@ -1,4 +1,4 @@
-const address = "cyberboxx.me";
+const address = "https://cyberboxx.me";
 
 function openNav() {
     document.getElementById("mySidenav").style.height = "100%";
@@ -49,7 +49,7 @@ window.onload = function(){
 
 function welcome() {
 
-    axios.get("http://" + address + "/api/users/welcome")
+    axios.get(address + "/api/users/welcome")
         .then((response) => {
 
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
