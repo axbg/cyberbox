@@ -2,10 +2,10 @@
   "name": "cyberbox",
   "short_name": "cyberbox",
   "display": "standalone",
-  "start_url": "/",
+  "start_url": "/index.html",
   "theme_color": "#021130",
-  "background_color": "#ffffff",
-  "description": "your daily drive",
+  "background_color": "#021130",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/img/icons/192.png",
