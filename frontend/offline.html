@@ -19,10 +19,10 @@
 		<div class="container fadeIn animated">
 			<div class="container-wrapper"  style="background-color: rgba(0, 23, 49, 1);">
 				<div class="logo fadeInDown animated">
-					<img src="img\logo.png" height="220px" width="220px" />
+					<img src="img/logo.png" height="220px" width="220px" />
 				</div>
-				<div class="title fadeIn animated"><h1>your daily drive</h1></div>
-				<div id="loginG" class="g-signin2 fadeInDown animated" style="padding-bottom:20px;" data-onsuccess="onSignIn" ></div>
+				<div class="title fadeIn animated"><h1>You are offline</h1></div>
+				<div class="title fadeIn animated" style="margin-top:0!important; padding-bottom:20px;"><h1>Please check your Internet connection</h1></div>
 			</div>
 		</div>
 
@@ -31,30 +31,5 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-			<script src="js/structure.js"></script>
-			<script type="text/javascript">
-
-                function onSignIn(googleUser){
-
-                    let details = googleUser.getBasicProfile();
-                    let token = googleUser.getAuthResponse().id_token;
-
-                    googleUser.disconnect();
-
-                    axios.post(address + "/auth/glogin", {name: details.ig, token: token})
-						.then((response) => {
-
-                            if(response.status === 200){
-
-                                localStorage.setItem("logged", 1);
-                                window.location.replace('dashboard.html');
-
-                            } else {
-                                toastr.warning("Your email is not allowed");
-                            }
-
-						}).catch(() => {toastr.info("Your email is not allowed")});
-                }
-			</script>
 	</body>
 </html>
