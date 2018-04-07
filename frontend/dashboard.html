@@ -32,6 +32,16 @@
         <span onclick="openNav();closeModal()" >&#9776;</span>
     </div>
 
+    <div class="phone-menu">
+            <a class="fa fa-file" onClick="changeMenu('files');loadFiles();"></a>
+            <a class="fa fa-sticky-note" onClick="changeMenu('notes');loadNotes()"></a>
+            <a class="fa fa-bell" onclick="changeMenu('reminders');loadUndoneReminders();"></a>
+            <img id="logo" src= "img/logo.png" onClick="changeMenu('welcome');welcome();"></img>
+            <a class="fa fa-share-alt" onclick="changeMenu('permissions');showGranted();getGranted();"></a>
+            <a class="fa fa-gear" onClick="changeMenu('settings');loadSettings();getParentFolders();getParentNotes();"></a>
+            <a class="fa fa-sign-out" onClick="logout()"></a>
+    </div>
+    
     <div id="myModal" class="modal">
         <div id="modal-content" class="modal-content">
             <span class="close">&times;</span>

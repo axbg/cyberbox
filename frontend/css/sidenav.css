@@ -77,3 +77,109 @@
         height:100px
     }
 }
+
+.phone-menu{
+    position:fixed;
+    display:none;
+    bottom:0;
+    height:60px;
+    width:100%;
+    z-index:0;
+    background-color: #021130;
+}
+
+@media only screen and (max-width: 350px){
+    .menu-button{
+        display:none;
+    }
+
+    .phone-menu{
+        display:flex;
+        flex-direction:row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .fa{
+        font-size: 30px !important;
+        padding: 5px 5px 5px 10px;
+        color:white;
+    }
+
+    #logo{
+        margin-left: 0px;
+        height:60px;
+        width:60px;
+        text-align: center;
+        top:20px !important;
+        padding-top:7px !important;
+        padding-bottom:40px !important;
+        background-color: #021130;
+        border-radius: 30px;
+    }
+}
+
+    @media only screen and (min-width: 350px) and (max-width: 445px){
+    .menu-button{
+        display:none;
+    }
+
+    .phone-menu{
+        display:flex;
+        flex-direction:row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .fa{
+        font-size: 40px !important;
+        padding-right:7px;
+        padding-left:7px;
+        color:white;
+        opacity:1;
+    }
+
+    #logo{
+        margin-left: 0px;
+        height:60px;
+        width:60px;
+        text-align: center;
+        top:20px !important;
+        padding-top:7px !important;
+        padding-bottom:40px !important;
+        background-color: #021130;
+        border-radius: 30px;
+    }
+}
+    @media only screen and (min-width: 401px) and (max-width: 500px){
+    .menu-button{
+        display:none;
+    }
+
+    .phone-menu{
+        display:flex;
+        flex-direction:row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .fa{
+        font-size: 40px !important;
+        padding-right:10px;
+        padding-left:10px;
+        color:white;
+        opacity:1;
+    }
+
+    #logo{
+        margin-left: 0px;
+        height:60px;
+        width:60px;
+        text-align: center;
+        top:20px !important;
+        padding-top:7px !important;
+        padding-bottom:40px !important;
+        background-color: #021130;
+        border-radius: 30px;
+    }
+}
