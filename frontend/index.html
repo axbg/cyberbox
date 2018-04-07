@@ -39,7 +39,7 @@
 
                     googleUser.disconnect();
 
-                    axios.post("http://" + address + "/auth/glogin", {name: details.ig, token: token})
+                    axios.post(address + "/auth/glogin", {name: details.ig, token: token})
 						.then((response) => {
 
                             if(response.status === 200){

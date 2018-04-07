@@ -13,7 +13,7 @@ function showReceived(){
 
 function getReceived(){
 
-    axios.get("http://" + address + "/api/permissions/get/received")
+    axios.get(address + "/api/permissions/get/received")
         .then((response) => {
 
             let received = document.getElementById("received");
@@ -43,7 +43,7 @@ function getReceived(){
 
 function getGranted(){
 
-    axios.get("http://" + address + "/api/permissions/get/granted")
+    axios.get(address + "/api/permissions/get/granted")
         .then((response) => {
 
             let received = document.getElementById("permissions-wrapper");
@@ -87,7 +87,7 @@ function showResult(element){
         liveSearch.style.display = "none";
     } else {
 
-        axios.get("http://" + address + "/api/permissions/searchEmail/" + document.getElementById("email").value)
+        axios.get(address + "/api/permissions/searchEmail/" + document.getElementById("email").value)
             .then((result) => {
 
                 if(result.status === 200){
@@ -133,7 +133,7 @@ function grantAccess(){
 
     let email = document.getElementById("email").value;
 
-    axios.post("http://" + address + "/api/permissions/create", {email:email})
+    axios.post(address + "/api/permissions/create", {email:email})
         .then((response) => {
 
             if(response.status === 200){
@@ -175,7 +175,7 @@ function othersFilesRoot(element){
 
     let playground = document.getElementById("playground");
 
-    axios.get("http://" + address + "/api/files/get/root/friend/" + element.getAttribute('owner_id'))
+    axios.get(address + "/api/files/get/root/friend/" + element.getAttribute('owner_id'))
         .then((response) => {
 
             if(response.status === 200){
@@ -224,14 +224,14 @@ function downloadFileFriend(element){
     let owner_id = element.getAttribute("owner_id");
     let file_id = element.id;
 
-    window.location = "http://" + address + "/api/files/get/friend/download/" + owner_id + "/" + file_id;
+    window.location = address + "/api/files/get/friend/download/" + owner_id + "/" + file_id;
 }
 
 function loadFolderFriend(element){
 
     let playground = document.getElementById("playground");
 
-    axios.get("http://" + address + "/api/files/get/friend/" + element.getAttribute('owner_id') + "/" + element.id)
+    axios.get(address + "/api/files/get/friend/" + element.getAttribute('owner_id') + "/" + element.id)
         .then((response) => {
 
 
@@ -282,7 +282,7 @@ function loadFolderFriend(element){
 function navigateBackFriend(element){
     let playground = document.getElementById("playground");
 
-    axios.get("http://" + address + "/api/files/get/back/friend/" + element.getAttribute('owner_id'))
+    axios.get(address + "/api/files/get/back/friend/" + element.getAttribute('owner_id'))
         .then((response) => {
 
 
@@ -333,7 +333,7 @@ function othersNotes(element){
 
     let playground = document.getElementById("playground");
 
-    axios.get("http://" + address + "/api/notes/get/friend/root/" + element.getAttribute('owner_id'))
+    axios.get(address + "/api/notes/get/friend/root/" + element.getAttribute('owner_id'))
         .then((response) => {
 
             if(response.status === 200){
@@ -380,7 +380,7 @@ function loadFolderNotesFriend(element){
 
     let playground = document.getElementById("playground");
 
-    axios.get("http://" + address + "/api/notes/get/friend/folder/" + element.getAttribute('owner_id') + "/" + element.id)
+    axios.get(address + "/api/notes/get/friend/folder/" + element.getAttribute('owner_id') + "/" + element.id)
         .then((response) => {
 
             if(response.status === 200){
@@ -420,7 +420,7 @@ function openNoteFriend(element){
 
     modalcontent.innerHTML = "";
 
-    axios.get("http://" + address + "/api/notes/get/friend/note/" + element.getAttribute("owner_id") + "/" + element.id)
+    axios.get(address + "/api/notes/get/friend/note/" + element.getAttribute("owner_id") + "/" + element.id)
         .then((result) => {
 
             if(result.status===200) {
@@ -440,6 +440,6 @@ function openNoteFriend(element){
 
 function rawNoteFriend(element){
 
-    window.open("http://" + address + "/api/notes/get/raw/" + element.id + "/" + element.getAttribute('owner_id'));
+    window.open(address + "/api/notes/get/raw/" + element.id + "/" + element.getAttribute('owner_id'));
 
 }
