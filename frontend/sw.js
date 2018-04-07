@@ -28,6 +28,7 @@ self.addEventListener('install', function(e) {
                 '/index.html',
                 '/offline.html',
                 '/dashboard.html',
+                '/sw.js',
                 '/img/blocuri.jpg',
                 '/img/icon.ico',
                 '/img/logo.png',
