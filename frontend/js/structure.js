@@ -1,6 +1,6 @@
 const address = "https://cyberboxx.me";
 
-navigator.serviceWorker && navigator.serviceWorker.register('./js/sw.js').then(function(registration) {
+navigator.serviceWorker && navigator.serviceWorker.register('./sw.js').then(function(registration) {
 
 });
 
