@@ -7,17 +7,18 @@ let session = require('client-sessions');
 let middlewares = require('./public/controllers/middlewares');
 let auth = require('./public/controllers/auth');
 let init = require('./public/controllers/init');
-let fileUploader = require('express-fileupload');
+//let fileUploader = require('express-fileupload');
 
 let index = require('./routes/index');
 
 let app = express();
 
+//app.use(fileUploader());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileUploader());
+
 
 
 app.get('/*',function(req,res,next){

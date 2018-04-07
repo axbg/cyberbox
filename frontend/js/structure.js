@@ -1,4 +1,4 @@
-const address = "cyberboxx.me";
+const address = "localhost:8080";
 
 function openNav() {
     document.getElementById("mySidenav").style.height = "100%";

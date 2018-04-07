@@ -2,7 +2,9 @@ let express = require('express');
 let router = express.Router();
 let filesController = require('../public/controllers/filesController');
 let middlewares = require('../public/controllers/middlewares');
-
+let multer = require('multer');
+let storage = multer.memoryStorage();
+let upload = multer({storage: storage});
 
 router.get("/get", middlewares.isFolder, filesController.getCurrentFolder);
 router.get("/get/parents", filesController.parentFolders);
@@ -11,7 +13,9 @@ router.get("/get/:folder_id", middlewares.isFolder, filesController.getFiles);
 
 router.get("/back", filesController.navigateBack);
 router.post("/access", filesController.changeAccess);
-router.post("/upload", filesController.uploadFiles);
+
+router.post("/upload", upload.array('fisiere'), filesController.uploadFiles);
+
 router.post("/public/:owner_id", middlewares.PermissionChecker, filesController.publicParentFolders);
 router.post("/delete", filesController.deleteFiles);
 router.get("/download/:file_id", filesController.downloadFiles);
