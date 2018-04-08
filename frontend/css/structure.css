@@ -8,6 +8,8 @@ body {
     background-size:cover;
     margin: 0;
     text-align: center;
+    background-repeat:no-repeat;
+    background-color: #02000A;
 }
 
 
@@ -32,6 +34,7 @@ i{
     width:80%;
     margin: 0 auto;
     background-color: rgba(0, 23, 49, 0.5);
+    padding-bottom: 10px;
 
 }
 
@@ -225,6 +228,15 @@ span{
     animation: spin 2s linear infinite;
 }
 
+#files-perm-wrapper{
+    max-height:30vh !important;
+}
+
+#notes-perm-wrapper{
+    max-height:30vh !important;
+    margin-bottom:10px !important;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
@@ -236,12 +248,11 @@ span{
     100% { transform: rotate(360deg); }
 }
 
-@media only screen and (max-width: 1510px){
+@media only screen and (min-width:700px) and (max-width: 1510px){
     body{
-
+        background-repeat:no-repeat;
+        background-color: #02000A;
         background-size:auto;
-        min-height:100%;
-
     }
 }
 

@@ -1,21 +1,4 @@
 
-
-function login(){
-
-    let email = 'bisagalexstefan@gmail.com';
-
-    axios.post(address + "/auth/login", {email:email})
-        .then((result)=>{
-            if(result.status === 200){
-                window.location.replace('dashboard.html');
-
-
-            } else {
-                toastr.info("Your email is not allowed");
-            }
-        });
-}
-
 function logout(){
 
     axios.post(address + "/auth/logout")
