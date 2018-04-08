@@ -1,20 +1,14 @@
-/** An empty service worker! */
+
 self.addEventListener('fetch', event => {
-    // request.mode = navigate isn't supported in all browsers
-    // so include a check for Accept: text/html header.
-    if(event.request.url.includes("files/download")){
-        return fetch(event.request.url);
-    }
-    else if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
+
+    if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
         event.respondWith(
-            fetch(event.request.url).catch(error => {
-                // Return the offline page
+            fetch(event.request).catch(error => {
                 return caches.match("/offline.html");
             })
         );
     }
     else{
-        // Respond with everything else if we can
         event.respondWith(caches.match(event.request)
             .then(function (response) {
                 return response || fetch(event.request);
@@ -25,7 +19,7 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('install', function(e) {
     e.waitUntil(
-        caches.open('the-magic-cache').then(function(cache) {
+        caches.open('cb-cache').then(function(cache) {
             return cache.addAll([
                 '/',
                 '/index.html',
@@ -40,6 +34,12 @@ self.addEventListener('install', function(e) {
                 '/css/structure.css',
                 '/css/style.css',
                 '/css/sidenav.css',
+                '/js/content.js',
+                '/js/notes.js',
+                '/js/permissions.js',
+                '/js/reminders.js',
+                '/js/settings.js',
+                '/js/structure.js',
             ]);
         })
     );
