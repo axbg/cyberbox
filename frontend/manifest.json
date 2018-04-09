@@ -2,7 +2,7 @@
   "name": "cyberbox",
   "short_name": "cyberbox",
   "display": "standalone",
-  "start_url": "https://cyberboxx/index.html",
+  "start_url": "https://cyberboxx.me/index.html",
   "theme_color": "#021130",
   "background_color": "#021130",
   "orientation": "portrait",
