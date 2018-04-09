@@ -287,13 +287,8 @@ module.exports.uploadFiles = (req, res) => {
             for (let i = 0; i < req.files.length; i++) {
 
                 let current_file = req.files[i];
-                //console.log(req.files[i]);
-                //console.log(current_file);
-                console.log(parent.path);
 
                 let location = path.join(parent.path, current_file.originalname);
-
-                console.log(current_file.name);
 
                 size += req.files[i].size;
 
@@ -352,30 +347,34 @@ module.exports.uploadFiles = (req, res) => {
                                         path: location
                                     });
 
-                                    req.files[i] = null;
+                                    req.files = null;
                                     current_file = null;
                                     file = null;
-
+                                    global.gc();
                                 } else {
-                                    req.files[i].buffer = null;
+                                    req.files = null;
                                     current_file = null;
+                                    global.gc();
                                 }
                             });
                         }
                         catch (err) {
                             err = 1;
-                            req.files[i].buffer = null;
+                            req.files = null;
                             current_file = null;
+                            global.gc();
                         }
 
                     }
                     if (err_text.length) {
-                        req.files[i] = null;
+                        req.files = null;
                         res.status(200).send({message: err_text});
+                        global.gc();
 
                     }
                     else {
                         res.status(201).send({message: "good"});
+                        global.gc();
                     }
 
                 });
