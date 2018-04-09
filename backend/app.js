@@ -34,14 +34,13 @@ app.post('/*',function(req,res,next){
 app.use(session({
     cookieName: 'session',
     secret: 'eg[isfd-8yF9-7w2315dfergewegw$!@!24912bbxcbsdgrgpok123+Ijsli;;termgerdfkhmdkrherhhehwemgro8',
-    duration: 86400000, //one day cookie
-    activeDuration: 300000,
+    duration: 432000000, //5 days cookie
+    activeDuration: 172800000, //2 days renewal
     httpOnly: true,
     ephemeral: false,
     secure: false
 }));
 
-app.post('/auth/login', auth.Login);
 app.post('/auth/glogin', auth.gLogin);
 app.post('/auth/logout',middlewares.LogInCheck, auth.Logout);
 app.post('/init', middlewares.ForceAdmin, init.createDatabase); //will be commented in production

@@ -1,7 +1,7 @@
 
 self.addEventListener('fetch', event => {
 
-    if(event.request.url.includes("upload")){
+    if(event.request.url.includes("upload") || event.request.url.includes("download")) {
 
     }
     else  if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
@@ -32,6 +32,8 @@ self.addEventListener('install', function(e) {
                 '/img/blocuri.jpg',
                 '/img/icon.ico',
                 '/img/logo.png',
+                '/img/icons/512.png',
+                '/img/icons/192.png',
                 '/css/animate.css',
                 '/css/modal.css',
                 '/css/structure.css',

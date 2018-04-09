@@ -15,10 +15,10 @@ function loadUndoneReminders(){
                 for(let i = 0; i < response.data.length; i++){
 
                         content +=
-                            "<li><a class='fa fa-list-ul'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-list'></a>" +
                             "<span>" + response.data[i].title +" - " + response.data[i].expiration + "</span>"+
-                            "<i class='fa fa-check' id=" + response.data[i].id + " onclick='makeDone(this)'></i>" +
-                            "</li>";
+                            "<i class='icons'><i class='fa fa-check' style='margin-top:-8px;' id=" + response.data[i].id + " onclick='makeDone(this)'></i>" +
+                            "</i></li>";
 
                 }
 
@@ -73,12 +73,14 @@ function addModalReminder(){
     let modalcontent = document.getElementById('modal-content');
     modalcontent.innerHTML = "";
 
-    openModal();
+    modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
     modalcontent.innerHTML += '<h3>New Reminder</h3>';
     modalcontent.innerHTML += '<input id="reminder" type="text" style="font-size:20px;height:30px;width:50%">';
     modalcontent.innerHTML += '<h3>Expiration Date</h3>';
     modalcontent.innerHTML += '<input id="date" type="date" style="font-size:20px;height:20px;width:50%">';
     modalcontent.innerHTML += '<button style="margin-top:5px;height:50px;width:50%;" onclick="createReminder()">Create</button>';
+
+    openModal();
 }
 
 function createReminder(){

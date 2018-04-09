@@ -218,12 +218,20 @@ span{
    color:white;
 }
 
+#welcome-files, #welcome-notes, #welcome-reminders {
+    cursor: pointer;
+}
+
+.menu-option {
+    cursor:pointer !important;
+}
+
 .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
     border-top: 16px solid #2490e3;
-    width: 120px !important;
-    height: 120px;
+    width: 110px !important;
+    height: 100px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
 }

@@ -172,11 +172,12 @@ function addModalFolder(){
     let modalcontent = document.getElementById('modal-content');
     modalcontent.innerHTML = "";
 
-    openModal();
+    modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
     modalcontent.innerHTML += '<h1>Folder Name</h1>';
     modalcontent.innerHTML += '<input id="folder_name" class="input-fls small-text" type="text" style="font-size:30px;height:30px;width:50%">';
     modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:50px;width:50%;" onclick="addFolder()">Create</button>';
 
+    openModal();
 }
 
 function addFolder() {
@@ -233,7 +234,7 @@ function uploadModalFiles(){
 
     let modalcontent = document.getElementById('modal-content');
     modalcontent.innerHTML = "";
-
+    modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
     modalcontent.innerHTML += '<h1>Upload Files</h1>';
     modalcontent.innerHTML += '<form method="post" enctype="multipart/form-data">';
     modalcontent.innerHTML += '<p><input class="input-fls" id="files-input" name="fisier[]" type="file" value="Browse" multiple ' +
@@ -314,12 +315,14 @@ function renameModal(file){
     let currentId = file.getAttribute("fileId");
     modalcontent.innerHTML = "";
 
-    openModal();
+    modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
     modalcontent.innerHTML += '<h1>Rename File</h1>';
     modalcontent.innerHTML += '<input id="file_name" class="input-fls small-text" type="text"' +
         ' value="' + currentTitle + '"style="font-size:30px;height:30px;width:50%">';
     modalcontent.innerHTML += '<h3>Be aware that you can modify the file\'s extension too!</h3>';
     modalcontent.innerHTML += '<button id="' + currentId + '"class="input-fls" style="margin-top:5px;height:50px;width:50%;" onclick="renameFolder(this)">Rename</button>';
+
+    openModal();
 
 }
 
