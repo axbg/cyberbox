@@ -6,7 +6,6 @@ let middlewares = require('../public/controllers/middlewares');
 
 router.get('/get', usersController.getUsers);
 router.get('/get/:email', usersController.getOneUser);
-router.post('/create', usersController.createUser);
 router.delete('/delete', usersController.deleteUser);
 router.get('/welcome', usersController.Welcome);
 

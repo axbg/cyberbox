@@ -17,12 +17,12 @@
 
 	<body style>
 		<div class="container fadeIn animated">
-			<div class="container-wrapper"  style="background-color: rgba(0, 23, 49, 1);">
+			<div class="container-wrapper container-login">
 				<div class="logo fadeInDown animated">
 					<img src="img/logo.png" height="220px" width="220px" />
 				</div>
 				<div class="title fadeIn animated"><h1>your daily drive</h1></div>
-				<div id="loginG" class="g-signin2 fadeInDown animated" style="padding-bottom:20px;" data-onsuccess="onSignIn" ></div>
+				<div id="loginG" class="g-signin2 fadeInDown animated" data-onsuccess="onSignIn" ></div>
 			</div>
 		</div>
 
@@ -49,8 +49,8 @@
                                 localStorage.setItem("logged", 1);
                                 window.location.replace('dashboard.html');
 
-                            } else {
-                                toastr.warning("Your email is not allowed");
+                            } else if(response.status === 205){
+                                toastr.success("Your account was registered! You can login now.");
                             }
 
 						}).catch(() => {toastr.info("Your email is not allowed")});

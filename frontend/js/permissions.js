@@ -119,7 +119,7 @@ function openGrantModal(){
 
     modalcontent.innerHTML = "";
 
-    openModal();
+    modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
     modalcontent.innerHTML += '<h3>Email</h3>';
     modalcontent.innerHTML += '<input id="email" class="input-fls" type="text" onkeyup="showResult(this.value)" ' +
         ' autocomplete="off" style="font-size:40px;height:50px;width:50%">';
@@ -127,6 +127,7 @@ function openGrantModal(){
     modalcontent.innerHTML += '<button style="margin-top:5px;height:50px;width:50%;" ' +
         'onclick="grantAccess()">Grant Access</button>';
 
+    openModal();
 }
 
 function grantAccess(){
@@ -425,13 +426,15 @@ function openNoteFriend(element){
 
             if(result.status===200) {
 
-                openModal();
+
+                modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
                 modalcontent.innerHTML += '<h3>Note Title</h3>';
                 modalcontent.innerHTML += '<input id="title" type="text" class="input-fls" style="font-size:20px;height:50px;width:50%"' +
                     'value="' + result.data.title + '" readonly>';
                 modalcontent.innerHTML += '<h3>Content</h3>';
                 modalcontent.innerHTML += '<textarea id="content" class="small-text" style="font-size:20px;height:200px;width:90%;resize:none;"' +
                     ' readonly>' + result.data.content + '</textarea>';
+                openModal();
             }
 
         }).catch(() => toastr.error("Error occured"));
@@ -442,4 +445,23 @@ function rawNoteFriend(element){
 
     window.open(address + "/api/notes/get/raw/" + element.id + "/" + element.getAttribute('owner_id'));
 
+}
+
+function revokeAccess(element){
+
+    axios.post(address + "/api/permissions/create", {email:element.id})
+        .then((response) => {
+
+            if(response.status === 200){
+                toastr.warning(response.data.message);
+                closeModal();
+                getGranted();
+            } else if(response.status === 201){
+                toastr.success(response.data.message);
+                closeModal();
+                getGranted();
+            } else if(response.status === 203){
+                toastr.error(response.data.message);
+            }
+        });
 }
