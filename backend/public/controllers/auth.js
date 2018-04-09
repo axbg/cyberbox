@@ -1,9 +1,14 @@
 let Users = require('../models').Users;
 let session = require('client-sessions');
-let Files = require('../models').Files;
-let Notes = require('../models').Notes;
 let axios = require('axios');
-
+let crypto = require("crypto");
+const path = require('path');
+const mkdir = require('make-dir');
+const Files = require("../models").Files;
+const Notes = require("../models").Notes;
+const Reminders = require ("../models").Reminders;
+const Permissions = require ("../models").Permissions;
+const Settings = require("../models").Settings;
 
 module.exports.gLogin = (req, res) => {
 
@@ -57,12 +62,54 @@ module.exports.gLogin = (req, res) => {
                         }).catch(() => res.status(500).send({message: "Server error"}));
                     }
                 } else {
-                    res.status(203).send({message: "Incorrect log in credentials"});
+
+                    tokenizer = crypto.randomBytes(64).toString('hex');
+
+                    Users.create({
+                        email: response.data.email,
+                        name: response.data.given_name,
+                        token: tokenizer,
+                        isAdmin: 0
+                    }).then((result) => {
+
+                        Settings.create({
+                            user_id: result.id,
+                            push: 1,
+                            mail: 0
+                        });
+
+                        let location = path.join(__dirname, '..', '..', '..', 'files', response.data.email.toString());
+                        mkdir(location);
+                        Files.create({
+                            user_id: result.id,
+                            idParent: 0,
+                            name: response.data.email,
+                            isPublic: 1,
+                            isFolder: 1,
+                            path: location
+                        });
+
+                        let locationNotes = path.join(__dirname, '..', '..', '..', 'notes', response.data.email.toString());
+                        mkdir(locationNotes);
+                        Notes.create({
+                            user_id: result.id,
+                            idParent: 0,
+                            title: response.data.email,
+                            isPublic: 0,
+                            isFolder: 1,
+                            path: locationNotes
+                        });
+
+                    }).then(() => {
+                        res.status(205).send({message: "Account created"});
+                    })
                 }
+                })
             }).catch(() => res.status(500).send({message: "Server error"}));
-        });
 };
 
+
+/*
 module.exports.Login = (req, res) => {
 
     Users.findOne({
@@ -116,7 +163,7 @@ module.exports.Login = (req, res) => {
     }).catch(() => res.status(500).send({message: "Server error"}));
 
 };
-
+*/
 
 module.exports.Logout = (req,res) => {
 

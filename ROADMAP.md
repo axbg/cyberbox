@@ -4,7 +4,6 @@ Future Features
 
  
 Roadmap
-  - General - Progressive Web App
   - General - Multiple Themes (with different logos)
   - Files - Move files
   - Files - Add foreign public files to personal repository

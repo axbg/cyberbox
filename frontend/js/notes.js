@@ -116,11 +116,12 @@ function addModalNotesFolder(){
         let modalcontent = document.getElementById('modal-content');
         modalcontent.innerHTML = "";
 
-        openModal();
+        modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
         modalcontent.innerHTML += '<h1>Folder Name</h1>';
         modalcontent.innerHTML += '<input id="title" class="input-fls" type="text" style="font-size:40px;height:50px;width:50%">';
         modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:50px;width:50%;" onclick="createFolderNotes()">Create</button>';
 
+        openModal();
 }
 
 function createFolderNotes(){
@@ -173,13 +174,15 @@ function addModalNotes() {
 
     modalcontent.innerHTML = "";
 
-    openModal();
+    modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
     modalcontent.innerHTML += '<h3>Note Title</h3>';
     modalcontent.innerHTML += '<input id="title" class="input-fls" type="text" style="font-size:40px;height:50px;width:50%">';
     modalcontent.innerHTML += '<h3>Content</h3>';
     modalcontent.innerHTML += '<textarea id="content" class="small-text" onkeydown="modifiedTrue()" style="font-size:20px;height:150px;width:90%;resize:none; max-length=900000000000"></textarea>';
     modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:50px;width:50%;" ' +
         'onclick="createNote()">Create</button>';
+
+    openModal();
 }
 
 function createNote(){
@@ -213,7 +216,7 @@ function editModalNote(note){
     axios.get(address + "/api/notes/get/note/" + note.id)
         .then((result) => {
 
-            openModal();
+            modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
             modalcontent.innerHTML += '<h3>Note Title</h3>';
             modalcontent.innerHTML += '<input id="title" class="input-fls" type="text" style="font-size:20px;height:50px;width:50%"' +
                 'value="' + result.data.title + '">';
@@ -223,6 +226,7 @@ function editModalNote(note){
             modalcontent.innerHTML += '<button class="input-fls" style="margin-top:5px;height:50px;width:50%;" ' +
                 'onclick="editNote('+ note.id +')">Edit</button>';
 
+            openModal();
 
         }).catch(() => toastr.error("Error occured"));
 

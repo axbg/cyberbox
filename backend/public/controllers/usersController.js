@@ -11,7 +11,7 @@ const Permissions = require ("../models").Permissions;
 let cron= require('node-cron');
 let nodemailer = require('nodemailer');
 
-
+/*
 module.exports.createUser = (req,res) => {
 
     Users.findOne({
@@ -69,6 +69,7 @@ module.exports.createUser = (req,res) => {
     });
 
 };
+*/
 
 module.exports.Welcome = (req, res) => {
 

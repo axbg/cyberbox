@@ -71,9 +71,9 @@ function welcome() {
             document.getElementById('welcome-notes').innerHTML = "You have " + response.data.notes + " notes";
             document.getElementById('welcome-reminders').innerHTML = "You have " + response.data.reminders + " reminders";
         })
-        .catch(() => {
+        .catch((error) => {
             localStorage.setItem("logged", 0);
-            alert("Your cookie expired. Please log in");
+            console.log("Your cookies expired. Please log in again.");
             window.location.replace("index.html");
         });
 }
