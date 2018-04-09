@@ -1,4 +1,4 @@
-
+'use strict';
 const Files = require("../models").Files;
 const Permissions = require("../models").Permissions;
 
@@ -351,17 +351,26 @@ module.exports.uploadFiles = (req, res) => {
                                         isFolder: 0,
                                         path: location
                                     });
+
+                                    req.files[i] = null;
+                                    current_file = null;
+                                    file = null;
+
                                 } else {
+                                    req.files[i].buffer = null;
                                     current_file = null;
                                 }
                             });
                         }
                         catch (err) {
                             err = 1;
+                            req.files[i].buffer = null;
+                            current_file = null;
                         }
 
                     }
                     if (err_text.length) {
+                        req.files[i] = null;
                         res.status(200).send({message: err_text});
 
                     }
