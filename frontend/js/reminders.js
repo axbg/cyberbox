@@ -17,7 +17,7 @@ function loadUndoneReminders(){
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-list'></a>" +
                             "<span>" + response.data[i].title +" - " + response.data[i].expiration + "</span>"+
-                            "<i class='icons'><i class='fa fa-check' style='margin-top:-8px;' id=" + response.data[i].id + " onclick='makeDone(this)'></i>" +
+                            "<i class='icons'><i class='fa fa-check' id=" + response.data[i].id + " onclick='makeDone(this)'></i>" +
                             "</i></li>";
 
                 }
