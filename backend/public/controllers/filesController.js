@@ -1,4 +1,3 @@
-'use strict';
 const Files = require("../models").Files;
 const Permissions = require("../models").Permissions;
 
