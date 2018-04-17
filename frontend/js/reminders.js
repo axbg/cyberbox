@@ -48,10 +48,10 @@ function loadDoneReminders(){
                 for(let i = 0; i < response.data.length; i++){
 
                         content +=
-                            "<li><a class='fa fa-list-ul'></a>" +
+                            "<li class='li-wrapper'><a class='fa fa-list'></a>" +
                             "<span>" + response.data[i].title +" - " + response.data[i].expiration + "</span>"+
-                            "<i class='fa fa-times' id=" + response.data[i].id + " onclick='makeUndone(this)'></i>" +
-                            "</li>";
+                            "<i class='icons'><i class='fa fa-times' id=" + response.data[i].id + " onclick='makeUndone(this)'></i>" +
+                            "</i></li>";
 
                 }
 

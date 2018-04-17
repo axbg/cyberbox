@@ -257,7 +257,7 @@ function uploadFiles(){
     }
 
 
-    if(size !== 0 && size < 150000000) {
+    if(size !== 0 && size < 250000000) {
 
         let modalcontent = document.getElementById('modal-content');
         modalcontent.innerHTML = '<div class="container col loader"></div>';
