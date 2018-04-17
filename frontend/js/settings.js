@@ -9,10 +9,10 @@ function loadSettings() {
             settings.innerHTML = "";
 
             let content = "";
-            content += '<div class="content-wrapper settings-wrapper smaller\">';
+            content += '<div class="content-wrapper files-perm-wrapper smaller\">';
             for(i=0; i<2; i++){
                 if(i === 0){
-                    content+= '<a class="fa fa-envelope">  Email Notifications</a>\n';
+                    content+= '<a class="fa fa-envelope">  Email </a>\n';
 
                 if(response.data.mail === 1){
                     content += '<i class="fa fa-check" onclick="changeMail()"></i>';
@@ -23,7 +23,7 @@ function loadSettings() {
                 content += '<br/>';
 
                 } else {
-                    content+= '<a class="fa fa-mobile">  Phone Notifications</a>\n';
+                    content+= '<a class="fa fa-mobile">  Phone </a>\n';
 
                     if(response.data.push === 1){
                         content += '<i class="fa fa-check" onclick="changePush()"></i>';
