@@ -26,7 +26,7 @@ function getReceived(){
                 for (let i = 0; i < response.data.length; i++) {
                     content += "<li class='li-wrapper'><a class='fa fa-user'></a>" +
                         "<span id=" + response.data[i].id + ' email=' + response.data[i].email +
-                        " onclick='othersMenu(this)'>" + response.data[i].email + "</span>" +
+                        " onclick='othersMenu(this)'>" + response.data[i].email.split('@')[0] + "</span>" +
                         "<i class='icons'><i class='fa fa-arrow-right' id=" + response.data[i].id + ' email=' + response.data[i].email +" onclick='othersMenu(this)'></i>" +
                         "</i></li>";
                 }
@@ -34,7 +34,7 @@ function getReceived(){
                 content += "</ul>";
 
             } else {
-                content += "<h1>No person gave you access</h1>";
+                content += "<h1>Nobody gave you access</h1>";
             }
 
             received.innerHTML = content;
@@ -56,7 +56,7 @@ function getGranted(){
                 for (let i = 0; i < response.data.length; i++) {
                     content += "<li class='li-wrapper'><a class='fa fa-user'></a>" +
                         "<span id=" + response.data[i].email +
-                        ">" + response.data[i].email + "</span>" +
+                        ">" + response.data[i].email.split('@')[0] + "</span>" +
                         "<i class='icons'><i class='fa fa-ban' id=" + response.data[i].email + " onclick='revokeAccess(this)'></i>" +
                         "</i></li>";
                 }
@@ -160,8 +160,8 @@ function othersMenu(element) {
     let content = "";
 
     content += '<div class="col"><i style="padding:0 !important;">';
-    content += element.getAttribute('email');
-    content += ' Box</i></div>';
+    content += element.getAttribute('email').split('@')[0];
+    content += '\'s Box</i></div>';
     content += '<div class="content-wrapper"><div class="col">' +
         '<i class="fa fa-pencil" onclick="othersNotes(this)" owner_id="'+ element.id + '">Notes</i>' +
         '</div><div class="col">' +

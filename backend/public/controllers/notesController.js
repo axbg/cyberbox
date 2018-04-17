@@ -145,6 +145,9 @@ module.exports.getNotes = (req, res) => {
 			user_id: req.session.id,
 			isFolder: 0,
 		},
+        order: [
+            ['title', 'ASC'],
+        ],
 		raw: true
 	}).then((result) => {
 
@@ -195,6 +198,10 @@ module.exports.getRoot = (req, res) => {
 			user_id : req.session.id,
 			idParent: result.id
 		},
+        order: [
+            ['isFolder', 'DESC'],
+            ['title', 'ASC'],
+        ],
 		raw:true,
 	}).then((obtain) => {
 
@@ -218,7 +225,10 @@ module.exports.getFolder = (req, res) => {
 			user_id:req.session.id,
 			idParent: req.params.folder_id,
 		},
-		raw: true
+		raw: true,
+        order: [
+            ['title', 'ASC'],
+        ],
 	}).then((result) => {
         req.session.note = req.params.folder_id;
 		if(result.length){
@@ -240,6 +250,10 @@ module.exports.getCurrent = (req, res) => {
             user_id: req.session.id,
             idParent: req.session.note,
         },
+        order: [
+            ['isFolder', 'DESC'],
+            ['title', 'ASC'],
+        ],
         raw: true
     }).then((result) => {
         if(result.length){
@@ -391,6 +405,9 @@ module.exports.getFriendRoot = (req, res) =>{
                         isFolder: 1,
                         idParent: 0,
                     },
+                    order: [
+                        ['title', 'ASC'],
+                    ],
                     raw: true,
                 }).then((root) => {
 
@@ -441,6 +458,9 @@ module.exports.getNotesFolder = (req, res) => {
 					isPublic: 1,
 					idParent: req.params.folder_id
 				},
+                order: [
+                    ['title', 'ASC'],
+                ],
 				raw:true
 			}).then((notes) => {
 

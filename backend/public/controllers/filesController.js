@@ -65,6 +65,10 @@ module.exports.getFiles = (req,res) => {
             user_id: req.session.id,
             idParent: req.params.folder_id,
         },
+        order: [
+            ['isFolder', 'DESC'],
+            ['name', 'ASC'],
+        ],
         raw:true
     }).then((result) => {
 
@@ -91,6 +95,10 @@ module.exports.getCurrentFolder = (req, res) => {
             user_id: req.session.id,
             idParent: req.session.folder
         },
+        order: [
+            ['isFolder', 'DESC'],
+            ['name', 'ASC'],
+        ],
         raw:true
     }).then((result) => {
 
@@ -244,13 +252,17 @@ module.exports.navigateBack = (req,res) => {
         },
         raw:true
     }).then((output) => {
-        if(output.idParent != 0) {
+        if(output.idParent !== 0) {
             Files.findAll({
                 attributes: ['id', 'name', 'isFolder'],
                 where: {
                     user_id: req.session.id,
                     idParent: output.idParent,
                 },
+                order: [
+                    ['isFolder', 'DESC'],
+                    ['name', 'ASC'],
+                ],
                 raw: true
             }).then((result) => {
 
@@ -306,7 +318,7 @@ module.exports.uploadFiles = (req, res) => {
 
             }
 
-            if (size < 150000000) {
+            if (size < 250000000) {
 
                 Files.findOne({
                     where: {
@@ -404,7 +416,11 @@ module.exports.parentFolders = (req, res) => {
                 user_id: req.session.id,
                 idParent: resp.id,
                 isFolder: 1,
-            }
+            },
+            order: [
+                ['isFolder', 'DESC'],
+                ['name', 'ASC'],
+            ]
         }).then((result) => {
             if (result.length) {
                 res.status(200).send(result);
@@ -424,7 +440,11 @@ module.exports.publicParentFolders = (req, res) => {
                     idParent: 0,
                     isFolder: 1,
                     isPublic: 1
-                }
+                },
+                order: [
+                    ['isFolder', 'DESC'],
+                    ['name', 'ASC'],
+                ]
             }).then((result) => {
                 if (result.length) {
                     res.status(200).send(result);
@@ -448,7 +468,7 @@ module.exports.deleteFiles = (req, res) => {
 
             console.log(req.body.file_id);
 
-        if (result && result.idParent != 0 && req.body.file_id !== req.session.folder) {
+        if (result && result.idParent !== 0 && req.body.file_id !== req.session.folder) {
             let err = 0;
 
             if (result.isFolder) {
@@ -601,7 +621,11 @@ module.exports.getFriendFiles = (req, res) => {
                         user_id: req.params.owner_id,
                         idParent: req.params.folder_id,
                         isPublic: 1
-                    }
+                    },
+                    order: [
+                        ['isFolder', 'DESC'],
+                        ['name', 'ASC'],
+                    ]
                 }).then((pub) => {
 
                     if(pub.length){
@@ -646,7 +670,11 @@ module.exports.getFriendFilesRoot = (req, res) => {
                         user_id: req.params.owner_id,
                         idParent: result.id,
                         isPublic: 1
-                    }
+                    },
+                    order: [
+                        ['isFolder', 'DESC'],
+                        ['name', 'ASC'],
+                    ]
                 }).then((pub) => {
 
                     if (pub.length) {
@@ -693,6 +721,10 @@ module.exports.navigateBackFriend = (req, res) => {
                             idParent: output.idParent,
                             isPublic: 1
                         },
+                        order: [
+                            ['isFolder', 'DESC'],
+                            ['name', 'ASC'],
+                        ],
                         raw:true
                     }).then((pub) => {
 
