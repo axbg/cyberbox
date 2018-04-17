@@ -296,7 +296,7 @@ function uploadFiles(){
                     closeModal();
                 }
             }).catch(() => toastr.error("Error occured"));
-    } else if(size >= 150000000) {
+    } else if(size >= 250000000) {
 
         toastr.error("Upload limit is 250MB");
     }
