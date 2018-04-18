@@ -1,4 +1,4 @@
-const address = "https://cyberfellas.me";
+const address = "https://cyberboxx.me";
 
 navigator.serviceWorker && navigator.serviceWorker.register('/sw.js').then(function(registration) {
 
