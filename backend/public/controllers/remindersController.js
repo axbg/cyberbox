@@ -37,6 +37,7 @@ module.exports.getUndoneReminders = (req, res) => {
 			isDone: 0,
 			user_id: req.session.id
 		},
+
 		raw: true
 	}).then((result) => {
 

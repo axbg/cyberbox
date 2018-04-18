@@ -164,7 +164,7 @@ function othersMenu(element) {
     content += '\'s Box</i></div>';
     content += '<div class="content-wrapper"><div class="col">' +
         '<i class="fa fa-pencil" onclick="othersNotes(this)" owner_id="'+ element.id + '">Notes</i>' +
-        '</div><div class="col">' +
+        '</div></div><div class="col">' +
         '<i class="fa fa-file" onclick="othersFilesRoot(this)" owner_id="' + element.id +  '">Files</i>' +
         '</div><div id="playground" class="content-wrapper"</div>';
 
