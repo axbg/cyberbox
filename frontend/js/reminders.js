@@ -12,7 +12,7 @@ function loadUndoneReminders(){
             if(response.status === 200){
                 content = '<ul>';
 
-                for(let i = 0; i < response.data.length; i++){
+                for(let i = response.data.length-1; i >= 0; i--){
 
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-list'></a>" +
