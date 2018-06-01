@@ -1,6 +1,7 @@
 Future Features
 
  - Research & Change Font
+ - Remove all toastrs before a new one fires
  - Minimize assets
  - Make every dependency local
  - Make every button clickable (cursor: pointer)
@@ -44,10 +45,13 @@ Future Features
 
  - Settings - Synchronize loading of Settings, Files and Notes Permissions
  - Settings - Display messages when an user has no files
+ - Settings - On/off sliders instead of button (on privacy level)
+
  - Service Worker - Cache every asset
  - Service Worker - Integrate push notifications
 
-
+ - Cookies - HTTPOnly cookies
+ - Cookies - More complex hash string for encryption
 
 
 Roadmap
@@ -60,6 +64,8 @@ Roadmap
   - General - Visualize Archived Files Content
   - General - Visualize Images Files
   - General - Display only the first 20 characters from the name of a file and .. after that
+  - General - Add a slim scroll-bar to every container
+  - General - New privacy level - open - which generates a url where download of the file is accessible without logging in
 
   - Files - Move files
   - Files - Copy files
