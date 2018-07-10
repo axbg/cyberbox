@@ -28,7 +28,8 @@ Future Features
 
  - Notes - Fullscreen insert mode on note creation
  - Notes - Shortcuts in fullscreen mode (such as tab space)
- - Notes - Keep current position 
+ - Notes - Keep current positioni
+ - Notes - Format text from RAW page (with a h5/h6) 
 
  - Reminders - Edit title & data
  - Reminders - Highlight expired undone reminders
@@ -55,7 +56,8 @@ Future Features
 
 
 Roadmap
-
+  - General - Change domain
+  - General - Presentation Page + Cookies Guide (GDPR)
   - General - Multiple Themes (with different logos)
   - General - Search for files, notes and reminders
   - General - New module "Tools" with different useful tools
@@ -66,6 +68,9 @@ Roadmap
   - General - Display only the first 20 characters from the name of a file and .. after that
   - General - Add a slim scroll-bar to every container
   - General - New privacy level - open - which generates a url where download of the file is accessible without logging in
+
+  - Users - Basic auth register route
+  - Users - Add "Last activity" column
 
   - Files - Move files
   - Files - Copy files
@@ -80,3 +85,4 @@ Roadmap
   - Reminders - Android Widget
 
   - Tools - Fast Copy&Paste between devices tool
+  - Tools - Fancy kanban table interface
