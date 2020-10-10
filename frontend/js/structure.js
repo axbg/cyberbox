@@ -1,4 +1,4 @@
-const address = "http://api-url";
+const address = "";
 
 navigator.serviceWorker &&
   navigator.serviceWorker.register("/sw.js").then(function (registration) {});
