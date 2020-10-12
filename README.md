@@ -5,7 +5,7 @@ To setup and run the application
    - clone repository
    - cd to *backend*
    - run "npm install"
-   - cd to *public/models*
+   - cd to *models*
    - open *db.js*
    - replace placeholder values for database connection
 

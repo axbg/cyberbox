@@ -1,16 +1,15 @@
-let express = require('express');
-let router = express.Router();
-let Users = require('./users.js');
-let Reminders = require('./reminders.js');
-let Permissions = require('./permissions');
-let Settings = require('./settings');
-let Notes = require('./notes');
-let Files = require('./files');
+const router = require('express').Router();
+
+const Users = require('./users.js');
+const Reminders = require('./reminders.js');
+const Permissions = require('./permissions');
+const Settings = require('./settings');
+const Notes = require('./notes');
+const Files = require('./files');
 
 router.get('/main', function(req, res, next) {
-    res.status(200).send("gg");
+  res.status(200).send('gg');
 });
-
 
 router.use('/users', Users);
 router.use('/reminders', Reminders);

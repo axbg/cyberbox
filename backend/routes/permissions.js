@@ -1,7 +1,5 @@
-let express = require('express');
-let router = express.Router();
-let permissionsController = require('../public/controllers/permissionsController');
-
+const router = require('express').Router();
+const permissionsController = require('../controllers/permissionsController');
 
 router.get('/get/granted', permissionsController.getPermissionsGranted);
 router.get('/get/received', permissionsController.getPermissionsReceived);
