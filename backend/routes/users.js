@@ -1,8 +1,5 @@
-let express = require('express');
-let router = express.Router();
-let usersController = require('../public/controllers/usersController');
-let middlewares = require('../public/controllers/middlewares');
-
+const router = require('express').Router();
+const usersController = require('../controllers/usersController');
 
 router.get('/get', usersController.getUsers);
 router.get('/get/:email', usersController.getOneUser);

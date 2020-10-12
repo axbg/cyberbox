@@ -1,13 +1,5 @@
-//create note
-//delete note
-//edit content
-//edit title
-//make public/ private
-
-let express = require('express');
-let router = express.Router();
-let notesController = require('../public/controllers/notesController');
-let middlewares = require('../public/controllers/middlewares');
+const router = require('express').Router();
+const notesController = require('../controllers/notesController');
 
 router.post('/create', notesController.createNote);
 router.post('/delete', notesController.deleteNote);
@@ -30,4 +22,4 @@ router.get('/get/friend/folder/:owner_id/:folder_id', notesController.getNotesFo
 router.get('/get/raw/:note_id', notesController.rawNote);
 router.get('/get/raw/:note_id/:owner_id', notesController.rawNoteFriend);
 
-module.exports = router;	
+module.exports = router;

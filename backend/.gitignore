@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # Custom
-public/models/db.js
+models/db.js

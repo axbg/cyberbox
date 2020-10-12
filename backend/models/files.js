@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
   return sequelize.define('files', {
     name: DataTypes.STRING,
     isPublic: DataTypes.BOOLEAN,
@@ -6,7 +6,6 @@ module.exports = function (sequelize, DataTypes) {
     isFolder: DataTypes.BOOLEAN,
     path: DataTypes.STRING,
   }, {
-    underscored: true
+    underscored: true,
   });
-
 };
