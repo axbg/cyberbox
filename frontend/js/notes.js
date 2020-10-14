@@ -1,19 +1,13 @@
 
 
 function loadNotes() {
-
     axios.get(address + "/api/notes/get/folder/root")
         .then((response) => {
-
             if (response.status === 200) {
-
                 let files = document.getElementById("notes-wrapper");
-                let content = "";
-
-                content += "<ul>";
+                let content = "<ul>";
 
                 for (let i = 0; i < response.data.length; i++) {
-
                     if (response.data[i].isFolder) {
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-folder-open icons'></a>" +
@@ -40,13 +34,10 @@ function loadNotes() {
                 controller.innerHTML = "";
                 controller.innerHTML += '<i class="fa fa-plus" onclick="addModalNotesFolder();"></i>';
                 controller.innerHTML += '<i class="fa fa-upload" onclick="addModalNotes()"></i>';
-
             } else if (response.status === 204) {
-
                 let files = document.getElementById("notes-wrapper");
                 files.innerHTML = "";
                 files.innerHTML = "<h1>No files here</h1>";
-
             } else {
                 toastr.error("You are not allowed");
             }
@@ -54,19 +45,13 @@ function loadNotes() {
 }
 
 function loadFolderNotes(folder) {
-
     axios.get(address + "/api/notes/get/folder/" + folder.id)
         .then((response) => {
-
             if (response.status === 200) {
-
                 let files = document.getElementById("notes-wrapper");
-                let content = "";
-
-                content += "<ul>";
+                let content = "<ul>";
 
                 for (let i = 0; i < response.data.length; i++) {
-
                     if (response.data[i].isFolder) {
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-folder-open icons'></a>" +
@@ -93,9 +78,7 @@ function loadFolderNotes(folder) {
                 controller.innerHTML = "";
                 controller.innerHTML += '<i class="fa fa-backward" onclick="loadNotes()"></i>';
                 controller.innerHTML += '<i class="fa fa-upload" onclick="addModalNotes()"></i>';
-
             } else if (response.status === 204) {
-
                 let files = document.getElementById("notes-wrapper");
                 files.innerHTML = "";
                 files.innerHTML = "<h1>No files here</h1>";
@@ -104,7 +87,6 @@ function loadFolderNotes(folder) {
                 controller.innerHTML = "";
                 controller.innerHTML += '<i class="fa fa-backward" onclick="loadNotes()"></i>';
                 controller.innerHTML += '<i class="fa fa-upload" onclick="addModalNotes()"></i>';
-
             } else {
                 toastr.error("You are not allowed");
             }
@@ -112,7 +94,6 @@ function loadFolderNotes(folder) {
 }
 
 function addModalNotesFolder() {
-
     let modalcontent = document.getElementById('modal-content');
     modalcontent.innerHTML = "";
 
@@ -125,24 +106,17 @@ function addModalNotesFolder() {
 }
 
 function createFolderNotes() {
-
     let folder_name = document.getElementById("title").value;
 
     if (folder_name.length != 0) {
         axios.post(address + "/api/notes/create/folder", { title: folder_name })
             .then((result) => {
-                console.log(result.status);
-
                 if (result.status === 201) {
-
                     toastr.success("Folder was created!");
                     loadNotes();
                     closeModal();
-
                 } else if (result.status === 200) {
-
                     toastr.warning("Folder already exists!");
-
                 } else {
                     toastr.error("Error");
                 }
@@ -153,16 +127,13 @@ function createFolderNotes() {
 }
 
 function deleteNote(element) {
-
     if (confirm("Do you really want to delete this note?")) {
         axios.post(address + "/api/notes/delete", { note_id: element.id })
             .then((result) => {
-
                 if (result.status === 200) {
                     toastr.success(result.data.message);
                     loadNotes();
                 }
-
             }).catch(() => {
                 toastr.error("Error occurred");
             })
@@ -172,9 +143,7 @@ function deleteNote(element) {
 function addModalNotes() {
     let modalcontent = document.getElementById('modal-content');
 
-    modalcontent.innerHTML = "";
-
-    modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
+    modalcontent.innerHTML = "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
     modalcontent.innerHTML += '<h3>Note Title</h3>';
     modalcontent.innerHTML += '<input id="title" class="input-fls" type="text" style="font-size:40px;height:50px;width:50%">';
     modalcontent.innerHTML += '<h3>Content</h3>';
@@ -186,14 +155,11 @@ function addModalNotes() {
 }
 
 function createNote() {
-
     let noteTitle = document.getElementById("title").value;
     let noteContent = document.getElementById("content").value;
 
-
     axios.post(address + "/api/notes/create/note", { title: noteTitle, content: noteContent })
         .then((response) => {
-
             if (response.status === 204) {
                 toastr.warning("Note already exists");
             } else if (response.status === 201) {
@@ -207,15 +173,11 @@ function createNote() {
 }
 
 function editModalNote(note) {
-
     let modalcontent = document.getElementById('modal-content');
-
     modalcontent.innerHTML = "";
-
 
     axios.get(address + "/api/notes/get/note/" + note.id)
         .then((result) => {
-
             modalcontent.innerHTML += "<span onclick='closeModal()' style='float:right;margin-top:-10px;'>X</span>";
             modalcontent.innerHTML += '<h3>Note Title</h3>';
             modalcontent.innerHTML += '<input id="title" class="input-fls" type="text" style="font-size:20px;height:50px;width:50%"' +
@@ -227,10 +189,7 @@ function editModalNote(note) {
                 'onclick="editNote(' + note.id + ')">Edit</button>';
 
             openModal();
-
         }).catch(() => toastr.error("Error occured"));
-
-
 }
 
 function modifiedTrue() {
@@ -238,13 +197,11 @@ function modifiedTrue() {
 }
 
 function editNote(element) {
-
     let noteTitle = document.getElementById("title").value;
     let noteContent = document.getElementById("content").value;
 
     axios.post(address + "/api/notes/edit/note", { note_id: element, title: noteTitle, content: noteContent })
         .then((response) => {
-
             if (response.status === 204) {
                 toastr.warning("A file with this name already exists");
             } else if (response.status === 200) {
@@ -252,12 +209,9 @@ function editNote(element) {
                 closeModal();
                 loadNotes();
             }
-
         }).catch(() => { toastr.warning("Error occured") });
 }
 
 function rawNote(element) {
-
     window.open(address + "/api/notes/get/raw/" + element.id);
-
 }

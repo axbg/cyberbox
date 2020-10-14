@@ -1,8 +1,17 @@
 # cyberbox
-The release of cyberbox - an all inclusive file-hosting application
+<img src="https://raw.githubusercontent.com/axbg/cyberbox/master/frontend/img/icons/144.png?token=AF6UYGJHLVGSYBXXPMGFWEC7SCPF2">
 
+#
+## The first version of cyberbox - a platform for students which features file hosting & sharing, note-taking and quick notifications
+
+The app was developed during my second year at university as part of BUES' Student Scientific Communication Sessions 2018 organized by The Faculty of Economic Cybernetics, Statistics and Informatics and won the third place
+
+### rebuit from scratch & improved @ [devclub1](https://github.com/devclub1)
+
+#
+### Deployment
 To setup and run the application
-   - clone repository
+   - clone the repository
    - cd to *backend*
    - run "npm install"
    - cd to *models*
@@ -19,6 +28,5 @@ To setup and run the application
 	});
 ```
 
-   - edit *frontend/js/structure.js* *address* variable with your back-end address
    - cd back to *back* (pun intended)
    - run *npm start*

@@ -7,7 +7,7 @@ module.exports.ForceAdmin = (req, res, next) => {
   if (req.body.password === 'parolaparola') {
     next();
   } else {
-    res.status(403).send({message: 'Forbidden'});
+    res.status(403).send({ message: 'Forbidden' });
   }
 };
 
@@ -21,7 +21,7 @@ module.exports.LogInCheck = (req, res, next) => {
     if (result) {
       next();
     } else {
-      res.status(403).send({message: 'Forbidden'});
+      res.status(403).send({ message: 'Forbidden' });
     }
   });
 };
@@ -40,7 +40,7 @@ module.exports.isFolder = (req, res, next) => {
           next();
         }
       } else {
-        res.status(400).send({message: 'Is not a folder'});
+        res.status(400).send({ message: 'Is not a folder' });
       }
     });
   } else {
@@ -56,7 +56,7 @@ module.exports.isFolder = (req, res, next) => {
           next();
         }
       } else {
-        res.status(400).send({message: 'Is not a folder'});
+        res.status(400).send({ message: 'Is not a folder' });
       }
     });
   }
@@ -72,7 +72,7 @@ module.exports.PermissionChecker = (req, res, next) => {
     if (access) {
       next();
     } else {
-      res.status(403).send({message: 'You don\'t have permissions to view this user\'s public folders'});
+      res.status(403).send({ message: 'You don\'t have permissions to view this user\'s public folders' });
     }
   });
 };
@@ -81,7 +81,6 @@ module.exports.isNoteFolder = (req, res, next) => {
   if (req.params.folder_id.toString() === '0') {
     next();
   }
-
 
   Notes.findOne({
     where: {
@@ -95,7 +94,7 @@ module.exports.isNoteFolder = (req, res, next) => {
         next();
       }
     } else {
-      res.status(400).send({message: 'Is not a folder'});
+      res.status(400).send({ message: 'Is not a folder' });
     }
   });
 };
