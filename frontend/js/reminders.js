@@ -1,66 +1,64 @@
 
 
-function loadUndoneReminders(){
-
-
+function loadUndoneReminders() {
     let container = document.getElementById('reminders-wrapper');
-    let content  = "";
+    let content = "";
 
     axios.get(address + "/api/reminders/getUndone")
         .then((response) => {
 
-            if(response.status === 200){
+            if (response.status === 200) {
                 content = '<ul>';
 
-                for(let i = response.data.length-1; i >= 0; i--){
+                for (let i = response.data.length - 1; i >= 0; i--) {
 
-                        content +=
-                            "<li class='li-wrapper'><a class='fa fa-list'></a>" +
-                            "<span>" + response.data[i].title +" - " + response.data[i].expiration + "</span>"+
-                            "<i class='icons'><i class='fa fa-check' id=" + response.data[i].id + " onclick='makeDone(this)'></i>" +
-                            "</i></li>";
+                    content +=
+                        "<li class='li-wrapper'><a class='fa fa-list'></a>" +
+                        "<span>" + response.data[i].title + " - " + response.data[i].expiration + "</span>" +
+                        "<i class='icons'><i class='fa fa-check' id=" + response.data[i].id + " onclick='makeDone(this)'></i>" +
+                        "</i></li>";
 
                 }
 
                 content += '</ul>';
 
                 container.innerHTML = content;
-            } else if(response.status === 201){
+            } else if (response.status === 201) {
 
-                content+= '<h1>You have 0 Undone Reminders</h1>';
+                content += '<h1>You have 0 Undone Reminders</h1>';
                 container.innerHTML = content;
 
             }
         })
 }
 
-function loadDoneReminders(){
+function loadDoneReminders() {
 
     let container = document.getElementById('reminders-wrapper');
-    let content  = "";
+    let content = "";
 
     axios.get(address + "/api/reminders/getDone")
         .then((response) => {
 
-            if(response.status === 200){
+            if (response.status === 200) {
                 content = '<ul>';
 
-                for(let i = 0; i < response.data.length; i++){
+                for (let i = 0; i < response.data.length; i++) {
 
-                        content +=
-                            "<li class='li-wrapper'><a class='fa fa-list'></a>" +
-                            "<span>" + response.data[i].title +" - " + response.data[i].expiration + "</span>"+
-                            "<i class='icons'><i class='fa fa-times' id=" + response.data[i].id + " onclick='makeUndone(this)'></i>" +
-                            "</i></li>";
+                    content +=
+                        "<li class='li-wrapper'><a class='fa fa-list'></a>" +
+                        "<span>" + response.data[i].title + " - " + response.data[i].expiration + "</span>" +
+                        "<i class='icons'><i class='fa fa-times' id=" + response.data[i].id + " onclick='makeUndone(this)'></i>" +
+                        "</i></li>";
 
                 }
 
                 content += '</ul>';
 
                 container.innerHTML = content;
-            } else if(response.status === 201){
+            } else if (response.status === 201) {
 
-                content+= '<h1>You have 0 reminders</h1>';
+                content += '<h1>You have 0 reminders</h1>';
                 container.innerHTML = content;
 
             }
@@ -68,7 +66,7 @@ function loadDoneReminders(){
 
 }
 
-function addModalReminder(){
+function addModalReminder() {
 
     let modalcontent = document.getElementById('modal-content');
     modalcontent.innerHTML = "";
@@ -83,40 +81,40 @@ function addModalReminder(){
     openModal();
 }
 
-function createReminder(){
+function createReminder() {
 
     let reminder = document.getElementById('reminder').value;
     let date = document.getElementById('date').value;
 
-    axios.post(address + "/api/reminders/create", {title: reminder, expiration: date})
+    axios.post(address + "/api/reminders/create", { title: reminder, expiration: date })
         .then((response) => {
-            if(response.status === 201){
+            if (response.status === 201) {
                 toastr.success("Reminder created");
                 closeModal();
                 loadUndoneReminders();
             }
-        }).catch(() => {toastr.error("Error occurred")});
+        }).catch(() => { toastr.error("Error occurred") });
 }
 
 function makeDone(element) {
 
-    axios.post(address + "/api/reminders/makeDone", {reminder_id: element.id})
+    axios.post(address + "/api/reminders/makeDone", { reminder_id: element.id })
         .then((response) => {
-            if(response.status === 200){
+            if (response.status === 200) {
                 toastr.success("Reminder set as done");
                 loadUndoneReminders();
             }
-        }).catch(() => {toastr.error("Error occurred")});
+        }).catch(() => { toastr.error("Error occurred") });
 }
 
 function makeUndone(element) {
 
-    axios.post(address + "/api/reminders/makeUndone", {reminder_id: element.id})
+    axios.post(address + "/api/reminders/makeUndone", { reminder_id: element.id })
         .then((response) => {
-            if(response.status === 200){
+            if (response.status === 200) {
                 toastr.success("Reminder set as undone");
                 loadDoneReminders();
             }
-        }).catch(() => {toastr.error("Error occurred")});
+        }).catch(() => { toastr.error("Error occurred") });
 }
 
