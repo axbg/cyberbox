@@ -32,7 +32,6 @@ module.exports.createPermissions = (req, res) => {
             created: Date.now(),
           }).catch(() => res.status(500).send({message: 'Server Error!'}));
           res.status(201).send({message: 'Permission granted'});
-          // also we can send an email here to the person who received the permission
         }
       });
     } else {

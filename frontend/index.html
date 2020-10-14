@@ -10,10 +10,10 @@
 	<meta name="theme-color" content="#021130">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="google-signin-client_id" content="google_public_client_id">
-	<title>cyberbox - Login</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/animate.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet" />
+	<title>cyberbox - Login</title>
 
 </head>
 
@@ -39,7 +39,6 @@
 	<script type="text/javascript">
 
 		function onSignIn(googleUser) {
-
 			let details = googleUser.getBasicProfile();
 			let token = googleUser.getAuthResponse().id_token;
 
@@ -47,16 +46,12 @@
 
 			axios.post(address + "/auth/glogin", { name: details.ig, token: token })
 				.then((response) => {
-
 					if (response.status === 200) {
-
 						localStorage.setItem("logged", 1);
 						window.location.replace('dashboard.html');
-
 					} else if (response.status === 205) {
 						toastr.success("Your account was registered! You can login now.");
 					}
-
 				}).catch(() => { toastr.info("Your email is not allowed") });
 		}
 	</script>
