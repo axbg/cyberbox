@@ -1,7 +1,7 @@
 const address = "";
 
 navigator.serviceWorker &&
-  navigator.serviceWorker.register("/sw.js").then(function (registration) {});
+  navigator.serviceWorker.register("/sw.js").then(function (registration) { });
 
 function openNav() {
   document.getElementById("mySidenav").style.height = "100%";
@@ -85,7 +85,6 @@ function welcome() {
     })
     .catch((error) => {
       localStorage.setItem("logged", 0);
-      console.log("Your cookies expired. Please log in again.");
       window.location.replace("index.html");
     });
 }

@@ -1,7 +1,7 @@
-body{
+body {
 	margin: 0px 0;
 	padding: 0px;
-  	margin-top: 200px;
+	margin-top: 200px;
 	font-family: sans-serif;
 	color: white;
 	text-align: center;
@@ -9,49 +9,46 @@ body{
 	line-height: 30px;
 }
 
-.logo{
+.logo {
 	margin-top: 200px;
 	margin-bottom: 70px;
 }
 
-.title{
+.title {
 	margin-top: -40px;
-	animation-delay:0.4s;
+	animation-delay: 0.4s;
 	transition: .5s ease;
 }
 
-
-.container-login{
+.container-login {
 	background-color: rgba(0, 23, 49, 1);
-	padding-bottom:25px;
+	padding-bottom: 25px;
 }
 
-
-.login-button{
+.login-button {
 	margin-top: -50px;
 	animation-delay: 0.7s;
 }
 
-.container{
+.container {
 	transition: .5s ease;
 	background-color: white;
 }
 
-.g-signin2{
+.g-signin2 {
 	width: 100%;
-
 }
 
-.g-signin2 > div{
+.g-signin2>div {
 	margin: 0 auto;
 }
 
-@media only screen and (max-width: 700px){
-	.container-wrapper{
-		margin-top:-70px;
+@media only screen and (max-width: 700px) {
+	.container-wrapper {
+		margin-top: -70px;
 	}
-	img{
-		height:150px;
-		width:150px;
+	img {
+		height: 150px;
+		width: 150px;
 	}
 }
