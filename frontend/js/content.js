@@ -1,5 +1,5 @@
 
-function logout(){
+function logout() {
 
     axios.post(address + "/auth/logout")
         .then((result) => {
@@ -11,22 +11,22 @@ function logout(){
 function loadFiles() {
 
     axios.get(address + "/api/files/get")
-        .then((response)=>{
+        .then((response) => {
 
-            if(response.status === 200) {
+            if (response.status === 200) {
 
                 let files = document.getElementById("files-wrapper");
                 let content = "";
 
                 content += "<ul>";
 
-                for(let i = 0; i < response.data.length; i++){
+                for (let i = 0; i < response.data.length; i++) {
 
-                    if(response.data[i].isFolder){
+                    if (response.data[i].isFolder) {
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-folder-open'></a>" +
                             "<span id=" + response.data[i].id +
-                            " onclick='loadFolder(this)'>" + response.data[i].name + "</span>"+
+                            " onclick='loadFolder(this)'>" + response.data[i].name + "</span>" +
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
                             "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
@@ -36,7 +36,7 @@ function loadFiles() {
                     else {
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-file'></a>" +
-                            "<span>" + response.data[i].name + "</span>"+
+                            "<span>" + response.data[i].name + "</span>" +
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
                             "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
@@ -48,7 +48,7 @@ function loadFiles() {
                 content += "</ul>";
                 files.innerHTML = content;
 
-            } else if(response.status === 204) {
+            } else if (response.status === 204) {
 
                 let files = document.getElementById("files-wrapper");
                 files.innerHTML = "";
@@ -66,20 +66,20 @@ function loadFolder(folder) {
     axios.get(address + "/api/files/get/" + folder.id)
         .then((response) => {
 
-            if(response.status === 200) {
+            if (response.status === 200) {
 
                 let files = document.getElementById("files-wrapper");
                 let content = "";
 
                 content += "<ul>";
 
-                for(let i = 0; i < response.data.length; i++){
+                for (let i = 0; i < response.data.length; i++) {
 
-                    if(response.data[i].isFolder){
+                    if (response.data[i].isFolder) {
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-folder-open'></a>" +
                             "<span id=" + response.data[i].id +
-                            " onclick='loadFolder(this)'>" + response.data[i].name + "</span>"+
+                            " onclick='loadFolder(this)'>" + response.data[i].name + "</span>" +
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
                             "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
@@ -89,7 +89,7 @@ function loadFolder(folder) {
                     else {
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-file'></a>" +
-                            "<span>" + response.data[i].name + "</span>"+
+                            "<span>" + response.data[i].name + "</span>" +
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
                             "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
@@ -101,7 +101,7 @@ function loadFolder(folder) {
                 content += "</ul>";
                 files.innerHTML = content;
 
-            } else if(response.status === 204) {
+            } else if (response.status === 204) {
 
                 let files = document.getElementById("files-wrapper");
                 files.innerHTML = "";
@@ -117,20 +117,20 @@ function backFolder() {
 
     axios.get(address + "/api/files/back")
         .then((response) => {
-            if(response.status === 200) {
+            if (response.status === 200) {
 
                 let files = document.getElementById("files-wrapper");
                 let content = "";
 
                 content += "<ul>";
 
-                for(let i = 0; i < response.data.length; i++){
+                for (let i = 0; i < response.data.length; i++) {
 
-                    if(response.data[i].isFolder){
+                    if (response.data[i].isFolder) {
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-folder-open'></a>" +
                             "<span id=" + response.data[i].id +
-                            " onclick='loadFolder(this)'>" + response.data[i].name + "</span>"+
+                            " onclick='loadFolder(this)'>" + response.data[i].name + "</span>" +
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
                             "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
@@ -140,7 +140,7 @@ function backFolder() {
                     else {
                         content +=
                             "<li class='li-wrapper'><a class='fa fa-file'></a>" +
-                            "<span>" + response.data[i].name + "</span>"+
+                            "<span>" + response.data[i].name + "</span>" +
                             "<i class='icons'><i class='fa fa-trash' id=" + response.data[i].id + " onclick='deleteFile(this)'></i>" +
                             "<i class='fa fa-download' id=" + response.data[i].id + " onclick='downloadFile(this)'></i>" +
                             "<i class='fa fa-pencil-square' fileId='" + response.data[i].id + "' onclick='renameModal(this)' current='" +
@@ -152,22 +152,22 @@ function backFolder() {
                 content += "</ul>";
                 files.innerHTML = content;
 
-            } else if(response.status === 204) {
+            } else if (response.status === 204) {
 
                 let files = document.getElementById("files-wrapper");
                 files.innerHTML = "";
                 files.innerHTML = "<h1>No files here</h1>";
 
-            } else if(response.status === 203) {
-                    toastr.warning("This is your root folder");
+            } else if (response.status === 203) {
+                toastr.warning("This is your root folder");
             }
-                else {
-                    toastr.error("You are not allowed");
-                }
+            else {
+                toastr.error("You are not allowed");
+            }
         })
 }
 
-function addModalFolder(){
+function addModalFolder() {
 
     let modalcontent = document.getElementById('modal-content');
     modalcontent.innerHTML = "";
@@ -184,24 +184,24 @@ function addFolder() {
 
     let folder_name = document.getElementById("folder_name").value;
 
-    if(folder_name.length !=0 ){
+    if (folder_name.length != 0) {
 
-    axios.post(address + "/api/files/create", {name:folder_name})
-        .then((result) => {
+        axios.post(address + "/api/files/create", { name: folder_name })
+            .then((result) => {
 
-            if(result.status === 201){
+                if (result.status === 201) {
 
-                toastr.success("Folder was created!");
-                loadFiles();
+                    toastr.success("Folder was created!");
+                    loadFiles();
 
-            } else if(result.status === 200){
+                } else if (result.status === 200) {
 
-                toastr.warning("Folder already exists!");
+                    toastr.warning("Folder already exists!");
 
-            } else {
-                toastr.error("Error");
-            }
-        }).catch(() => {toastr.error("error")});
+                } else {
+                    toastr.error("Error");
+                }
+            }).catch(() => { toastr.error("error") });
 
     } else {
         toastr.error("Empty names are not allowed");
@@ -210,27 +210,27 @@ function addFolder() {
     closeModal();
 }
 
-function deleteFile(element){
+function deleteFile(element) {
 
-    if(confirm("Do you really want to delete this file?")) {
+    if (confirm("Do you really want to delete this file?")) {
 
-        axios.post(address + "/api/files/delete", {file_id: element.id})
+        axios.post(address + "/api/files/delete", { file_id: element.id })
             .then((response) => {
                 toastr.success("File was deleted");
                 loadFiles();
             }).catch((error) => {
-            toastr.error("An error occured");
-            console.log(error)
-        });
+                toastr.error("An error occured");
+                console.log(error)
+            });
     }
 }
 
-function downloadFile(element){
+function downloadFile(element) {
 
     window.location = address + "/api/files/download/" + element.id;
 }
 
-function uploadModalFiles(){
+function uploadModalFiles() {
 
     let modalcontent = document.getElementById('modal-content');
     modalcontent.innerHTML = "";
@@ -246,18 +246,18 @@ function uploadModalFiles(){
     openModal();
 }
 
-function uploadFiles(){
+function uploadFiles() {
 
     let files = document.getElementById("files-input");
 
     let size = 0;
 
-    for(let i = 0; i < files.files.length; i++){
+    for (let i = 0; i < files.files.length; i++) {
         size = size + files.files[i].size;
     }
 
 
-    if(size !== 0 && size < 250000000) {
+    if (size !== 0 && size < 250000000) {
 
         let modalcontent = document.getElementById('modal-content');
         modalcontent.innerHTML = '<div class="container col loader"></div>';
@@ -275,32 +275,32 @@ function uploadFiles(){
                 const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
 
                 if (totalLength !== progressEvent.loaded) {
-                    percentageLoader.innerHTML = '<h3>' + (Math.round( (progressEvent.loaded * 100) / totalLength ))
-                                                        + '%</h3>';
+                    percentageLoader.innerHTML = '<h3>' + (Math.round((progressEvent.loaded * 100) / totalLength))
+                        + '%</h3>';
                 }
             }
         }).then((response) => {
 
-                if (response.status === 201) {
-                    toastr.success("Files Uploaded");
+            if (response.status === 201) {
+                toastr.success("Files Uploaded");
+                loadFiles();
+                closeModal();
+            } else if (response.status === 200) {
+                for (let i = 0; i < response.data.message.length; i++) {
+                    toastr.warning(response.data.message[i]);
                     loadFiles();
                     closeModal();
-                } else if (response.status === 200) {
-                    for (let i = 0; i < response.data.message.length; i++) {
-                        toastr.warning(response.data.message[i]);
-                        loadFiles();
-                        closeModal();
-                    }
-                } else if (response.status === 204) {
-                    toastr.error("File bigger than 150MB");
-                    closeModal();
                 }
-            }).catch(() => toastr.error("Error occured"));
-    } else if(size >= 250000000) {
+            } else if (response.status === 204) {
+                toastr.error("File bigger than 150MB");
+                closeModal();
+            }
+        }).catch(() => toastr.error("Error occured"));
+    } else if (size >= 250000000) {
 
         toastr.error("Upload limit is 250MB");
     }
-    else{
+    else {
 
         toastr.error("You cannot upload empty files");
     }
@@ -308,7 +308,7 @@ function uploadFiles(){
 }
 
 
-function renameModal(file){
+function renameModal(file) {
 
     let modalcontent = document.getElementById('modal-content');
     let currentTitle = file.getAttribute("current");
@@ -330,25 +330,25 @@ function renameFolder(element) {
 
     let file_name = document.getElementById("file_name").value;
 
-    if(file_name.length !==0){
+    if (file_name.length !== 0) {
 
-        axios.post(address + "/api/files/rename", {file_id: element.id, name:file_name})
+        axios.post(address + "/api/files/rename", { file_id: element.id, name: file_name })
             .then((result) => {
 
-                if(result.status === 200){
+                if (result.status === 200) {
 
                     toastr.success("File was renamed!");
                     loadFiles();
                     closeModal();
 
-                } else if(result.status === 203){
+                } else if (result.status === 203) {
 
                     toastr.warning("File already exists!");
 
                 } else {
                     toastr.error(result.status);
                 }
-            }).catch(() => {toastr.error("error")});
+            }).catch(() => { toastr.error("error") });
 
     } else {
         toastr.error("Empty names are not allowed");
@@ -361,27 +361,27 @@ function openModal() {
     document.getElementById('myModal').style.display = "block";
 }
 
-function closeModal(){
+function closeModal() {
     document.getElementById('myModal').style.display = "none";
     modified = 0;
 }
 
 
-    let modal = document.getElementById('myModal');
-    let modified = 0;
+let modal = document.getElementById('myModal');
+let modified = 0;
 
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            if(document.getElementById("content") && document.getElementById("content").value !== "" &&
-                !document.getElementById("content").readOnly && modified === 1) {
-                if (confirm("Do you really want to close?")) {
-                    modal.style.display = "none";
-                    modified = 0;
-                }
-            } else {
+window.onclick = function (event) {
+    if (event.target === modal) {
+        if (document.getElementById("content") && document.getElementById("content").value !== "" &&
+            !document.getElementById("content").readOnly && modified === 1) {
+            if (confirm("Do you really want to close?")) {
                 modal.style.display = "none";
+                modified = 0;
             }
+        } else {
+            modal.style.display = "none";
         }
-    };
+    }
+};
 
 
