@@ -1,5 +1,3 @@
-
-
 function loadSettings() {
     axios.get(address + "/api/settings/get")
         .then((response) => {

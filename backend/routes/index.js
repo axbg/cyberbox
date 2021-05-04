@@ -7,7 +7,7 @@ const Settings = require('./settings');
 const Notes = require('./notes');
 const Files = require('./files');
 
-router.get('/main', function(req, res, next) {
+router.get('/main', function (req, res, next) {
   res.status(200).send('gg');
 });
 

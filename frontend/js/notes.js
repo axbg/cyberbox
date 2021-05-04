@@ -1,5 +1,3 @@
-
-
 function loadNotes() {
     axios.get(address + "/api/notes/get/folder/root")
         .then((response) => {

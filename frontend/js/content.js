@@ -1,4 +1,3 @@
-
 function logout() {
     axios.post(address + "/auth/logout")
         .then((result) => {

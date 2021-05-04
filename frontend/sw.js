@@ -1,17 +1,13 @@
-
 self.addEventListener('fetch', event => {
-
-    if(event.request.url.includes("upload") || event.request.url.includes("download")) {
-
-    }
-    else  if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
+    if (event.request.url.includes("upload") || event.request.url.includes("download") || event.request.url.includes("welcome")) {
+        // passthrough
+    } else if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
         event.respondWith(
             fetch(event.request).catch(error => {
                 return caches.match("/offline.html");
             })
         );
-    }
-    else{
+    } else {
         event.respondWith(caches.match(event.request)
             .then(function (response) {
                 return response || fetch(event.request);
@@ -20,14 +16,11 @@ self.addEventListener('fetch', event => {
     }
 });
 
-self.addEventListener('install', function(e) {
+self.addEventListener('install', function (e) {
     e.waitUntil(
-        caches.open('cb-cache').then(function(cache) {
+        caches.open('cb-cache').then(function (cache) {
             return cache.addAll([
-                '/',
-                '/index.html',
                 '/offline.html',
-                '/dashboard.html',
                 '/sw.js',
                 '/img/background.jpg',
                 '/img/icon.ico',
@@ -38,13 +31,7 @@ self.addEventListener('install', function(e) {
                 '/css/modal.css',
                 '/css/structure.css',
                 '/css/style.css',
-                '/css/sidenav.css',
-                '/js/content.js',
-                '/js/notes.js',
-                '/js/permissions.js',
-                '/js/reminders.js',
-                '/js/settings.js',
-                '/js/structure.js',
+                '/css/sidenav.css'
             ]);
         })
     );

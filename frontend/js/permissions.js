@@ -1,4 +1,3 @@
-
 function showGranted() {
     document.getElementById("granted").style.display = "block";
     document.getElementById("received").style.display = "none";
