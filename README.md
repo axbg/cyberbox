@@ -28,6 +28,6 @@ To setup and run the application
 	});
 ```
 
-   - replace the `#GOOGLE_PUBLIC_CLIENT_ID#` placeholder in `front/index.html` with the intended value ([more details here](https://developers.google.com/identity/sign-in/web/sign-in))
+   - replace the `#GOOGLE_PUBLIC_CLIENT_ID#` placeholder in `frontend/index.html` with the intended value ([more details here](https://developers.google.com/identity/sign-in/web/sign-in))
    - cd back to *back* (pun intended)
    - run *npm start*
