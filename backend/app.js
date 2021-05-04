@@ -32,16 +32,14 @@ app.use(
   session({
     cookieName: 'session',
     secret: 'AUTH_SECRET',
-    duration: 432000000, // 5 days cookie example
-    activeDuration: 172800000, // 2 days renewal example
-    httpOnly: true,
+    duration: 432000000, // 5 days
+    activeDuration: 172800000, // 2 days
     ephemeral: false,
     secure: false,
   }),
 );
 
 app.post('/auth/glogin', auth.gLogin);
-
 app.post('/auth/logout', middlewares.LogInCheck, auth.Logout);
 
 app.use('/api', middlewares.LogInCheck, index);

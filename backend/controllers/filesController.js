@@ -1,7 +1,7 @@
-const path = require('path');
 const fs = require('fs');
-const makedir = require('make-dir');
+const path = require('path');
 const rmdir = require('rmdir');
+const makedir = require('make-dir');
 const archiver = require('archiver');
 
 const Files = require('../models').Files;
@@ -140,7 +140,7 @@ module.exports.changeAccess = (req, res) => {
 
               const foldersFound = await promise;
 
-              for (const j = 0; j < foldersFound.length; j++) {
+              for (j = 0; j < foldersFound.length; j++) {
                 i++;
                 parents.push(foldersFound[j]['id']);
                 folders.push(foldersFound[j]['id']);
@@ -150,13 +150,13 @@ module.exports.changeAccess = (req, res) => {
 
               parents = parents.filter(((item) => item !== currentId));
 
-              for (const x = 0; x < parents.length - 1; x++) {
+              for (x = 0; x < parents.length - 1; x++) {
                 parents[x] = parents[x + 1];
               }
             }
 
             if (result.isPublic) {
-              for (const j = folders.length - 1; j >= 0; j--) {
+              for (j = folders.length - 1; j >= 0; j--) {
                 Files.update({
                   isPublic: 0,
                 },
@@ -180,7 +180,7 @@ module.exports.changeAccess = (req, res) => {
 
               res.status(201).send({ message: 'Folder is now private' });
             } else {
-              for (const j = folders.length - 1; j >= 0; j--) {
+              for (j = folders.length - 1; j >= 0; j--) {
                 Files.update({
                   isPublic: 1,
                 },
@@ -262,7 +262,7 @@ module.exports.uploadFiles = (req, res) => {
       const errText = [];
       let size = 0;
 
-      for (const i = 0; i < req.files.length; i++) {
+      for (i = 0; i < req.files.length; i++) {
         const currentFile = req.files[i];
 
         size += req.files[i].size;
@@ -288,8 +288,8 @@ module.exports.uploadFiles = (req, res) => {
             id: req.session.folder,
           },
         }).then((result) => {
-          for (const i = 0; i < req.files.length; i++) {
-            const currentFile = req.files[i];
+          for (i = 0; i < req.files.length; i++) {
+            let currentFile = req.files[i];
             const location = path.join(parent.path, currentFile.originalname);
 
             try {
@@ -302,7 +302,7 @@ module.exports.uploadFiles = (req, res) => {
                 },
               }).then((number) => {
                 if (!number) {
-                  const file = fs.createWriteStream(location);
+                  file = fs.createWriteStream(location);
                   file.write(currentFile.buffer);
                   file.end();
 
@@ -408,11 +408,12 @@ module.exports.deleteFiles = (req, res) => {
     },
   }).then((result) => {
     if (result && result.idParent !== 0 && req.body.file_id !== req.session.folder) {
-      const err = 0;
+      let err = 0;
 
       if (result.isFolder) {
         async function f() {
-          const i = 1;
+          let i = 1;
+
           const path = result.path;
           const parents = [req.body.file_id];
           const folders = [req.body.file_id];
@@ -431,7 +432,7 @@ module.exports.deleteFiles = (req, res) => {
 
             const foldersFound = await promise;
 
-            for (const j = 0; j < foldersFound.length; j++) {
+            for (j = 0; j < foldersFound.length; j++) {
               i++;
               parents.push(foldersFound[j]['id']);
               folders.push(foldersFound[j]['id']);
@@ -441,12 +442,12 @@ module.exports.deleteFiles = (req, res) => {
 
             parents = parents.filter(((item) => item !== currentId));
 
-            for (const x = 0; x < parents.length - 1; x++) {
+            for (x = 0; x < parents.length - 1; x++) {
               parents[x] = parents[x + 1];
             }
           }
 
-          for (const j = folders.length - 1; j >= 0; j--) {
+          for (j = folders.length - 1; j >= 0; j--) {
             Files.destroy({
               where: {
                 idParent: folders[j],
@@ -745,7 +746,7 @@ module.exports.renameFile = (req, res) => {
                 },
                 raw: true,
               }).then((children) => {
-                for (const i = 0; i < children.length; i++) {
+                for (i = 0; i < children.length; i++) {
                   const newChildPath = children[i].path.replace(oldPath, newPath);
 
                   Files.update({

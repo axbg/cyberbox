@@ -69,6 +69,7 @@
     .sidenav a {
         font-size: 35px;
     }
+
     #logo {
         width: 100px;
         height: 100px
@@ -90,20 +91,24 @@
         margin-top: -10px !important;
         padding-bottom: 50px !important;
     }
+
     .menu-button {
         display: none;
     }
+
     .phone-menu {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
     }
+
     .faphone {
         font-size: 30px !important;
         padding: 5px 5px 5px 10px !important;
         color: white !important;
     }
+
     #logo {
         margin-left: 0px;
         height: 60px;
@@ -122,15 +127,18 @@
         margin-top: -10px !important;
         padding-bottom: 50px !important;
     }
+
     .menu-button {
         display: none;
     }
+
     .phone-menu {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
     }
+
     .faphone {
         font-size: 35px !important;
         padding-right: 8px !important;
@@ -138,6 +146,7 @@
         color: white !important;
         opacity: 1 !important;
     }
+
     #logo {
         margin-left: 0px;
         height: 60px;
@@ -156,15 +165,18 @@
         margin-top: -10px !important;
         padding-bottom: 50px !important;
     }
+
     .menu-button {
         display: none;
     }
+
     .phone-menu {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
     }
+
     .fa {
         font-size: 40px;
         padding-right: 10px;
@@ -172,11 +184,13 @@
         color: white;
         opacity: 1;
     }
+
     .faphone {
         font-size: 35px !important;
         padding: 10px 10px 10px 21px !important;
         color: white !important;
     }
+
     #logo {
         margin-left: 0px;
         height: 60px;

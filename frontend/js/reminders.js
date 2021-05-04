@@ -1,5 +1,3 @@
-
-
 function loadUndoneReminders() {
     let container = document.getElementById('reminders-wrapper');
     let content = "";
