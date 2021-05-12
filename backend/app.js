@@ -13,6 +13,8 @@ const index = require('./routes/index');
 
 const app = express();
 
+require('./injector')();
+
 models.sequelize.sync();
 
 app.use(bodyParser.json());
