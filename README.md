@@ -14,20 +14,13 @@ To setup and run the application
    - clone the repository
    - cd to *backend*
    - run "npm install"
-   - cd to *models*
-   - open *db.js*
-   - replace placeholder values for database connection
-
-```js
-	const sequelize = new Sequelize('REPLACE_HERE_DATABASE_NAME', 'REPLACE_HERE_USER', 'REPLACE_HERE_PASSWORD', {
-  		dialect: 'mysql',
-  		host: 'localhost',
-  		define: {
-   		   timestamps: false
-  		}
-	});
+   - replace placeholder values in **/backend/.env** with your actual values
+```properties
+DB_HOST=localhost
+DB_NAME=cyberbox
+DB_USER=root
+DB_PASSWORD=root_password
+GOOGLE_CLIENT_ID=SOME_GOOGLE_CLIENT_ID
 ```
-
-   - replace the `#GOOGLE_PUBLIC_CLIENT_ID#` placeholder in `frontend/index.html` with the intended value ([more details here](https://developers.google.com/identity/sign-in/web/sign-in))
-   - cd back to *back* (pun intended)
+   - *if you don't know how to obtain a GOOGLE_CLIENT_ID, you can find more details here](https://developers.google.com/identity/sign-in/web/sign-in)*
    - run *npm start*
