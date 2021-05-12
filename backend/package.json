@@ -23,6 +23,7 @@
     "mysql2": "^1.5.2",
     "node-cron": "^1.2.1",
     "nodemailer": "^4.6.3",
+    "replace": "^1.2.1",
     "rmdir": "^1.2.0",
     "sequelize": "^4.44.4",
     "serve-favicon": "~2.4.5"
