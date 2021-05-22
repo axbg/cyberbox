@@ -1,6 +1,6 @@
 function logout() {
-    axios.post(address + "/auth/logout")
-        .then((result) => {
+    axios.post(address + "/api/auth/logout")
+        .then(() => {
             localStorage.setItem("logged", 0);
             window.location.replace('index.html');
         })

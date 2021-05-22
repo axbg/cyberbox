@@ -43,9 +43,7 @@ app.use(
   }),
 );
 
-app.post('/auth/glogin', auth.gLogin);
-app.post('/auth/logout', middlewares.LogInCheck, auth.Logout);
-
+app.post('/api/auth/glogin', auth.gLogin);
 app.use('/api', middlewares.LogInCheck, index);
 
 app.use(express.static(path.resolve(__dirname, '../.', 'frontend')));
