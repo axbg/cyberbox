@@ -9,7 +9,7 @@ const Files = require('./files');
 
 const auth = require('../controllers/auth');
 
-router.get('/main', function (req, res, next) {
+router.get('/main', function(req, res, next) {
   res.status(200).send('gg');
 });
 

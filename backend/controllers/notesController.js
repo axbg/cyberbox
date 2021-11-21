@@ -11,7 +11,7 @@ module.exports.createNote = (req, res) => {
     raw: true,
   }).then((result) => {
     if (result) {
-      res.status(204).send({ message: 'Note already exist' });
+      res.status(204).send({message: 'Note already exist'});
     } else {
       Notes.findOne({
         attributes: ['isPublic'],
@@ -27,8 +27,8 @@ module.exports.createNote = (req, res) => {
           user_id: req.session.id,
           idParent: req.session.note,
         }).then(() => {
-          res.status(201).send({ message: 'Note created' });
-        }).catch(() => res.status(500).send({ message: 'Server Error!' }));
+          res.status(201).send({message: 'Note created'});
+        }).catch(() => res.status(500).send({message: 'Server Error!'}));
       });
     }
   });
@@ -51,7 +51,7 @@ module.exports.createNoteFolder = (req, res) => {
         },
       }).then((tester) => {
         if (tester) {
-          res.status(400).send({ message: 'This folder already exists' });
+          res.status(400).send({message: 'This folder already exists'});
         } else {
           Notes.create({
             title: req.body.title,
@@ -60,12 +60,12 @@ module.exports.createNoteFolder = (req, res) => {
             user_id: req.session.id,
             idParent: req.session.note,
           }).then(() => {
-            res.status(201).send({ message: 'Folder created' });
-          }).catch(() => res.status(500).send({ message: 'Server Error!' }));
+            res.status(201).send({message: 'Folder created'});
+          }).catch(() => res.status(500).send({message: 'Server Error!'}));
         }
       });
     } else {
-      res.status(403).send({ message: 'Folders can be created only in the root folder' });
+      res.status(403).send({message: 'Folders can be created only in the root folder'});
     }
   });
 };
@@ -98,8 +98,8 @@ module.exports.deleteNote = (req, res) => {
             },
 
           }).then(() => {
-            res.status(200).send({ message: 'Folder was deleted' });
-          }).catch(() => res.status(500).send({ message: 'Folder was not deleted' }));
+            res.status(200).send({message: 'Folder was deleted'});
+          }).catch(() => res.status(500).send({message: 'Folder was not deleted'}));
         } else {
           Notes.destroy({
             where: {
@@ -108,13 +108,13 @@ module.exports.deleteNote = (req, res) => {
             },
 
           }).then(() => {
-            res.status(200).send({ message: 'Note was deleted' });
-          }).catch(() => res.status(500).send({ message: 'Note was not deleted' }));
+            res.status(200).send({message: 'Note was deleted'});
+          }).catch(() => res.status(500).send({message: 'Note was not deleted'}));
         }
       }
-    }).catch(() => res.status(400).send({ message: 'Server Error' }));
+    }).catch(() => res.status(400).send({message: 'Server Error'}));
   } else {
-    res.status(403).send({ message: 'You must close the folder before deleting it' });
+    res.status(403).send({message: 'You must close the folder before deleting it'});
   }
 };
 
@@ -133,9 +133,9 @@ module.exports.getNotes = (req, res) => {
     if (result.length) {
       res.status(200).send(result);
     } else {
-      res.status(200).send({ message: 'Nothing to show' });
+      res.status(200).send({message: 'Nothing to show'});
     }
-  }).catch(() => res.status(500).send({ message: 'Database Error' }));
+  }).catch(() => res.status(500).send({message: 'Database Error'}));
 };
 
 module.exports.getNote = (req, res) => {
@@ -151,7 +151,7 @@ module.exports.getNote = (req, res) => {
     if (result) {
       res.status(200).send(result);
     } else {
-      res.status(404).send({ message: 'Note not found' });
+      res.status(404).send({message: 'Note not found'});
     }
   });
 };
@@ -180,10 +180,10 @@ module.exports.getRoot = (req, res) => {
       if (obtain.length) {
         res.status(200).send(obtain);
       } else {
-        res.status(204).send({ message: 'Nothing here' });
+        res.status(204).send({message: 'Nothing here'});
       }
     });
-  }).catch(() => res.status(500).send({ message: 'db Error' }));
+  }).catch(() => res.status(500).send({message: 'db Error'}));
 };
 
 module.exports.getFolder = (req, res) => {
@@ -202,9 +202,9 @@ module.exports.getFolder = (req, res) => {
     if (result.length) {
       res.status(200).send(result);
     } else {
-      res.status(204).send({ message: 'This folder is empty' });
+      res.status(204).send({message: 'This folder is empty'});
     }
-  }).catch(() => res.status(500).send({ message: 'Server Error' }));
+  }).catch(() => res.status(500).send({message: 'Server Error'}));
 };
 
 module.exports.getCurrent = (req, res) => {
@@ -223,9 +223,9 @@ module.exports.getCurrent = (req, res) => {
     if (result.length) {
       res.status(200).send(result);
     } else {
-      res.status(204).send({ message: 'This folder is empty' });
+      res.status(204).send({message: 'This folder is empty'});
     }
-  }).catch(() => res.status(500).send({ message: 'Server Error' }));
+  }).catch(() => res.status(500).send({message: 'Server Error'}));
 };
 
 module.exports.editNotes = (req, res) => {
@@ -245,37 +245,37 @@ module.exports.editNotes = (req, res) => {
           raw: true,
         }).then((existing) => {
           if (existing && (existing.title != req.body.title)) {
-            res.status(204).send({ message: 'A note with this title exists here' });
+            res.status(204).send({message: 'A note with this title exists here'});
           } else {
             Notes.update({
               title: req.body.title,
               content: req.body.content,
             },
-              {
-                where: {
-                  id: req.body.note_id,
-                  user_id: req.session.id,
-                },
+            {
+              where: {
+                id: req.body.note_id,
+                user_id: req.session.id,
               },
-            ).then(() => res.status(200).send({ message: 'Note updated' }));
+            },
+            ).then(() => res.status(200).send({message: 'Note updated'}));
           }
         });
       } else {
         Notes.update({
           content: req.body.content,
         },
-          {
-            where: {
-              id: req.body.note_id,
-              user_id: req.session.id,
-            },
+        {
+          where: {
+            id: req.body.note_id,
+            user_id: req.session.id,
+          },
 
-          }).then(() => res.status(200).send({ message: 'Note updated' }));
+        }).then(() => res.status(200).send({message: 'Note updated'}));
       }
     } else {
-      res.status(404).send({ message: 'Note not found' });
+      res.status(404).send({message: 'Note not found'});
     }
-  }).catch(() => res.status(500).send({ message: 'Server error' }));
+  }).catch(() => res.status(500).send({message: 'Server error'}));
 };
 
 module.exports.changeAccess = (req, res) => {
@@ -308,7 +308,7 @@ module.exports.changeAccess = (req, res) => {
             id: req.params.note_id,
           },
         }).then(() => {
-          res.status(201).send({ message: 'Folder is now private' });
+          res.status(201).send({message: 'Folder is now private'});
         });
       } else {
         Notes.update({
@@ -328,7 +328,7 @@ module.exports.changeAccess = (req, res) => {
             id: req.params.note_id,
           },
         }).then(() => {
-          res.status(200).send({ message: 'Folder is now public' });
+          res.status(200).send({message: 'Folder is now public'});
         });
       }
     } else {
@@ -371,15 +371,15 @@ module.exports.getFriendRoot = (req, res) => {
             if (folders.length) {
               res.status(200).send(folders);
             } else {
-              res.status(201).send({ message: 'This user has no public folders' });
+              res.status(201).send({message: 'This user has no public folders'});
             }
           });
         } else {
-          res.status(400).send({ message: 'You don\'t have access' });
+          res.status(400).send({message: 'You don\'t have access'});
         }
       });
     }
-  }).catch(() => res.status(400).send({ message: 'No permission' }));
+  }).catch(() => res.status(400).send({message: 'No permission'}));
 };
 
 module.exports.getNotesFolder = (req, res) => {
@@ -406,11 +406,11 @@ module.exports.getNotesFolder = (req, res) => {
         if (notes.length) {
           res.status(200).send(notes);
         } else {
-          res.status(201).send({ message: 'This folder is empty' });
+          res.status(201).send({message: 'This folder is empty'});
         }
       });
     } else {
-      res.status(403).send({ message: 'You don\'t have access' });
+      res.status(403).send({message: 'You don\'t have access'});
     }
   });
 };
@@ -436,13 +436,13 @@ module.exports.getActualNotes = (req, res) => {
         if (result) {
           res.status(200).send(result);
         } else {
-          res.status(200).send({ message: 'Nothing to show' });
+          res.status(200).send({message: 'Nothing to show'});
         }
-      }).catch(() => res.status(500).send({ message: 'Database Error' }));
+      }).catch(() => res.status(500).send({message: 'Database Error'}));
     } else {
-      res.status(403).send({ message: 'Access not allowed' });
+      res.status(403).send({message: 'Access not allowed'});
     }
-  }).catch(() => res.status(500).send({ message: 'Error at searching permissions' }));
+  }).catch(() => res.status(500).send({message: 'Error at searching permissions'}));
 };
 
 module.exports.rawNote = (req, res) => {

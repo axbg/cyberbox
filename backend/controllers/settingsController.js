@@ -8,22 +8,22 @@ module.exports.updateSettingsPush = (req, res) => {
   }).then((result) => {
     if (result.push) {
       Settings.update(
-        { push: 0 },
-        {
-          where: {
-            user_id: req.session.id,
-          },
-        }).then(() => res.status(200).send({ message: 'Push notification: off' }));
+          {push: 0},
+          {
+            where: {
+              user_id: req.session.id,
+            },
+          }).then(() => res.status(200).send({message: 'Push notification: off'}));
     } else {
       Settings.update(
-        { push: 1 },
-        {
-          where: {
-            user_id: req.session.id,
-          },
-        }).then(() => res.status(200).send({ message: 'Push notification: on' }));
+          {push: 1},
+          {
+            where: {
+              user_id: req.session.id,
+            },
+          }).then(() => res.status(200).send({message: 'Push notification: on'}));
     }
-  }).catch(() => res.status(404).send({ message: 'Not found' }));
+  }).catch(() => res.status(404).send({message: 'Not found'}));
 };
 
 module.exports.updateSettingsMail = (req, res) => {
@@ -34,22 +34,22 @@ module.exports.updateSettingsMail = (req, res) => {
   }).then((result) => {
     if (result.mail) {
       Settings.update(
-        { mail: 0 },
-        {
-          where: {
-            user_id: req.session.id,
-          },
-        }).then(() => res.status(200).send({ message: 'Mail notification: off' }));
+          {mail: 0},
+          {
+            where: {
+              user_id: req.session.id,
+            },
+          }).then(() => res.status(200).send({message: 'Mail notification: off'}));
     } else {
       Settings.update(
-        { mail: 1 },
-        {
-          where: {
-            user_id: req.session.id,
-          },
-        }).then(() => res.status(200).send({ message: 'Mail notification: on' }));
+          {mail: 1},
+          {
+            where: {
+              user_id: req.session.id,
+            },
+          }).then(() => res.status(200).send({message: 'Mail notification: on'}));
     }
-  }).catch(() => res.status(400).send({ message: 'Not found' }));
+  }).catch(() => res.status(400).send({message: 'Not found'}));
 };
 
 module.exports.getSettings = (req, res) => {
@@ -61,5 +61,5 @@ module.exports.getSettings = (req, res) => {
     raw: true,
   }).then((result) => {
     res.status(200).send(result);
-  }).catch(() => res.status(500).send({ message: 'Database Error' }));
+  }).catch(() => res.status(500).send({message: 'Database Error'}));
 };

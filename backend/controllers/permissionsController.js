@@ -23,21 +23,21 @@ module.exports.createPermissions = (req, res) => {
               owner_id: req.session.id,
               friend_id: email.id,
             },
-          }).then(() => res.status(200).send({ message: 'Permission removed' }),
-          ).catch(() => res.status(404).send({ message: 'Not found' }));
+          }).then(() => res.status(200).send({message: 'Permission removed'}),
+          ).catch(() => res.status(404).send({message: 'Not found'}));
         } else {
           Permissions.create({
             owner_id: req.session.id,
             friend_id: email.id,
             created: Date.now(),
-          }).catch(() => res.status(500).send({ message: 'Server Error!' }));
-          res.status(201).send({ message: 'Permission granted' });
+          }).catch(() => res.status(500).send({message: 'Server Error!'}));
+          res.status(201).send({message: 'Permission granted'});
         }
       });
     } else {
-      res.status(204).send({ message: 'You cannot grant permissions to yourself!' });
+      res.status(204).send({message: 'You cannot grant permissions to yourself!'});
     }
-  }).catch(() => res.status(203).send({ message: 'No user has this email' }));
+  }).catch(() => res.status(203).send({message: 'No user has this email'}));
 };
 
 module.exports.getPermissionsGranted = (req, res) => {
@@ -60,13 +60,13 @@ module.exports.getPermissionsGranted = (req, res) => {
         if (permissions.length) {
           res.status(200).send(permissions);
         } else {
-          res.status(201).send({ message: 'No user found' });
+          res.status(201).send({message: 'No user found'});
         }
       });
     } else {
-      res.status(200).send({ message: 'No user found' });
+      res.status(200).send({message: 'No user found'});
     }
-  }).catch(() => res.status(500).send({ message: 'Server Error' }));
+  }).catch(() => res.status(500).send({message: 'Server Error'}));
 };
 
 module.exports.getPermissionsReceived = (req, res) => {
@@ -92,13 +92,13 @@ module.exports.getPermissionsReceived = (req, res) => {
         if (permissions.length) {
           res.status(200).send(permissions);
         } else {
-          res.status(200).send({ message: 'No user found' });
+          res.status(200).send({message: 'No user found'});
         }
       });
     } else {
-      res.status(200).send({ message: 'No user found' });
+      res.status(200).send({message: 'No user found'});
     }
-  }).catch(() => res.status(500).send({ message: 'Server Error' }));
+  }).catch(() => res.status(500).send({message: 'Server Error'}));
 };
 
 module.exports.searchEmail = (req, res) => {
@@ -115,7 +115,7 @@ module.exports.searchEmail = (req, res) => {
     if (result.length) {
       res.status(200).send(result);
     } else {
-      res.status(203).send({ message: 'nothing found' });
+      res.status(203).send({message: 'nothing found'});
     }
   });
 };

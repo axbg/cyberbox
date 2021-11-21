@@ -43,7 +43,7 @@ module.exports.Welcome = (req, res) => {
         }).then((reminders) => {
           info['reminders'] = reminders;
 
-          res.status(200).send({ name: info['name'], files: info['files'], notes: info['notes'], reminders: info['reminders'] });
+          res.status(200).send({name: info['name'], files: info['files'], notes: info['notes'], reminders: info['reminders']});
         });
       });
     });
@@ -99,11 +99,11 @@ module.exports.deleteUser = (req, res) => {
             user_id: result.id,
           },
         });
-      }).catch(() => res.status(500).send({ message: 'User cannot be deleted' }));
+      }).catch(() => res.status(500).send({message: 'User cannot be deleted'}));
 
-      res.status(200).send({ message: 'User was deleted' });
+      res.status(200).send({message: 'User was deleted'});
     } else {
-      res.status(404).send({ message: 'User was not found' });
+      res.status(404).send({message: 'User was not found'});
     }
   });
 };
@@ -114,7 +114,7 @@ module.exports.getUsers = (req, res) => {
     raw: true,
   }).then((result) => {
     res.status(200).send(result);
-  }).catch(() => res.status(500).send({ message: 'Database Error' }));
+  }).catch(() => res.status(500).send({message: 'Database Error'}));
 };
 
 module.exports.getOneUser = (req, res) => {
@@ -128,12 +128,12 @@ module.exports.getOneUser = (req, res) => {
     if (result) {
       res.status(200).send(result);
     } else {
-      res.status(404).send({ message: 'User not found!' });
+      res.status(404).send({message: 'User not found!'});
     }
   });
 };
 
-cron.schedule('0 0 6 * * *', function () {
+cron.schedule('0 0 6 * * *', function() {
   Reminders.findAll({
     where: {
       isDone: 0,
@@ -174,7 +174,7 @@ cron.schedule('0 0 6 * * *', function () {
                 text: result[i].title,
               };
 
-              transporter.sendMail(mailOptions, function (error, info) { });
+              transporter.sendMail(mailOptions, function(error, info) { });
             }
           });
         });

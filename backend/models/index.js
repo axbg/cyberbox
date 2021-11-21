@@ -8,15 +8,15 @@ const Permissions = require('./permissions')(sequelize, Sequelize);
 const Reminders = require('./reminders')(sequelize, Sequelize);
 const Notes = require('./notes')(sequelize, Sequelize);
 
-Users.hasMany(Files, { onDelete: 'cascade' });
+Users.hasMany(Files, {onDelete: 'cascade'});
 
-Settings.belongsTo(Users, { onDelete: 'cascade' });
+Settings.belongsTo(Users, {onDelete: 'cascade'});
 
-Permissions.belongsTo(Users, { onDelete: 'cascade', as: 'owner' });
-Permissions.belongsTo(Users, { onDelete: 'cascade', as: 'friend' });
+Permissions.belongsTo(Users, {onDelete: 'cascade', as: 'owner'});
+Permissions.belongsTo(Users, {onDelete: 'cascade', as: 'friend'});
 
-Users.hasMany(Reminders, { onDelete: 'cascade' });
-Users.hasMany(Notes, { onDelete: 'cascade' });
+Users.hasMany(Reminders, {onDelete: 'cascade'});
+Users.hasMany(Notes, {onDelete: 'cascade'});
 
 module.exports = {
   sequelize,

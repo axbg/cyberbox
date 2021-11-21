@@ -16,7 +16,7 @@ module.exports.createFolder = (req, res) => {
     },
   }).then((result) => {
     if (result) {
-      res.status(200).send({ message: 'Folder already exists' });
+      res.status(200).send({message: 'Folder already exists'});
     } else {
       Files.findOne({
         where: {
@@ -42,11 +42,11 @@ module.exports.createFolder = (req, res) => {
             isPublic: privacy,
             isFolder: 1,
             path: location,
-          }).then(() => res.status(201).send({ message: 'Folder created' }));
+          }).then(() => res.status(201).send({message: 'Folder created'}));
         }
-      }).catch(() => res.status(500).send({ message: 'Error' }));
+      }).catch(() => res.status(500).send({message: 'Error'}));
     }
-  }).catch(() => res.status(500).send({ meesage: 'Error' }));
+  }).catch(() => res.status(500).send({meesage: 'Error'}));
 };
 
 module.exports.getFiles = (req, res) => {
@@ -68,12 +68,12 @@ module.exports.getFiles = (req, res) => {
         res.status(200).send(result);
       } else {
         req.session.folder = req.params.folder_id;
-        res.status(204).send({ message: 'Empty folder' });
+        res.status(204).send({message: 'Empty folder'});
       }
     } else {
-      res.status(403).send({ message: 'You don\'t own this folder' });
+      res.status(403).send({message: 'You don\'t own this folder'});
     }
-  }).catch(() => res.status(500).send({ message: 'Error' }));
+  }).catch(() => res.status(500).send({message: 'Error'}));
 };
 
 module.exports.getCurrentFolder = (req, res) => {
@@ -93,12 +93,12 @@ module.exports.getCurrentFolder = (req, res) => {
       if (result.length) {
         res.status(200).send(result);
       } else {
-        res.status(204).send({ message: 'Empty folder' });
+        res.status(204).send({message: 'Empty folder'});
       }
     } else {
-      res.status(403).send({ message: 'You don\'t own this folder' });
+      res.status(403).send({message: 'You don\'t own this folder'});
     }
-  }).catch(() => res.status(500).send({ message: 'Error' }));
+  }).catch(() => res.status(500).send({message: 'Error'}));
 };
 
 module.exports.changeAccess = (req, res) => {
@@ -160,61 +160,61 @@ module.exports.changeAccess = (req, res) => {
                 Files.update({
                   isPublic: 0,
                 },
-                  {
-                    where: {
-                      idParent: folders[j],
-                      user_id: req.session.id,
-                    },
-                  }).catch(() => res.status(500).send({ message: 'Error' }));
+                {
+                  where: {
+                    idParent: folders[j],
+                    user_id: req.session.id,
+                  },
+                }).catch(() => res.status(500).send({message: 'Error'}));
               }
 
               Files.update({
                 isPublic: 0,
               },
-                {
-                  where: {
-                    user_id: req.session.id,
-                    id: req.body.file_id,
-                  },
-                }).catch(() => res.status(500).send({ message: 'Error' }));
+              {
+                where: {
+                  user_id: req.session.id,
+                  id: req.body.file_id,
+                },
+              }).catch(() => res.status(500).send({message: 'Error'}));
 
-              res.status(201).send({ message: 'Folder is now private' });
+              res.status(201).send({message: 'Folder is now private'});
             } else {
               for (j = folders.length - 1; j >= 0; j--) {
                 Files.update({
                   isPublic: 1,
                 },
-                  {
-                    where: {
-                      idParent: folders[j],
-                      user_id: req.session.id,
-                    },
-                  }).catch(() => res.status(500).send({ message: 'Error' }));
+                {
+                  where: {
+                    idParent: folders[j],
+                    user_id: req.session.id,
+                  },
+                }).catch(() => res.status(500).send({message: 'Error'}));
               }
 
               Files.update({
                 isPublic: 1,
               },
-                {
-                  where: {
-                    user_id: req.session.id,
-                    id: req.body.file_id,
-                  },
-                }).catch(() => res.status(500).send({ message: 'Error' }));
+              {
+                where: {
+                  user_id: req.session.id,
+                  id: req.body.file_id,
+                },
+              }).catch(() => res.status(500).send({message: 'Error'}));
 
-              res.status(200).send({ message: 'Folder is now public' });
+              res.status(200).send({message: 'Folder is now public'});
             }
           }
 
           f();
         } else {
-          res.status(400).send({ message: 'Only primary folders have accessors' });
+          res.status(400).send({message: 'Only primary folders have accessors'});
         }
-      }).catch(() => res.status(400).send({ message: 'Temporary error' }));
+      }).catch(() => res.status(400).send({message: 'Temporary error'}));
     } else {
-      res.status(404).send({ message: 'No folders found' });
+      res.status(404).send({message: 'No folders found'});
     }
-  }).catch(() => res.status(400).send({ message: 'No folders found' }));
+  }).catch(() => res.status(400).send({message: 'No folders found'}));
 };
 
 module.exports.navigateBack = (req, res) => {
@@ -242,11 +242,11 @@ module.exports.navigateBack = (req, res) => {
           req.session.folder = output.idParent;
           res.status(200).send(result);
         }
-      }).catch(() => res.status(500).send({ message: 'Error' }));
+      }).catch(() => res.status(500).send({message: 'Error'}));
     } else {
-      res.status(203).send({ message: 'This is your root folder' });
+      res.status(203).send({message: 'This is your root folder'});
     }
-  }).catch(() => res.status(400).send({ message: 'Bad request' }));
+  }).catch(() => res.status(400).send({message: 'Bad request'}));
 };
 
 module.exports.uploadFiles = (req, res) => {
@@ -334,19 +334,19 @@ module.exports.uploadFiles = (req, res) => {
           }
           if (errText.length) {
             req.files = null;
-            res.status(200).send({ message: errText });
+            res.status(200).send({message: errText});
             global.gc();
           } else {
-            res.status(201).send({ message: 'good' });
+            res.status(201).send({message: 'good'});
             global.gc();
           }
         });
       } else {
-        res.status(204).send({ message: 'Files are too big. Current upload limit is 150MB' });
+        res.status(204).send({message: 'Files are too big. Current upload limit is 150MB'});
       }
     });
   } else {
-    res.status(400).send({ message: 'Upload buffer is empty' });
+    res.status(400).send({message: 'Upload buffer is empty'});
   }
 };
 
@@ -373,7 +373,7 @@ module.exports.parentFolders = (req, res) => {
       if (result.length) {
         res.status(200).send(result);
       } else {
-        res.status(203).send({ message: 'You have 0 folders' });
+        res.status(203).send({message: 'You have 0 folders'});
       }
     });// .catch(() => res.status(400).send({message: "Bad Request"}));
   });
@@ -395,9 +395,9 @@ module.exports.publicParentFolders = (req, res) => {
     if (result.length) {
       res.status(200).send(result);
     } else {
-      res.status(200).send({ message: 'Current user have 0 public folders' });
+      res.status(200).send({message: 'Current user have 0 public folders'});
     }
-  }).catch(() => res.status(400).send({ message: 'Bad Request' }));
+  }).catch(() => res.status(400).send({message: 'Bad Request'}));
 };
 
 module.exports.deleteFiles = (req, res) => {
@@ -477,12 +477,12 @@ module.exports.deleteFiles = (req, res) => {
       });
 
       if (err) {
-        res.status(500).send({ message: 'An error occured. Try Again' });
+        res.status(500).send({message: 'An error occured. Try Again'});
       } else {
-        res.status(200).send({ message: 'Files deconsted' });
+        res.status(200).send({message: 'Files deconsted'});
       }
     } else {
-      res.status(400).send({ message: 'Cannot deconste this now' });
+      res.status(400).send({message: 'Cannot deconste this now'});
     }
   });
 };
@@ -501,11 +501,11 @@ module.exports.downloadFiles = (req, res) => {
 
         const archive = archiver('zip');
 
-        archive.on('error', function () {
-          res.status(200).send({ message: 'An error occured' });
+        archive.on('error', function() {
+          res.status(200).send({message: 'An error occured'});
         });
 
-        archive.on('finish', function (err) {
+        archive.on('finish', function(err) {
 
         });
 
@@ -520,13 +520,13 @@ module.exports.downloadFiles = (req, res) => {
         if (fs.existsSync(result.path)) {
           res.download(result.path, result.name);
         } else {
-          res.status(404).send({ message: 'File was not found' });
+          res.status(404).send({message: 'File was not found'});
         }
       }
     } else {
-      res.status(404).send({ message: 'No file found' });
+      res.status(404).send({message: 'No file found'});
     }
-  }).catch(() => res.status(400).send({ message: 'File cannot be downloaded right now' }));
+  }).catch(() => res.status(400).send({message: 'File cannot be downloaded right now'}));
 };
 
 module.exports.getFriendFiles = (req, res) => {
@@ -554,11 +554,11 @@ module.exports.getFriendFiles = (req, res) => {
           res.status(200).send(pub);
         } else {
           req.session.friend_folder = req.params.folder_id;
-          res.status(201).send({ message: 'No file here' });
+          res.status(201).send({message: 'No file here'});
         }
       });
     } else {
-      res.status(403).send({ message: 'This user didn\'t gave you permission' });
+      res.status(403).send({message: 'This user didn\'t gave you permission'});
     }
   });
 };
@@ -595,12 +595,12 @@ module.exports.getFriendFilesRoot = (req, res) => {
             res.status(200).send(pub);
           } else {
             req.session.friend_folder = result.id;
-            res.status(201).send({ message: 'No file here' });
+            res.status(201).send({message: 'No file here'});
           }
         });
       });
     } else {
-      res.status(403).send({ message: 'This user didn\'t gave you permission' });
+      res.status(403).send({message: 'This user didn\'t gave you permission'});
     }
   });
 };
@@ -638,11 +638,11 @@ module.exports.navigateBackFriend = (req, res) => {
             res.status(200).send(pub);
           });
         } else {
-          res.status(203).send({ message: 'This is the root folder' });
+          res.status(203).send({message: 'This is the root folder'});
         }
       });
     } else {
-      res.status(403).send({ message: 'You don\'t have permission' });
+      res.status(403).send({message: 'You don\'t have permission'});
     }
   });
 };
@@ -668,11 +668,11 @@ module.exports.downloadFilesFriend = (req, res) => {
 
             const archive = archiver('zip');
 
-            archive.on('error', function () {
-              res.status(200).send({ message: 'An error occured' });
+            archive.on('error', function() {
+              res.status(200).send({message: 'An error occured'});
             });
 
-            archive.on('finish', function (err) {
+            archive.on('finish', function(err) {
 
             });
 
@@ -687,17 +687,17 @@ module.exports.downloadFilesFriend = (req, res) => {
             if (fs.existsSync(result.path)) {
               res.download(result.path, result.name);
             } else {
-              res.status(404).send({ message: 'File was not found' });
+              res.status(404).send({message: 'File was not found'});
             }
           }
         } else {
-          res.status(404).send({ message: 'No file found' });
+          res.status(404).send({message: 'No file found'});
         }
-      }).catch(() => res.status(400).send({ message: 'File cannot be downloaded right now' }));
+      }).catch(() => res.status(400).send({message: 'File cannot be downloaded right now'}));
     } else {
-      res.status(403).send({ message: 'You don\'t have permission to download this file' });
+      res.status(403).send({message: 'You don\'t have permission to download this file'});
     }
-  }).catch(() => res.status(400).send({ message: 'Error at permissions' }));
+  }).catch(() => res.status(400).send({message: 'Error at permissions'}));
 };
 
 module.exports.renameFile = (req, res) => {
@@ -722,7 +722,7 @@ module.exports.renameFile = (req, res) => {
         },
       }).then((found) => {
         if (found.length) {
-          res.status(203).send({ message: 'A file with this name already exists!' });
+          res.status(203).send({message: 'A file with this name already exists!'});
         } else {
           fs.rename(oldPath, newPath, (err) => { });
 
@@ -730,43 +730,43 @@ module.exports.renameFile = (req, res) => {
             name: req.body.name,
             path: newPath,
           },
-            {
+          {
+            where: {
+              id: req.body.file_id,
+              user_id: req.session.id,
+            },
+
+          }).then((resp) => {
+            Files.findAll({
               where: {
-                id: req.body.file_id,
                 user_id: req.session.id,
-              },
-
-            }).then((resp) => {
-              Files.findAll({
-                where: {
-                  user_id: req.session.id,
-                  path: {
-                    $like: oldPath + '/%',
-                  },
+                path: {
+                  $like: oldPath + '/%',
                 },
-                raw: true,
-              }).then((children) => {
-                for (i = 0; i < children.length; i++) {
-                  const newChildPath = children[i].path.replace(oldPath, newPath);
+              },
+              raw: true,
+            }).then((children) => {
+              for (i = 0; i < children.length; i++) {
+                const newChildPath = children[i].path.replace(oldPath, newPath);
 
-                  Files.update({
-                    path: newChildPath,
+                Files.update({
+                  path: newChildPath,
+                },
+                {
+                  where: {
+                    id: children[i].id,
+                    user_id: req.session.id,
                   },
-                    {
-                      where: {
-                        id: children[i].id,
-                        user_id: req.session.id,
-                      },
 
-                    });
-                }
-              });
-              res.status(200).send({ message: 'Name change was successful' });
+                });
+              }
             });
+            res.status(200).send({message: 'Name change was successful'});
+          });
         }
       });
     } else {
-      res.status(404).send({ message: 'File was not found' });
+      res.status(404).send({message: 'File was not found'});
     }
-  }).catch(() => res.status(500).send({ message: 'Server error occurred' }));
+  }).catch(() => res.status(500).send({message: 'Server error occurred'}));
 };
