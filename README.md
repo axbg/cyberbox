@@ -6,8 +6,6 @@
 
 The app was developed during my second year at university as part of BUES' Student Scientific Communication Sessions 2018 organized by The Faculty of Economic Cybernetics, Statistics and Informatics and won the third place
 
-### rebuit from scratch & improved @ [devclub1](https://github.com/devclub1)
-
 #
 ### Deployment
 To setup and run the application
